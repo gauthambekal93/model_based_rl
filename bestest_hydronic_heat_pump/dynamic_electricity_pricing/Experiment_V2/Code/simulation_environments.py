@@ -15,7 +15,7 @@ Created on Thu Apr 25 13:36:01 2024
 import os
 
 #os.chdir('C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master')
-os.chdir(r'C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master/model_based_rl/model_based_rl_v1/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V2/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master/model_based_rl/model_based_rl_v1/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V3/Code')
 
 import numpy as np
 import torch
@@ -74,19 +74,19 @@ operational_data = 'http://127.0.0.1:5000/initialize'
 
 
 warmup_period = 24*3600
-episode_length_test = 14*24*3600 #was 7*24*3600
+episode_length_test = 7*24*3600 #was 7*24*3600
 warmup_period_test  = 7*24*3600
 start_time_tests    = [(23-7)*24*3600, (115-7)*24*3600]  # (Jan 16 to Jan 30) and (April 18 to May 02) 
 
-max_episode_length = 14*24*3600 #was 7*24*3600
+max_episode_length = 7*24*3600 #was 7*24*3600
 random_start_time =True#False #True
 step_period = 900
 render_episodes = False # False
 
-predictive_period =  24*3600  #2700 #was 24*3600 #None
-regressive_period = 6*3600  #None #2700 #was 6*3600 #None
+predictive_period =  2*3600   #2700 #was 24*3600 #None # 2*3600 
+regressive_period = None #None #2700 #was 6*3600 #None
 
-icm_parameters =  { "lr": str(0.001) }#0.0001
+#icm_parameters =  { "lr": str(0.001) }#0.0001
 
 
 def twozone_commercial_hydronic():
@@ -205,7 +205,7 @@ def bestest_hydronic_heat_pump():
      # Excluded since no heating during this period (nothing to learn).
     excluding_periods.append((173*24*3600, 266*24*3600))  # June 23 to Sept 26 its hot so we dont need to learn anything since heating system is off
     
-    n_bins_act = 10 #was 1
+    n_bins_act = 1 #was 10 #was 1
     
 
     env = BoptestGymEnv(      
@@ -238,12 +238,12 @@ def bestest_hydronic_heat_pump():
                        "action_space": str(env.action_space.n),
                        "action_bins": str(n_bins_act + 1),
                        "points":points,
-                       "h_size":str(int((obs_dim//2))),  #was 50, was 5, was 100, was 100
+                       "h_size": str(100), #was str(int((obs_dim//2))),  #was 50, was 5, was 100, was 100
                        "n_training_episodes": str(400),
                       # "n_evaluation_episodes": str(10),
                        "max_t": str(2000), #was 2000   
                        "gamma": str(0.90),
-                        "lr": str( 0.001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001
+                        "lr": str( 0.001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001, was 0.0001
                         "no_of_action_types":len(actions)
                       }
     

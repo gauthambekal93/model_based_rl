@@ -39,9 +39,9 @@ class Environment_Module(nn.Module):
         
         input_dims = obs_dims+ n_actions
         
-        h_size_1 = int(input_dims // 2)
+        h_size_1 = int(input_dims * 2)
         
-        h_size_2 = int(input_dims//2)
+        h_size_2 =  int(input_dims*2) #wasint(input_dims//2)
         
         super(Environment_Module, self).__init__()
         
@@ -206,12 +206,12 @@ class Policy_Module(nn.Module):
 
         return policy_loss
 
-y = torch.randn(1, 123)  # Example tensor with shape [1, 123]
-additional_value = torch.tensor([[0]])  # Tensor to concatenate with shape [1, 1]
+#y = torch.randn(1, 123)  # Example tensor with shape [1, 123]
+#additional_value = torch.tensor([[0]])  # Tensor to concatenate with shape [1, 1]
 
 # Concatenate along the second dimension (columns)
-concatenated_tensor = torch.cat([y, additional_value], dim=1)
-print(concatenated_tensor.shape)  # Should be [1, 124]
+#concatenated_tensor = torch.cat([y, additional_value], dim=1)
+#print(concatenated_tensor.shape)  # Should be [1, 124]
 
 
 

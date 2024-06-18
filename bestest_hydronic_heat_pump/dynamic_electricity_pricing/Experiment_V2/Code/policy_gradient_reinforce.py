@@ -9,7 +9,7 @@ Created on Tue Apr  2 21:14:01 2024
 import os
 #os.chdir(r'C:/Users/gb122421/Machine Learning Materials/RL Project/project1-boptest-gym-master')
 #os.chdir('C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master')
-os.chdir(r'C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master/model_based_rl/model_based_rl_v1/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V2/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master/model_based_rl/model_based_rl_v1/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V3/Code')
 
 #import math
 #import json
