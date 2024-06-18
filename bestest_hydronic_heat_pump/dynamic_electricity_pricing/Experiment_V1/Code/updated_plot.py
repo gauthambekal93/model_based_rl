@@ -29,8 +29,7 @@ import requests
 import json
 import os
 
-os.chdir(r'C:/Users/gauthambekal93/Research/rl_collaboration_project/project1-boptest-gym-master/model_based_rl/model_based_rl_v1/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V1/Code')
-
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V1/Code')
 
 with open('all_paths.json', 'r') as openfile:           json_data = json.load(openfile)
 
