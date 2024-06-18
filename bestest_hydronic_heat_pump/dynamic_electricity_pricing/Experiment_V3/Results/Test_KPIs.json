@@ -1,0 +1,35 @@
+{
+    "Episode": 209,
+    "Date": "January 16",
+    "Length": 7.0,
+    "Loss": -21.85674476623535,
+    "KPIs": {
+        "cost_tot": 0.24641082630140512,
+        "emis_tot": 0.15698273550292755,
+        "ener_tot": 0.9400163802570513,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020855916609229516,
+        "pgas_tot": null,
+        "tdis_tot": 67.3438635103883,
+        "time_rat": 6.952689595954128e-05
+    },
+    "Extrinsic Reward": -67.5902743366897
+}{
+    "Episode": 209,
+    "Date": "April 17",
+    "Length": 7.0,
+    "Loss": -21.85674476623535,
+    "KPIs": {
+        "cost_tot": 0.23844533869777498,
+        "emis_tot": 0.17357137804542253,
+        "ener_tot": 1.0393495691342678,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023914370170767453,
+        "pgas_tot": null,
+        "tdis_tot": 289.0222907086646,
+        "time_rat": 6.191478914053984e-05
+    },
+    "Extrinsic Reward": -289.2607360473624
+}
