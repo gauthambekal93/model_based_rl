@@ -1,0 +1,3060 @@
+{
+    "Episode": 2,
+    "Time Taken": 21.99728226661682,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.9512114524841309,
+    "KPIs": {
+        "cost_tot": 0.4814369446554038,
+        "emis_tot": 0.3364952601721722,
+        "ener_tot": 2.0149416776776796,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02404387853349005,
+        "pgas_tot": null,
+        "tdis_tot": 423.172487026303,
+        "time_rat": 2.6765140512632947e-05
+    },
+    "Intrinsic Rewards": -423.6539239709584,
+    "Extrinsic Reward": -423.6539239709584
+}{
+    "Episode": 3,
+    "Time Taken": 25.098435401916504,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -0.43998634815216064,
+    "KPIs": {
+        "cost_tot": 0.4299999004782357,
+        "emis_tot": 0.29948942773263576,
+        "ener_tot": 1.7933498666624899,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023838309868577823,
+        "pgas_tot": null,
+        "tdis_tot": 296.2604724819675,
+        "time_rat": 3.286466948569767e-05
+    },
+    "Intrinsic Rewards": -296.6904723824457,
+    "Extrinsic Reward": -296.6904723824457
+}{
+    "Episode": 4,
+    "Time Taken": 25.81427788734436,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.5829849243164062,
+    "KPIs": {
+        "cost_tot": 0.42458388151200727,
+        "emis_tot": 0.2981189982385258,
+        "ener_tot": 1.7851437020271035,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023769195276546657,
+        "pgas_tot": null,
+        "tdis_tot": 290.8816838598277,
+        "time_rat": 3.2350199799689035e-05
+    },
+    "Intrinsic Rewards": -291.30626774133975,
+    "Extrinsic Reward": -291.30626774133975
+}{
+    "Episode": 5,
+    "Time Taken": 25.52126717567444,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.26604604721069336,
+    "KPIs": {
+        "cost_tot": 0.44652539402311625,
+        "emis_tot": 0.31282672382721455,
+        "ener_tot": 1.8732139151330225,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02370247206763739,
+        "pgas_tot": null,
+        "tdis_tot": 359.62011616058146,
+        "time_rat": 3.267474117733183e-05
+    },
+    "Intrinsic Rewards": -360.0666415546046,
+    "Extrinsic Reward": -360.0666415546046
+}{
+    "Episode": 6,
+    "Time Taken": 24.533437490463257,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.07761335372924805,
+    "KPIs": {
+        "cost_tot": 0.4296672656444942,
+        "emis_tot": 0.30027284267022414,
+        "ener_tot": 1.7980409740731977,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023971864641408103,
+        "pgas_tot": null,
+        "tdis_tot": 290.84042118561166,
+        "time_rat": 3.1715219534894147e-05
+    },
+    "Intrinsic Rewards": -291.27008845125613,
+    "Extrinsic Reward": -291.27008845125613
+}{
+    "Episode": 7,
+    "Time Taken": 25.799111127853394,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.3308436870574951,
+    "KPIs": {
+        "cost_tot": 0.43231746565545537,
+        "emis_tot": 0.30224027388312463,
+        "ener_tot": 1.8098219993001488,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023977853059885538,
+        "pgas_tot": null,
+        "tdis_tot": 307.31450200493055,
+        "time_rat": 3.323291502301655e-05
+    },
+    "Intrinsic Rewards": -307.746819470586,
+    "Extrinsic Reward": -307.746819470586
+}{
+    "Episode": 8,
+    "Time Taken": 24.981545448303223,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.7211023569107056,
+    "KPIs": {
+        "cost_tot": 0.3882893098233126,
+        "emis_tot": 0.27081680588938456,
+        "ener_tot": 1.6216575202957162,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02290434001991028,
+        "pgas_tot": null,
+        "tdis_tot": 205.9661512136196,
+        "time_rat": 3.20851550531135e-05
+    },
+    "Intrinsic Rewards": -206.35444052344292,
+    "Extrinsic Reward": -206.35444052344292
+}{
+    "Episode": 9,
+    "Time Taken": 25.654731512069702,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.637647867202759,
+    "KPIs": {
+        "cost_tot": 0.38621181512292674,
+        "emis_tot": 0.2704279764120846,
+        "ener_tot": 1.619329200072365,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02278505702605524,
+        "pgas_tot": null,
+        "tdis_tot": 222.58803486151712,
+        "time_rat": 3.1410778562227884e-05
+    },
+    "Intrinsic Rewards": -222.97424667664004,
+    "Extrinsic Reward": -222.97424667664004
+}{
+    "Episode": 10,
+    "Time Taken": 24.915199518203735,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.0596415996551514,
+    "KPIs": {
+        "cost_tot": 0.39078248714096336,
+        "emis_tot": 0.2727972470420227,
+        "ener_tot": 1.6335164493534307,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023585582448281794,
+        "pgas_tot": null,
+        "tdis_tot": 215.24668629677083,
+        "time_rat": 3.2616222188586276e-05
+    },
+    "Intrinsic Rewards": -215.6374687839118,
+    "Extrinsic Reward": -215.6374687839118
+}{
+    "Episode": 11,
+    "Time Taken": 24.69784903526306,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.7519676685333252,
+    "KPIs": {
+        "cost_tot": 0.35556584842509986,
+        "emis_tot": 0.24906234571026242,
+        "ener_tot": 1.4913912916782182,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022756699816967284,
+        "pgas_tot": null,
+        "tdis_tot": 156.77030290808455,
+        "time_rat": 3.202524095300644e-05
+    },
+    "Intrinsic Rewards": -157.12586875650965,
+    "Extrinsic Reward": -157.12586875650965
+}{
+    "Episode": 12,
+    "Time Taken": 25.952739477157593,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -1.0102823972702026,
+    "KPIs": {
+        "cost_tot": 0.3671851243176869,
+        "emis_tot": 0.2558226099844192,
+        "ener_tot": 1.5318719160743672,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02350786837751325,
+        "pgas_tot": null,
+        "tdis_tot": 166.9262166104243,
+        "time_rat": 3.2544445502694955e-05
+    },
+    "Intrinsic Rewards": -167.293401734742,
+    "Extrinsic Reward": -167.293401734742
+}{
+    "Episode": 13,
+    "Time Taken": 24.691091537475586,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -1.054954171180725,
+    "KPIs": {
+        "cost_tot": 0.3566816322038779,
+        "emis_tot": 0.24962442338952126,
+        "ener_tot": 1.4947570262845589,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023387133024383982,
+        "pgas_tot": null,
+        "tdis_tot": 148.21505897223088,
+        "time_rat": 3.196730105965226e-05
+    },
+    "Intrinsic Rewards": -148.57174060443475,
+    "Extrinsic Reward": -148.57174060443475
+}{
+    "Episode": 14,
+    "Time Taken": 25.69957971572876,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.489792823791504,
+    "KPIs": {
+        "cost_tot": 0.361400763460481,
+        "emis_tot": 0.2527074951133918,
+        "ener_tot": 1.5132185336131232,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02281126621309119,
+        "pgas_tot": null,
+        "tdis_tot": 167.25214676203458,
+        "time_rat": 3.389948693217424e-05
+    },
+    "Intrinsic Rewards": -167.61354752549508,
+    "Extrinsic Reward": -167.61354752549508
+}{
+    "Episode": 15,
+    "Time Taken": 24.489837169647217,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.4763498306274414,
+    "KPIs": {
+        "cost_tot": 0.3462993684081405,
+        "emis_tot": 0.24184305147812446,
+        "ener_tot": 1.4481619848989498,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02290621847307664,
+        "pgas_tot": null,
+        "tdis_tot": 157.33757138235762,
+        "time_rat": 3.2551395041602e-05
+    },
+    "Intrinsic Rewards": -157.68387075076578,
+    "Extrinsic Reward": -157.68387075076578
+}{
+    "Episode": 16,
+    "Time Taken": 24.983540773391724,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 2.8228979110717773,
+    "KPIs": {
+        "cost_tot": 0.30888982639151114,
+        "emis_tot": 0.21564510823757702,
+        "ener_tot": 1.2912880732789036,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022719542053616818,
+        "pgas_tot": null,
+        "tdis_tot": 86.19526664743708,
+        "time_rat": 3.1514282106722473e-05
+    },
+    "Intrinsic Rewards": -86.50415647382859,
+    "Extrinsic Reward": -86.50415647382859
+}{
+    "Episode": 17,
+    "Time Taken": 25.43973183631897,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 7.976160049438477,
+    "KPIs": {
+        "cost_tot": 0.27931347099954623,
+        "emis_tot": 0.1953307153804419,
+        "ener_tot": 1.1696450022780938,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02268767641513472,
+        "pgas_tot": null,
+        "tdis_tot": 70.45895374305822,
+        "time_rat": 3.2695178632383e-05
+    },
+    "Intrinsic Rewards": -70.73826721405776,
+    "Extrinsic Reward": -70.73826721405776
+}{
+    "Episode": 18,
+    "Time Taken": 25.106645345687866,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -11.954911231994629,
+    "KPIs": {
+        "cost_tot": 0.2856124425276839,
+        "emis_tot": 0.198905644804161,
+        "ener_tot": 1.191051765294377,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022407312503344743,
+        "pgas_tot": null,
+        "tdis_tot": 48.12658046706363,
+        "time_rat": 3.180086928069907e-05
+    },
+    "Intrinsic Rewards": -48.41219290959132,
+    "Extrinsic Reward": -48.41219290959132
+}{
+    "Episode": 19,
+    "Time Taken": 24.66463279724121,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -6.3995361328125,
+    "KPIs": {
+        "cost_tot": 0.2845106769581354,
+        "emis_tot": 0.1989325880788529,
+        "ener_tot": 1.1912131022685801,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02230637658883759,
+        "pgas_tot": null,
+        "tdis_tot": 81.07089528626848,
+        "time_rat": 3.249208920847171e-05
+    },
+    "Intrinsic Rewards": -81.35540596322662,
+    "Extrinsic Reward": -81.35540596322662
+}{
+    "Episode": 20,
+    "Time Taken": 24.856083393096924,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 3.465822696685791,
+    "KPIs": {
+        "cost_tot": 0.3009160393245273,
+        "emis_tot": 0.20931145756019767,
+        "ener_tot": 1.2533620213185486,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022651421234908906,
+        "pgas_tot": null,
+        "tdis_tot": 71.16484927041505,
+        "time_rat": 3.252707776569185e-05
+    },
+    "Intrinsic Rewards": -71.46576530973958,
+    "Extrinsic Reward": -71.46576530973958
+}{
+    "Episode": 21,
+    "Time Taken": 25.60066819190979,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.1739091873168945,
+    "KPIs": {
+        "cost_tot": 0.29968885090571,
+        "emis_tot": 0.208846801590651,
+        "ener_tot": 1.25057965024342,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02243645695388975,
+        "pgas_tot": null,
+        "tdis_tot": 78.05587763761382,
+        "time_rat": 3.172258733126222e-05
+    },
+    "Intrinsic Rewards": -78.35556648851953,
+    "Extrinsic Reward": -78.35556648851953
+}{
+    "Episode": 22,
+    "Time Taken": 25.10745906829834,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 6.834019660949707,
+    "KPIs": {
+        "cost_tot": 0.3143643941382227,
+        "emis_tot": 0.21922771615642922,
+        "ener_tot": 1.3127408153079598,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.023047677941335366,
+        "pgas_tot": null,
+        "tdis_tot": 91.36193965036517,
+        "time_rat": 3.294956589502001e-05
+    },
+    "Intrinsic Rewards": -91.6763040445034,
+    "Extrinsic Reward": -91.6763040445034
+}{
+    "Episode": 23,
+    "Time Taken": 24.453081369400024,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -8.502103805541992,
+    "KPIs": {
+        "cost_tot": 0.30056954186116125,
+        "emis_tot": 0.2101980042806051,
+        "ener_tot": 1.2586706843150008,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02253308670290937,
+        "pgas_tot": null,
+        "tdis_tot": 78.28355458912147,
+        "time_rat": 3.194907749140704e-05
+    },
+    "Intrinsic Rewards": -78.58412413098263,
+    "Extrinsic Reward": -78.58412413098263
+}{
+    "Episode": 24,
+    "Time Taken": 25.50450301170349,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 17.3142147064209,
+    "KPIs": {
+        "cost_tot": 0.27350142108662207,
+        "emis_tot": 0.19055823397073665,
+        "ener_tot": 1.1410672692858486,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02283194416717781,
+        "pgas_tot": null,
+        "tdis_tot": 61.023170564419495,
+        "time_rat": 3.3673874284855274e-05
+    },
+    "Intrinsic Rewards": -61.296671985506116,
+    "Extrinsic Reward": -61.296671985506116
+}{
+    "Episode": 25,
+    "Time Taken": 25.25325894355774,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.77345871925354,
+    "KPIs": {
+        "cost_tot": 0.2957233254119017,
+        "emis_tot": 0.2064583272127241,
+        "ener_tot": 1.236277408459425,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02211492815968017,
+        "pgas_tot": null,
+        "tdis_tot": 59.68548210344806,
+        "time_rat": 3.2767515491556233e-05
+    },
+    "Intrinsic Rewards": -59.98120542885996,
+    "Extrinsic Reward": -59.98120542885996
+}{
+    "Episode": 26,
+    "Time Taken": 25.31675100326538,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -16.94098663330078,
+    "KPIs": {
+        "cost_tot": 0.2864995568230073,
+        "emis_tot": 0.20032678819607458,
+        "ener_tot": 1.1995616059645184,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02282568480170681,
+        "pgas_tot": null,
+        "tdis_tot": 49.294555205446734,
+        "time_rat": 3.245189155220354e-05
+    },
+    "Intrinsic Rewards": -49.581054762269744,
+    "Extrinsic Reward": -49.581054762269744
+}{
+    "Episode": 27,
+    "Time Taken": 25.70466661453247,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 4.595476150512695,
+    "KPIs": {
+        "cost_tot": 0.31784594381557746,
+        "emis_tot": 0.2225895009714297,
+        "ener_tot": 1.3328712633019757,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022578506526960414,
+        "pgas_tot": null,
+        "tdis_tot": 104.30210333798624,
+        "time_rat": 3.2319358338123904e-05
+    },
+    "Intrinsic Rewards": -104.61994928180182,
+    "Extrinsic Reward": -104.61994928180182
+}{
+    "Episode": 28,
+    "Time Taken": 25.088377475738525,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.0707292556762695,
+    "KPIs": {
+        "cost_tot": 0.27980912257528007,
+        "emis_tot": 0.1949408596731641,
+        "ener_tot": 1.167310536965054,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022411078868680222,
+        "pgas_tot": null,
+        "tdis_tot": 40.3568380557286,
+        "time_rat": 3.1589431264413096e-05
+    },
+    "Intrinsic Rewards": -40.63664717830388,
+    "Extrinsic Reward": -40.63664717830388
+}{
+    "Episode": 29,
+    "Time Taken": 25.798823595046997,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.5229067802429199,
+    "KPIs": {
+        "cost_tot": 0.258825962069833,
+        "emis_tot": 0.18144254173591434,
+        "ener_tot": 1.0864822858437986,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022703486284953566,
+        "pgas_tot": null,
+        "tdis_tot": 25.972853514483127,
+        "time_rat": 3.2676495808772934e-05
+    },
+    "Intrinsic Rewards": -26.23167947655296,
+    "Extrinsic Reward": -26.23167947655296
+}{
+    "Episode": 30,
+    "Time Taken": 24.68036437034607,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -11.957402229309082,
+    "KPIs": {
+        "cost_tot": 0.24373868934845733,
+        "emis_tot": 0.17087277957247676,
+        "ener_tot": 1.0231902968411783,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02199348691404646,
+        "pgas_tot": null,
+        "tdis_tot": 26.12043732278447,
+        "time_rat": 3.168731770187459e-05
+    },
+    "Intrinsic Rewards": -26.364176012132926,
+    "Extrinsic Reward": -26.364176012132926
+}{
+    "Episode": 31,
+    "Time Taken": 25.200220584869385,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.4324178695678711,
+    "KPIs": {
+        "cost_tot": 0.22836618038736026,
+        "emis_tot": 0.1598673435631762,
+        "ener_tot": 0.9572894824142276,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021669524524216697,
+        "pgas_tot": null,
+        "tdis_tot": 21.361202021846537,
+        "time_rat": 3.288751123128114e-05
+    },
+    "Intrinsic Rewards": -21.5895682022339,
+    "Extrinsic Reward": -21.5895682022339
+}{
+    "Episode": 32,
+    "Time Taken": 25.059016466140747,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 16.93391227722168,
+    "KPIs": {
+        "cost_tot": 0.21825140952931954,
+        "emis_tot": 0.15184229468563892,
+        "ener_tot": 0.9092352975187966,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021747224389717042,
+        "pgas_tot": null,
+        "tdis_tot": 47.246035870825956,
+        "time_rat": 3.2911017221748506e-05
+    },
+    "Intrinsic Rewards": -47.46428728035528,
+    "Extrinsic Reward": -47.46428728035528
+}{
+    "Episode": 33,
+    "Time Taken": 24.9739773273468,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -0.557442307472229,
+    "KPIs": {
+        "cost_tot": 0.18951308873564593,
+        "emis_tot": 0.13271974535175893,
+        "ener_tot": 0.794729014082389,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02214933519207666,
+        "pgas_tot": null,
+        "tdis_tot": 54.48098368926659,
+        "time_rat": 3.205876817148199e-05
+    },
+    "Intrinsic Rewards": -54.67049677800223,
+    "Extrinsic Reward": -54.67049677800223
+}{
+    "Episode": 34,
+    "Time Taken": 24.73685383796692,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.536174774169922,
+    "KPIs": {
+        "cost_tot": 0.19892894586138843,
+        "emis_tot": 0.13934377624982916,
+        "ener_tot": 0.8343938697594565,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02176457429331795,
+        "pgas_tot": null,
+        "tdis_tot": 41.86380852802274,
+        "time_rat": 3.2868593852356e-05
+    },
+    "Intrinsic Rewards": -42.06273747388413,
+    "Extrinsic Reward": -42.06273747388413
+}{
+    "Episode": 35,
+    "Time Taken": 24.433626651763916,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 21.033626556396484,
+    "KPIs": {
+        "cost_tot": 0.21123098867380727,
+        "emis_tot": 0.1466251090720375,
+        "ener_tot": 0.8779946651020215,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02185274497703708,
+        "pgas_tot": null,
+        "tdis_tot": 65.77515962088266,
+        "time_rat": 3.1237704728646254e-05
+    },
+    "Intrinsic Rewards": -65.98639060955647,
+    "Extrinsic Reward": -65.98639060955647
+}{
+    "Episode": 36,
+    "Time Taken": 24.71515917778015,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 23.116369247436523,
+    "KPIs": {
+        "cost_tot": 0.1679997698431674,
+        "emis_tot": 0.11751945872924024,
+        "ener_tot": 0.7037093337080257,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020941831245392027,
+        "pgas_tot": null,
+        "tdis_tot": 107.11277627872366,
+        "time_rat": 3.283557398294015e-05
+    },
+    "Intrinsic Rewards": -107.28077604856682,
+    "Extrinsic Reward": -107.28077604856682
+}{
+    "Episode": 37,
+    "Time Taken": 24.441709280014038,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 12.011740684509277,
+    "KPIs": {
+        "cost_tot": 0.23145672525659494,
+        "emis_tot": 0.16252119301831366,
+        "ener_tot": 0.9731807965168485,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02236300972910908,
+        "pgas_tot": null,
+        "tdis_tot": 57.01038219310673,
+        "time_rat": 3.2454332504322915e-05
+    },
+    "Intrinsic Rewards": -57.24183891836332,
+    "Extrinsic Reward": -57.24183891836332
+}{
+    "Episode": 38,
+    "Time Taken": 25.380882740020752,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -6.74713659286499,
+    "KPIs": {
+        "cost_tot": 0.21630367909175593,
+        "emis_tot": 0.15188983354450283,
+        "ener_tot": 0.9095199613443283,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022168206268295337,
+        "pgas_tot": null,
+        "tdis_tot": 30.465764348504724,
+        "time_rat": 3.307076358290577e-05
+    },
+    "Intrinsic Rewards": -30.68206802759648,
+    "Extrinsic Reward": -30.68206802759648
+}{
+    "Episode": 39,
+    "Time Taken": 24.843223571777344,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -3.5528147220611572,
+    "KPIs": {
+        "cost_tot": 0.22850773420105583,
+        "emis_tot": 0.15947116167067377,
+        "ener_tot": 0.954917135752537,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022637522383930818,
+        "pgas_tot": null,
+        "tdis_tot": 47.6912487432146,
+        "time_rat": 3.281168718502005e-05
+    },
+    "Intrinsic Rewards": -47.91975647741565,
+    "Extrinsic Reward": -47.91975647741565
+}{
+    "Episode": 40,
+    "Time Taken": 25.81212568283081,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -5.101512908935547,
+    "KPIs": {
+        "cost_tot": 0.2725311542415207,
+        "emis_tot": 0.19001747630705967,
+        "ener_tot": 1.1378291994434706,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02191084827213046,
+        "pgas_tot": null,
+        "tdis_tot": 37.90853668510137,
+        "time_rat": 3.1564817936332134e-05
+    },
+    "Intrinsic Rewards": -38.18106783934289,
+    "Extrinsic Reward": -38.18106783934289
+}{
+    "Episode": 41,
+    "Time Taken": 25.178710460662842,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -15.39553451538086,
+    "KPIs": {
+        "cost_tot": 0.2409396209280765,
+        "emis_tot": 0.1703003077867171,
+        "ener_tot": 1.0197623220761518,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021563921542200618,
+        "pgas_tot": null,
+        "tdis_tot": 28.324513844982874,
+        "time_rat": 3.2934605602234125e-05
+    },
+    "Intrinsic Rewards": -28.565453465910952,
+    "Extrinsic Reward": -28.565453465910952
+}{
+    "Episode": 42,
+    "Time Taken": 24.7149498462677,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -5.759213447570801,
+    "KPIs": {
+        "cost_tot": 0.2503028635475071,
+        "emis_tot": 0.17449389498314155,
+        "ener_tot": 1.0448736226535424,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022357626600477926,
+        "pgas_tot": null,
+        "tdis_tot": 22.5460781757248,
+        "time_rat": 3.178732262717353e-05
+    },
+    "Intrinsic Rewards": -22.79638103927231,
+    "Extrinsic Reward": -22.79638103927231
+}{
+    "Episode": 43,
+    "Time Taken": 24.40902304649353,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -10.018078804016113,
+    "KPIs": {
+        "cost_tot": 0.2299471142127383,
+        "emis_tot": 0.1612659132625601,
+        "ener_tot": 0.9656641512728142,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021453187973887608,
+        "pgas_tot": null,
+        "tdis_tot": 18.59869917112635,
+        "time_rat": 3.2110883208809706e-05
+    },
+    "Intrinsic Rewards": -18.828646285339087,
+    "Extrinsic Reward": -18.828646285339087
+}{
+    "Episode": 44,
+    "Time Taken": 25.173882246017456,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -21.761682510375977,
+    "KPIs": {
+        "cost_tot": 0.2482718649951717,
+        "emis_tot": 0.17374652975267707,
+        "ener_tot": 1.0403983817525564,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022315322968238828,
+        "pgas_tot": null,
+        "tdis_tot": 33.35579842578838,
+        "time_rat": 3.294591471631691e-05
+    },
+    "Intrinsic Rewards": -33.604070290783554,
+    "Extrinsic Reward": -33.604070290783554
+}{
+    "Episode": 45,
+    "Time Taken": 24.856634855270386,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 6.8936076164245605,
+    "KPIs": {
+        "cost_tot": 0.18872720715664698,
+        "emis_tot": 0.13290116042243472,
+        "ener_tot": 0.7958153318708665,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021450842109215922,
+        "pgas_tot": null,
+        "tdis_tot": 54.91023974667389,
+        "time_rat": 3.2022421164487406e-05
+    },
+    "Intrinsic Rewards": -55.098966953830534,
+    "Extrinsic Reward": -55.098966953830534
+}{
+    "Episode": 46,
+    "Time Taken": 24.265966653823853,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -9.698884010314941,
+    "KPIs": {
+        "cost_tot": 0.21506201228060381,
+        "emis_tot": 0.15118807063946554,
+        "ener_tot": 0.9053177882602733,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021957629247882873,
+        "pgas_tot": null,
+        "tdis_tot": 24.777918372955323,
+        "time_rat": 3.2333263723307824e-05
+    },
+    "Intrinsic Rewards": -24.992980385235928,
+    "Extrinsic Reward": -24.992980385235928
+}{
+    "Episode": 47,
+    "Time Taken": 24.52662491798401,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -5.156821250915527,
+    "KPIs": {
+        "cost_tot": 0.20986942759253438,
+        "emis_tot": 0.14721726591909187,
+        "ener_tot": 0.8815405144855798,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022007888017929387,
+        "pgas_tot": null,
+        "tdis_tot": 29.80521394085985,
+        "time_rat": 3.1371887714143786e-05
+    },
+    "Intrinsic Rewards": -30.015083368452384,
+    "Extrinsic Reward": -30.015083368452384
+}{
+    "Episode": 48,
+    "Time Taken": 25.28440260887146,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -17.05459213256836,
+    "KPIs": {
+        "cost_tot": 0.2021915985891606,
+        "emis_tot": 0.14132145487994208,
+        "ener_tot": 0.8462362567661212,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020870955282482836,
+        "pgas_tot": null,
+        "tdis_tot": 13.715194350236974,
+        "time_rat": 3.302077255236408e-05
+    },
+    "Intrinsic Rewards": -13.917385948826135,
+    "Extrinsic Reward": -13.917385948826135
+}{
+    "Episode": 49,
+    "Time Taken": 24.6822726726532,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -12.49067211151123,
+    "KPIs": {
+        "cost_tot": 0.2142421662525066,
+        "emis_tot": 0.15081852289513398,
+        "ener_tot": 0.9031049275157729,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020952783942927246,
+        "pgas_tot": null,
+        "tdis_tot": 20.545646012532725,
+        "time_rat": 3.223541670690769e-05
+    },
+    "Intrinsic Rewards": -20.759888178785232,
+    "Extrinsic Reward": -20.759888178785232
+}{
+    "Episode": 50,
+    "Time Taken": 24.87750744819641,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.424772024154663,
+    "KPIs": {
+        "cost_tot": 0.2108150461102353,
+        "emis_tot": 0.14831383196287987,
+        "ener_tot": 0.8881067782208374,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022031000644955025,
+        "pgas_tot": null,
+        "tdis_tot": 45.627081699332976,
+        "time_rat": 3.280133955062382e-05
+    },
+    "Intrinsic Rewards": -45.83789674544321,
+    "Extrinsic Reward": -45.83789674544321
+}{
+    "Episode": 51,
+    "Time Taken": 25.43302845954895,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -4.6769819259643555,
+    "KPIs": {
+        "cost_tot": 0.26902452285858547,
+        "emis_tot": 0.189123072634058,
+        "ener_tot": 1.1324734888266934,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021887102917504807,
+        "pgas_tot": null,
+        "tdis_tot": 49.97447738556014,
+        "time_rat": 3.4058482716323204e-05
+    },
+    "Intrinsic Rewards": -50.24350190841873,
+    "Extrinsic Reward": -50.24350190841873
+}{
+    "Episode": 52,
+    "Time Taken": 25.13371992111206,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -14.820603370666504,
+    "KPIs": {
+        "cost_tot": 0.2811177452414172,
+        "emis_tot": 0.19673732229558039,
+        "ener_tot": 1.178067798177128,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022293498194421488,
+        "pgas_tot": null,
+        "tdis_tot": 57.30151388645527,
+        "time_rat": 3.138664341162122e-05
+    },
+    "Intrinsic Rewards": -57.582631631696685,
+    "Extrinsic Reward": -57.582631631696685
+}{
+    "Episode": 53,
+    "Time Taken": 25.086758136749268,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -5.198272705078125,
+    "KPIs": {
+        "cost_tot": 0.22038155621341188,
+        "emis_tot": 0.15417326210917395,
+        "ener_tot": 0.9231931862824786,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021684488789731195,
+        "pgas_tot": null,
+        "tdis_tot": 19.238632313838774,
+        "time_rat": 3.307907157158725e-05
+    },
+    "Intrinsic Rewards": -19.459013870052186,
+    "Extrinsic Reward": -19.459013870052186
+}{
+    "Episode": 54,
+    "Time Taken": 24.34495973587036,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -11.103191375732422,
+    "KPIs": {
+        "cost_tot": 0.2596882979923708,
+        "emis_tot": 0.18158831759481786,
+        "ener_tot": 1.0873551951785514,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02233618470946203,
+        "pgas_tot": null,
+        "tdis_tot": 29.17865509858186,
+        "time_rat": 3.419036075236305e-05
+    },
+    "Intrinsic Rewards": -29.43834339657423,
+    "Extrinsic Reward": -29.43834339657423
+}{
+    "Episode": 55,
+    "Time Taken": 26.275803089141846,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -5.446991443634033,
+    "KPIs": {
+        "cost_tot": 0.23777657869873944,
+        "emis_tot": 0.16686128268499295,
+        "ener_tot": 0.9991693573951671,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021648165153567846,
+        "pgas_tot": null,
+        "tdis_tot": 23.6725846176352,
+        "time_rat": 3.324668677080245e-05
+    },
+    "Intrinsic Rewards": -23.910361196333938,
+    "Extrinsic Reward": -23.910361196333938
+}{
+    "Episode": 56,
+    "Time Taken": 24.736364364624023,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -23.902482986450195,
+    "KPIs": {
+        "cost_tot": 0.25026029243996406,
+        "emis_tot": 0.17586167284678808,
+        "ener_tot": 1.0530639092622043,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02206136556876463,
+        "pgas_tot": null,
+        "tdis_tot": 29.58028260138107,
+        "time_rat": 3.297044486595841e-05
+    },
+    "Intrinsic Rewards": -29.830542893821036,
+    "Extrinsic Reward": -29.830542893821036
+}{
+    "Episode": 57,
+    "Time Taken": 24.11522102355957,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.833540678024292,
+    "KPIs": {
+        "cost_tot": 0.26583718220006247,
+        "emis_tot": 0.18593349721643074,
+        "ener_tot": 1.113374234828926,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022057409743324877,
+        "pgas_tot": null,
+        "tdis_tot": 37.16375835900457,
+        "time_rat": 3.1942156335664175e-05
+    },
+    "Intrinsic Rewards": -37.429595541204634,
+    "Extrinsic Reward": -37.429595541204634
+}{
+    "Episode": 58,
+    "Time Taken": 26.444831132888794,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -8.908182144165039,
+    "KPIs": {
+        "cost_tot": 0.26572885504784644,
+        "emis_tot": 0.18665067874068783,
+        "ener_tot": 1.1176687349741776,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022428584258987184,
+        "pgas_tot": null,
+        "tdis_tot": 35.9514496137717,
+        "time_rat": 3.284489193921367e-05
+    },
+    "Intrinsic Rewards": -36.21717846881955,
+    "Extrinsic Reward": -36.21717846881955
+}{
+    "Episode": 59,
+    "Time Taken": 24.49039125442505,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -0.2982618808746338,
+    "KPIs": {
+        "cost_tot": 0.26116503149443077,
+        "emis_tot": 0.18351659815686833,
+        "ener_tot": 1.098901785370468,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021468070916199823,
+        "pgas_tot": null,
+        "tdis_tot": 22.008997850439997,
+        "time_rat": 3.155230766250973e-05
+    },
+    "Intrinsic Rewards": -22.27016288193443,
+    "Extrinsic Reward": -22.27016288193443
+}{
+    "Episode": 60,
+    "Time Taken": 25.253070831298828,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.443861961364746,
+    "KPIs": {
+        "cost_tot": 0.2679033077398766,
+        "emis_tot": 0.1875674040755713,
+        "ener_tot": 1.1231581082369535,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022461342165137798,
+        "pgas_tot": null,
+        "tdis_tot": 27.517093059860386,
+        "time_rat": 3.307642208205329e-05
+    },
+    "Intrinsic Rewards": -27.78499636760026,
+    "Extrinsic Reward": -27.78499636760026
+}{
+    "Episode": 61,
+    "Time Taken": 24.63386845588684,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -22.160945892333984,
+    "KPIs": {
+        "cost_tot": 0.25567680006515203,
+        "emis_tot": 0.17954716974133422,
+        "ener_tot": 1.0751327529421215,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021978486472275204,
+        "pgas_tot": null,
+        "tdis_tot": 39.75690693419772,
+        "time_rat": 3.180863641241871e-05
+    },
+    "Intrinsic Rewards": -40.012583734262876,
+    "Extrinsic Reward": -40.012583734262876
+}{
+    "Episode": 62,
+    "Time Taken": 25.251161336898804,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.840448379516602,
+    "KPIs": {
+        "cost_tot": 0.2638943197984554,
+        "emis_tot": 0.18523538473430473,
+        "ener_tot": 1.1091939205646972,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.022119298461478056,
+        "pgas_tot": null,
+        "tdis_tot": 18.789907896004728,
+        "time_rat": 3.270058799042273e-05
+    },
+    "Intrinsic Rewards": -19.053802215803184,
+    "Extrinsic Reward": -19.053802215803184
+}{
+    "Episode": 63,
+    "Time Taken": 24.928876876831055,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 2.882800817489624,
+    "KPIs": {
+        "cost_tot": 0.23829720264391577,
+        "emis_tot": 0.1671465747342179,
+        "ener_tot": 1.0008776930192687,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02130078327790289,
+        "pgas_tot": null,
+        "tdis_tot": 21.945539176288893,
+        "time_rat": 3.2335787065445425e-05
+    },
+    "Intrinsic Rewards": -22.18383637893281,
+    "Extrinsic Reward": -22.18383637893281
+}{
+    "Episode": 64,
+    "Time Taken": 24.771050214767456,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.419646263122559,
+    "KPIs": {
+        "cost_tot": 0.1991191734023961,
+        "emis_tot": 0.14016986486741698,
+        "ener_tot": 0.8393405081881258,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021820664139407725,
+        "pgas_tot": null,
+        "tdis_tot": 25.10374574011079,
+        "time_rat": 3.160942483831335e-05
+    },
+    "Intrinsic Rewards": -25.302864913513186,
+    "Extrinsic Reward": -25.302864913513186
+}{
+    "Episode": 65,
+    "Time Taken": 24.901829481124878,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.13954782485961914,
+    "KPIs": {
+        "cost_tot": 0.21381708972771954,
+        "emis_tot": 0.15070075374961678,
+        "ener_tot": 0.9023997230515977,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021610493065995426,
+        "pgas_tot": null,
+        "tdis_tot": 38.34052494090288,
+        "time_rat": 3.304701318185796e-05
+    },
+    "Intrinsic Rewards": -38.5543420306306,
+    "Extrinsic Reward": -38.5543420306306
+}{
+    "Episode": 66,
+    "Time Taken": 24.25047469139099,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -21.5767879486084,
+    "KPIs": {
+        "cost_tot": 0.21513630915175397,
+        "emis_tot": 0.15087936121381004,
+        "ener_tot": 0.9034692288252101,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021306613723461456,
+        "pgas_tot": null,
+        "tdis_tot": 16.074209851825984,
+        "time_rat": 3.1287603908114956e-05
+    },
+    "Intrinsic Rewards": -16.289346160977736,
+    "Extrinsic Reward": -16.289346160977736
+}{
+    "Episode": 67,
+    "Time Taken": 25.146280765533447,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 16.031198501586914,
+    "KPIs": {
+        "cost_tot": 0.20313576031959357,
+        "emis_tot": 0.1424679458578852,
+        "ener_tot": 0.853101472202905,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021961914333572807,
+        "pgas_tot": null,
+        "tdis_tot": 17.976195333171006,
+        "time_rat": 3.2511144166901e-05
+    },
+    "Intrinsic Rewards": -18.1793310934906,
+    "Extrinsic Reward": -18.1793310934906
+}{
+    "Episode": 68,
+    "Time Taken": 24.533262014389038,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -24.857494354248047,
+    "KPIs": {
+        "cost_tot": 0.19453172847026676,
+        "emis_tot": 0.13699511705871575,
+        "ener_tot": 0.8203300422677594,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021396747475133385,
+        "pgas_tot": null,
+        "tdis_tot": 26.420091928473063,
+        "time_rat": 3.235492165441866e-05
+    },
+    "Intrinsic Rewards": -26.61462365694333,
+    "Extrinsic Reward": -26.61462365694333
+}{
+    "Episode": 69,
+    "Time Taken": 24.83414101600647,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.3243770599365234,
+    "KPIs": {
+        "cost_tot": 0.23416224625568147,
+        "emis_tot": 0.16476753242379605,
+        "ener_tot": 0.9866319306814134,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02133795252867148,
+        "pgas_tot": null,
+        "tdis_tot": 19.773013824103423,
+        "time_rat": 3.2233262740115005e-05
+    },
+    "Intrinsic Rewards": -20.007176070359105,
+    "Extrinsic Reward": -20.007176070359105
+}{
+    "Episode": 70,
+    "Time Taken": 24.470726013183594,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -6.95698881149292,
+    "KPIs": {
+        "cost_tot": 0.21355107525876899,
+        "emis_tot": 0.15018083203601837,
+        "ener_tot": 0.8992864193773561,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021225997729007514,
+        "pgas_tot": null,
+        "tdis_tot": 24.714124847727607,
+        "time_rat": 3.183676215706679e-05
+    },
+    "Intrinsic Rewards": -24.927675922986378,
+    "Extrinsic Reward": -24.927675922986378
+}{
+    "Episode": 71,
+    "Time Taken": 24.466411590576172,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -3.7537639141082764,
+    "KPIs": {
+        "cost_tot": 0.23391844290524907,
+        "emis_tot": 0.16465312805821677,
+        "ener_tot": 0.9859468746001013,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021904745200532157,
+        "pgas_tot": null,
+        "tdis_tot": 16.56458944144244,
+        "time_rat": 3.1293047956688696e-05
+    },
+    "Intrinsic Rewards": -16.79850788434769,
+    "Extrinsic Reward": -16.79850788434769
+}{
+    "Episode": 72,
+    "Time Taken": 24.820053100585938,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -24.081398010253906,
+    "KPIs": {
+        "cost_tot": 0.26328081956798544,
+        "emis_tot": 0.18520047704557493,
+        "ener_tot": 1.1089848924884724,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021316687706126124,
+        "pgas_tot": null,
+        "tdis_tot": 38.89067061700206,
+        "time_rat": 3.263288941332903e-05
+    },
+    "Intrinsic Rewards": -39.15395143657005,
+    "Extrinsic Reward": -39.15395143657005
+}{
+    "Episode": 73,
+    "Time Taken": 24.65643858909607,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -21.716142654418945,
+    "KPIs": {
+        "cost_tot": 0.24872027493669782,
+        "emis_tot": 0.17503283416652166,
+        "ener_tot": 1.0481008033923453,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021605182380471686,
+        "pgas_tot": null,
+        "tdis_tot": 17.09910271869184,
+        "time_rat": 3.187448259383913e-05
+    },
+    "Intrinsic Rewards": -17.347822993628537,
+    "Extrinsic Reward": -17.347822993628537
+}{
+    "Episode": 74,
+    "Time Taken": 26.713088512420654,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -21.67055892944336,
+    "KPIs": {
+        "cost_tot": 0.23723979392341135,
+        "emis_tot": 0.16701849907603478,
+        "ener_tot": 1.0001107729103895,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02122719118701433,
+        "pgas_tot": null,
+        "tdis_tot": 13.163670015741232,
+        "time_rat": 3.2253305196131345e-05
+    },
+    "Intrinsic Rewards": -13.400909809664643,
+    "Extrinsic Reward": -13.400909809664643
+}{
+    "Episode": 75,
+    "Time Taken": 25.083608865737915,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 5.660655975341797,
+    "KPIs": {
+        "cost_tot": 0.23222384633912438,
+        "emis_tot": 0.1639492095266386,
+        "ener_tot": 0.9817317935726874,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021006970104251867,
+        "pgas_tot": null,
+        "tdis_tot": 8.345784892417,
+        "time_rat": 3.214010643580604e-05
+    },
+    "Intrinsic Rewards": -8.578008738756125,
+    "Extrinsic Reward": -8.578008738756125
+}{
+    "Episode": 76,
+    "Time Taken": 25.300572156906128,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 23.975181579589844,
+    "KPIs": {
+        "cost_tot": 0.21649483470844735,
+        "emis_tot": 0.15202701344391023,
+        "ener_tot": 0.9103413978677265,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020607356368027137,
+        "pgas_tot": null,
+        "tdis_tot": 7.3881928131185095,
+        "time_rat": 3.190359268238936e-05
+    },
+    "Intrinsic Rewards": -7.604687647826957,
+    "Extrinsic Reward": -7.604687647826957
+}{
+    "Episode": 77,
+    "Time Taken": 25.106916904449463,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -35.37291717529297,
+    "KPIs": {
+        "cost_tot": 0.19672986584116534,
+        "emis_tot": 0.13935962241570982,
+        "ener_tot": 0.8344887569802986,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021524594510364838,
+        "pgas_tot": null,
+        "tdis_tot": 10.274553301422678,
+        "time_rat": 3.195882119514324e-05
+    },
+    "Intrinsic Rewards": -10.471283167263843,
+    "Extrinsic Reward": -10.471283167263843
+}{
+    "Episode": 78,
+    "Time Taken": 24.51169753074646,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 19.460485458374023,
+    "KPIs": {
+        "cost_tot": 0.2258887497965713,
+        "emis_tot": 0.15892659536980872,
+        "ener_tot": 0.9516562596994528,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020692477103440268,
+        "pgas_tot": null,
+        "tdis_tot": 5.488095663910325,
+        "time_rat": 3.165554314378708e-05
+    },
+    "Intrinsic Rewards": -5.713984413706896,
+    "Extrinsic Reward": -5.713984413706896
+}{
+    "Episode": 79,
+    "Time Taken": 24.82354474067688,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -27.126243591308594,
+    "KPIs": {
+        "cost_tot": 0.18623583882714054,
+        "emis_tot": 0.13175947542325314,
+        "ener_tot": 0.7889788947500191,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.0209230935589297,
+        "pgas_tot": null,
+        "tdis_tot": 26.735610640740212,
+        "time_rat": 3.3417910179763876e-05
+    },
+    "Intrinsic Rewards": -26.921846479567353,
+    "Extrinsic Reward": -26.921846479567353
+}{
+    "Episode": 80,
+    "Time Taken": 24.753406763076782,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.704598426818848,
+    "KPIs": {
+        "cost_tot": 0.18543880150993147,
+        "emis_tot": 0.1311648060587209,
+        "ener_tot": 0.7854180003516232,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.0204546015691936,
+        "pgas_tot": null,
+        "tdis_tot": 20.474035362946456,
+        "time_rat": 3.4138402610859545e-05
+    },
+    "Intrinsic Rewards": -20.659474164456388,
+    "Extrinsic Reward": -20.659474164456388
+}{
+    "Episode": 81,
+    "Time Taken": 24.929481744766235,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -2.7906599044799805,
+    "KPIs": {
+        "cost_tot": 0.22607907793176,
+        "emis_tot": 0.15939468413017377,
+        "ener_tot": 0.9544591864082262,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02107801987610136,
+        "pgas_tot": null,
+        "tdis_tot": 7.874180886824543,
+        "time_rat": 3.3410809263981206e-05
+    },
+    "Intrinsic Rewards": -8.100259964756303,
+    "Extrinsic Reward": -8.100259964756303
+}{
+    "Episode": 82,
+    "Time Taken": 27.501216888427734,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -20.568540573120117,
+    "KPIs": {
+        "cost_tot": 0.23391474386906727,
+        "emis_tot": 0.16537452156656038,
+        "ener_tot": 0.9902665962069485,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021398300735942087,
+        "pgas_tot": null,
+        "tdis_tot": 17.904614192508646,
+        "time_rat": 3.5980278379702697e-05
+    },
+    "Intrinsic Rewards": -18.138528936377714,
+    "Extrinsic Reward": -18.138528936377714
+}{
+    "Episode": 83,
+    "Time Taken": 26.627593755722046,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 13.478761672973633,
+    "KPIs": {
+        "cost_tot": 0.2623278002519415,
+        "emis_tot": 0.18493480106435775,
+        "ener_tot": 1.107394018349447,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021452073528427065,
+        "pgas_tot": null,
+        "tdis_tot": 19.103180577627963,
+        "time_rat": 3.376556412568168e-05
+    },
+    "Intrinsic Rewards": -19.365508377879905,
+    "Extrinsic Reward": -19.365508377879905
+}{
+    "Episode": 84,
+    "Time Taken": 27.036738395690918,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -16.040485382080078,
+    "KPIs": {
+        "cost_tot": 0.2540286523372799,
+        "emis_tot": 0.17944529869342266,
+        "ener_tot": 1.0745227466671992,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02147761931599607,
+        "pgas_tot": null,
+        "tdis_tot": 34.48145894699308,
+        "time_rat": 3.475196777828156e-05
+    },
+    "Intrinsic Rewards": -34.73548759933036,
+    "Extrinsic Reward": -34.73548759933036
+}{
+    "Episode": 85,
+    "Time Taken": 26.304572105407715,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -17.40248680114746,
+    "KPIs": {
+        "cost_tot": 0.2733290130961102,
+        "emis_tot": 0.1932983397699505,
+        "ener_tot": 1.1574750884428162,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021636427590546063,
+        "pgas_tot": null,
+        "tdis_tot": 60.512156178819424,
+        "time_rat": 3.44985885121835e-05
+    },
+    "Intrinsic Rewards": -60.785485191915534,
+    "Extrinsic Reward": -60.785485191915534
+}{
+    "Episode": 86,
+    "Time Taken": 26.625954151153564,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 18.517221450805664,
+    "KPIs": {
+        "cost_tot": 0.24663331427828405,
+        "emis_tot": 0.17393924144706643,
+        "ener_tot": 1.0415523439944097,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021060492905870656,
+        "pgas_tot": null,
+        "tdis_tot": 17.608845316870116,
+        "time_rat": 3.534465239792274e-05
+    },
+    "Intrinsic Rewards": -17.8554786311484,
+    "Extrinsic Reward": -17.8554786311484
+}{
+    "Episode": 87,
+    "Time Taken": 25.829084157943726,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -0.6887035369873047,
+    "KPIs": {
+        "cost_tot": 0.24932844566126094,
+        "emis_tot": 0.1764502762994346,
+        "ener_tot": 1.056588480834937,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021634635722166135,
+        "pgas_tot": null,
+        "tdis_tot": 26.41362185254418,
+        "time_rat": 3.448200840798635e-05
+    },
+    "Intrinsic Rewards": -26.662950298205438,
+    "Extrinsic Reward": -26.662950298205438
+}{
+    "Episode": 88,
+    "Time Taken": 26.395483255386353,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 8.062504768371582,
+    "KPIs": {
+        "cost_tot": 0.23481632933220173,
+        "emis_tot": 0.16560991086976173,
+        "ener_tot": 0.991676112992585,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020800377484060082,
+        "pgas_tot": null,
+        "tdis_tot": 10.682263555959782,
+        "time_rat": 3.4442516782927134e-05
+    },
+    "Intrinsic Rewards": -10.917079885291983,
+    "Extrinsic Reward": -10.917079885291983
+}{
+    "Episode": 89,
+    "Time Taken": 26.203598976135254,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -12.71786117553711,
+    "KPIs": {
+        "cost_tot": 0.23326800778024787,
+        "emis_tot": 0.16438034803444682,
+        "ener_tot": 0.9843134612841133,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021331217484754573,
+        "pgas_tot": null,
+        "tdis_tot": 18.244379590382824,
+        "time_rat": 3.5126751692837514e-05
+    },
+    "Intrinsic Rewards": -18.47764759816307,
+    "Extrinsic Reward": -18.47764759816307
+}{
+    "Episode": 90,
+    "Time Taken": 26.180365562438965,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 35.0417594909668,
+    "KPIs": {
+        "cost_tot": 0.22743305349216444,
+        "emis_tot": 0.16100344286899534,
+        "ener_tot": 0.964092472269433,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02084090719511601,
+        "pgas_tot": null,
+        "tdis_tot": 7.0878167689029805,
+        "time_rat": 3.422364868499615e-05
+    },
+    "Intrinsic Rewards": -7.3152498223951445,
+    "Extrinsic Reward": -7.3152498223951445
+}{
+    "Episode": 91,
+    "Time Taken": 27.159361600875854,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -20.967275619506836,
+    "KPIs": {
+        "cost_tot": 0.21891849492682583,
+        "emis_tot": 0.15537629230215017,
+        "ener_tot": 0.9303969598931152,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020573851767868193,
+        "pgas_tot": null,
+        "tdis_tot": 4.357373162318235,
+        "time_rat": 3.518143856020831e-05
+    },
+    "Intrinsic Rewards": -4.576291657245061,
+    "Extrinsic Reward": -4.576291657245061
+}{
+    "Episode": 92,
+    "Time Taken": 24.340205907821655,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 24.76105499267578,
+    "KPIs": {
+        "cost_tot": 0.21974078029837515,
+        "emis_tot": 0.15553760818806192,
+        "ener_tot": 0.9313629232818078,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021221544944230095,
+        "pgas_tot": null,
+        "tdis_tot": 7.293835808575697,
+        "time_rat": 3.19799169819191e-05
+    },
+    "Intrinsic Rewards": -7.513576588874072,
+    "Extrinsic Reward": -7.513576588874072
+}{
+    "Episode": 93,
+    "Time Taken": 25.80112385749817,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -4.528323173522949,
+    "KPIs": {
+        "cost_tot": 0.24016845470793735,
+        "emis_tot": 0.16991039919232517,
+        "ener_tot": 1.0174275400738029,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021222287475780664,
+        "pgas_tot": null,
+        "tdis_tot": 20.931049721106326,
+        "time_rat": 3.349923819461197e-05
+    },
+    "Intrinsic Rewards": -21.171218175814264,
+    "Extrinsic Reward": -21.171218175814264
+}{
+    "Episode": 94,
+    "Time Taken": 25.592270612716675,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -32.6168212890625,
+    "KPIs": {
+        "cost_tot": 0.27395484024440775,
+        "emis_tot": 0.19431220409955496,
+        "ener_tot": 1.1635461323326628,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021182662279098374,
+        "pgas_tot": null,
+        "tdis_tot": 62.930642746482135,
+        "time_rat": 3.327991005289492e-05
+    },
+    "Intrinsic Rewards": -63.20459758672654,
+    "Extrinsic Reward": -63.20459758672654
+}{
+    "Episode": 95,
+    "Time Taken": 25.455627918243408,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -22.819223403930664,
+    "KPIs": {
+        "cost_tot": 0.2420983478123689,
+        "emis_tot": 0.17117791447417904,
+        "ener_tot": 1.0250174519411919,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021181020435307216,
+        "pgas_tot": null,
+        "tdis_tot": 34.118023495123,
+        "time_rat": 3.2108774970448205e-05
+    },
+    "Intrinsic Rewards": -34.360121842935364,
+    "Extrinsic Reward": -34.360121842935364
+}{
+    "Episode": 96,
+    "Time Taken": 24.732452392578125,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 4.5819573402404785,
+    "KPIs": {
+        "cost_tot": 0.24238778048756499,
+        "emis_tot": 0.17183385226827932,
+        "ener_tot": 1.02894522316335,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020940462612869692,
+        "pgas_tot": null,
+        "tdis_tot": 14.732231255630264,
+        "time_rat": 3.264383467101547e-05
+    },
+    "Intrinsic Rewards": -14.97461903611783,
+    "Extrinsic Reward": -14.97461903611783
+}{
+    "Episode": 97,
+    "Time Taken": 23.580027103424072,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -30.559141159057617,
+    "KPIs": {
+        "cost_tot": 0.20008745918185764,
+        "emis_tot": 0.14122127299581527,
+        "ener_tot": 0.8456363652444027,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020839862161882886,
+        "pgas_tot": null,
+        "tdis_tot": 2.252585548488917,
+        "time_rat": 3.136644130030637e-05
+    },
+    "Intrinsic Rewards": -2.4526730076707746,
+    "Extrinsic Reward": -2.4526730076707746
+}{
+    "Episode": 98,
+    "Time Taken": 25.125465869903564,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -38.18951416015625,
+    "KPIs": {
+        "cost_tot": 0.1842183418216205,
+        "emis_tot": 0.13072763086669562,
+        "ener_tot": 0.7828001848305121,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02010188263784651,
+        "pgas_tot": null,
+        "tdis_tot": 24.73383312218868,
+        "time_rat": 3.3169070248881345e-05
+    },
+    "Intrinsic Rewards": -24.9180514640103,
+    "Extrinsic Reward": -24.9180514640103
+}{
+    "Episode": 99,
+    "Time Taken": 24.697761058807373,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -24.720094680786133,
+    "KPIs": {
+        "cost_tot": 0.1803706297514778,
+        "emis_tot": 0.12883462212773647,
+        "ener_tot": 0.7714648031600989,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021133340451637,
+        "pgas_tot": null,
+        "tdis_tot": 13.764675559916057,
+        "time_rat": 3.35180712124658e-05
+    },
+    "Intrinsic Rewards": -13.945046189667535,
+    "Extrinsic Reward": -13.945046189667535
+}{
+    "Episode": 100,
+    "Time Taken": 24.784541845321655,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -56.785430908203125,
+    "KPIs": {
+        "cost_tot": 0.17572053935704793,
+        "emis_tot": 0.12500694441072002,
+        "ener_tot": 0.7485445773097004,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020459036041167455,
+        "pgas_tot": null,
+        "tdis_tot": 21.068543124192963,
+        "time_rat": 3.394200294106095e-05
+    },
+    "Intrinsic Rewards": -21.24426366355001,
+    "Extrinsic Reward": -21.24426366355001
+}{
+    "Episode": 101,
+    "Time Taken": 25.582830905914307,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -15.679546356201172,
+    "KPIs": {
+        "cost_tot": 0.1860993088322422,
+        "emis_tot": 0.1329683501925867,
+        "ener_tot": 0.7962176658238727,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02103754044212307,
+        "pgas_tot": null,
+        "tdis_tot": 17.481511297013345,
+        "time_rat": 3.3432819225169995e-05
+    },
+    "Intrinsic Rewards": -17.66761060584559,
+    "Extrinsic Reward": -17.66761060584559
+}{
+    "Episode": 102,
+    "Time Taken": 25.297027349472046,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -21.52301597595215,
+    "KPIs": {
+        "cost_tot": 0.19937995319969223,
+        "emis_tot": 0.1418600261750647,
+        "ener_tot": 0.8494612345812266,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020748779900132172,
+        "pgas_tot": null,
+        "tdis_tot": 9.004497784448171,
+        "time_rat": 3.260544486462124e-05
+    },
+    "Intrinsic Rewards": -9.203877737647863,
+    "Extrinsic Reward": -9.203877737647863
+}{
+    "Episode": 103,
+    "Time Taken": 25.854740619659424,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -29.927978515625,
+    "KPIs": {
+        "cost_tot": 0.191482053774807,
+        "emis_tot": 0.1358026797002931,
+        "ener_tot": 0.813189698804151,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.0209426680930779,
+        "pgas_tot": null,
+        "tdis_tot": 19.10354866771506,
+        "time_rat": 3.302428812261611e-05
+    },
+    "Intrinsic Rewards": -19.295030721489866,
+    "Extrinsic Reward": -19.295030721489866
+}{
+    "Episode": 104,
+    "Time Taken": 24.649768590927124,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 26.59949493408203,
+    "KPIs": {
+        "cost_tot": 0.20721484235457235,
+        "emis_tot": 0.1474971302248662,
+        "ener_tot": 0.8832163486518937,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02073882999313333,
+        "pgas_tot": null,
+        "tdis_tot": 22.742652093412723,
+        "time_rat": 3.291226410991931e-05
+    },
+    "Intrinsic Rewards": -22.949866935767297,
+    "Extrinsic Reward": -22.949866935767297
+}{
+    "Episode": 105,
+    "Time Taken": 25.640666961669922,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 12.899667739868164,
+    "KPIs": {
+        "cost_tot": 0.2235537283351436,
+        "emis_tot": 0.15798447751783928,
+        "ener_tot": 0.9460148354361646,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02102190849320641,
+        "pgas_tot": null,
+        "tdis_tot": 11.605550880302461,
+        "time_rat": 3.454497645771693e-05
+    },
+    "Intrinsic Rewards": -11.829104608637605,
+    "Extrinsic Reward": -11.829104608637605
+}{
+    "Episode": 106,
+    "Time Taken": 25.883325338363647,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 3.340280532836914,
+    "KPIs": {
+        "cost_tot": 0.2283101603366747,
+        "emis_tot": 0.16182924351470446,
+        "ener_tot": 0.9690373863155939,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020771532289210762,
+        "pgas_tot": null,
+        "tdis_tot": 6.444739479104557,
+        "time_rat": 3.430603436692052e-05
+    },
+    "Intrinsic Rewards": -6.673049639441232,
+    "Extrinsic Reward": -6.673049639441232
+}{
+    "Episode": 107,
+    "Time Taken": 25.403752088546753,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -12.573974609375,
+    "KPIs": {
+        "cost_tot": 0.2417690959911582,
+        "emis_tot": 0.17165567376694243,
+        "ener_tot": 1.0278782860295952,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02135843235332892,
+        "pgas_tot": null,
+        "tdis_tot": 31.7132798222653,
+        "time_rat": 3.191561334662967e-05
+    },
+    "Intrinsic Rewards": -31.95504891825646,
+    "Extrinsic Reward": -31.95504891825646
+}{
+    "Episode": 108,
+    "Time Taken": 25.058067560195923,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -43.736602783203125,
+    "KPIs": {
+        "cost_tot": 0.20833287075673435,
+        "emis_tot": 0.14816078722629164,
+        "ener_tot": 0.8871903426724059,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02070688485565361,
+        "pgas_tot": null,
+        "tdis_tot": 6.391637584937289,
+        "time_rat": 3.2660831850041793e-05
+    },
+    "Intrinsic Rewards": -6.599970455694024,
+    "Extrinsic Reward": -6.599970455694024
+}{
+    "Episode": 109,
+    "Time Taken": 24.289509057998657,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 16.89961051940918,
+    "KPIs": {
+        "cost_tot": 0.21559660481901294,
+        "emis_tot": 0.15343667373859513,
+        "ener_tot": 0.9187824774766175,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02054010464260301,
+        "pgas_tot": null,
+        "tdis_tot": 17.311968530643647,
+        "time_rat": 3.257937413990183e-05
+    },
+    "Intrinsic Rewards": -17.52756513546266,
+    "Extrinsic Reward": -17.52756513546266
+}{
+    "Episode": 110,
+    "Time Taken": 24.998360872268677,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 44.19097900390625,
+    "KPIs": {
+        "cost_tot": 0.23138987813430967,
+        "emis_tot": 0.1638081813807359,
+        "ener_tot": 0.9808873136571016,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020806558942357174,
+        "pgas_tot": null,
+        "tdis_tot": 1.189367487386314,
+        "time_rat": 3.2466236088011e-05
+    },
+    "Intrinsic Rewards": -1.4207573655206236,
+    "Extrinsic Reward": -1.4207573655206236
+}{
+    "Episode": 111,
+    "Time Taken": 24.533182621002197,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 42.81174087524414,
+    "KPIs": {
+        "cost_tot": 0.24138414493277063,
+        "emis_tot": 0.17123200879598194,
+        "ener_tot": 1.0253413700358198,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020971282129149924,
+        "pgas_tot": null,
+        "tdis_tot": 8.504561296970394,
+        "time_rat": 3.2214463230163335e-05
+    },
+    "Intrinsic Rewards": -8.745945441903164,
+    "Extrinsic Reward": -8.745945441903164
+}{
+    "Episode": 112,
+    "Time Taken": 25.195817708969116,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 8.147329330444336,
+    "KPIs": {
+        "cost_tot": 0.22892694677583114,
+        "emis_tot": 0.1632929090909199,
+        "ener_tot": 0.9778018508438311,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02052952967094348,
+        "pgas_tot": null,
+        "tdis_tot": 19.059045814111656,
+        "time_rat": 3.280104822898037e-05
+    },
+    "Intrinsic Rewards": -19.287972760887488,
+    "Extrinsic Reward": -19.287972760887488
+}{
+    "Episode": 113,
+    "Time Taken": 24.73440432548523,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 4.95753812789917,
+    "KPIs": {
+        "cost_tot": 0.24440658547402605,
+        "emis_tot": 0.17315568914354865,
+        "ener_tot": 1.0368604140332254,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02078254225579939,
+        "pgas_tot": null,
+        "tdis_tot": 15.027435822520976,
+        "time_rat": 3.3336550628066696e-05
+    },
+    "Intrinsic Rewards": -15.271842407995003,
+    "Extrinsic Reward": -15.271842407995003
+}{
+    "Episode": 114,
+    "Time Taken": 26.110886096954346,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 0.406099796295166,
+    "KPIs": {
+        "cost_tot": 0.2420476973029666,
+        "emis_tot": 0.1717934806085948,
+        "ener_tot": 1.0287034766981722,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021075384198686216,
+        "pgas_tot": null,
+        "tdis_tot": 15.979412351230504,
+        "time_rat": 3.331459112583645e-05
+    },
+    "Intrinsic Rewards": -16.22146004853347,
+    "Extrinsic Reward": -16.22146004853347
+}{
+    "Episode": 115,
+    "Time Taken": 24.911417484283447,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 21.986854553222656,
+    "KPIs": {
+        "cost_tot": 0.22495486329787995,
+        "emis_tot": 0.15950499285950911,
+        "ener_tot": 0.9551197177216119,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020752672167538667,
+        "pgas_tot": null,
+        "tdis_tot": 7.4010537724417365,
+        "time_rat": 3.299020230770111e-05
+    },
+    "Intrinsic Rewards": -7.626008635739616,
+    "Extrinsic Reward": -7.626008635739616
+}{
+    "Episode": 116,
+    "Time Taken": 24.6906316280365,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.781669616699219,
+    "KPIs": {
+        "cost_tot": 0.23155710848488228,
+        "emis_tot": 0.16411032262265843,
+        "ener_tot": 0.9826965426506487,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02079791678076918,
+        "pgas_tot": null,
+        "tdis_tot": 17.457366441569533,
+        "time_rat": 3.2368491566370405e-05
+    },
+    "Intrinsic Rewards": -17.688923550054415,
+    "Extrinsic Reward": -17.688923550054415
+}{
+    "Episode": 117,
+    "Time Taken": 24.682477712631226,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.415766716003418,
+    "KPIs": {
+        "cost_tot": 0.2294988956703936,
+        "emis_tot": 0.16254409313289445,
+        "ener_tot": 0.9733179229514637,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020466513523516812,
+        "pgas_tot": null,
+        "tdis_tot": 12.888397674821052,
+        "time_rat": 3.217073265837613e-05
+    },
+    "Intrinsic Rewards": -13.117896570491446,
+    "Extrinsic Reward": -13.117896570491446
+}{
+    "Episode": 118,
+    "Time Taken": 25.021453380584717,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -7.863356590270996,
+    "KPIs": {
+        "cost_tot": 0.21285862229620536,
+        "emis_tot": 0.15112867406037936,
+        "ener_tot": 0.9049621201220321,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021201671849059394,
+        "pgas_tot": null,
+        "tdis_tot": 7.17202068641576,
+        "time_rat": 3.2106855164759997e-05
+    },
+    "Intrinsic Rewards": -7.384879308711965,
+    "Extrinsic Reward": -7.384879308711965
+}{
+    "Episode": 119,
+    "Time Taken": 25.1573703289032,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -23.449796676635742,
+    "KPIs": {
+        "cost_tot": 0.2037996287467578,
+        "emis_tot": 0.14431797633278987,
+        "ener_tot": 0.8641794989987417,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020392712217259197,
+        "pgas_tot": null,
+        "tdis_tot": 8.665254938641997,
+        "time_rat": 3.1919318926397455e-05
+    },
+    "Intrinsic Rewards": -8.869054567388755,
+    "Extrinsic Reward": -8.869054567388755
+}{
+    "Episode": 120,
+    "Time Taken": 24.861197471618652,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 42.90846252441406,
+    "KPIs": {
+        "cost_tot": 0.23704818431819985,
+        "emis_tot": 0.16787464173632494,
+        "ener_tot": 1.0052373756666169,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021027856327869604,
+        "pgas_tot": null,
+        "tdis_tot": 8.772209725097968,
+        "time_rat": 3.293029096706834e-05
+    },
+    "Intrinsic Rewards": -9.009257909416167,
+    "Extrinsic Reward": -9.009257909416167
+}{
+    "Episode": 121,
+    "Time Taken": 24.63298273086548,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 28.71979522705078,
+    "KPIs": {
+        "cost_tot": 0.2220624483698237,
+        "emis_tot": 0.15834122974448098,
+        "ener_tot": 0.9481510763142578,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020621746042737345,
+        "pgas_tot": null,
+        "tdis_tot": 11.138445497583524,
+        "time_rat": 3.179480671567261e-05
+    },
+    "Intrinsic Rewards": -11.360507945953348,
+    "Extrinsic Reward": -11.360507945953348
+}{
+    "Episode": 122,
+    "Time Taken": 25.03686809539795,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 19.937841415405273,
+    "KPIs": {
+        "cost_tot": 0.24426129141672093,
+        "emis_tot": 0.1725047995427842,
+        "ener_tot": 1.0329628715136783,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02069390277128286,
+        "pgas_tot": null,
+        "tdis_tot": 11.294246160471163,
+        "time_rat": 3.3243744382782587e-05
+    },
+    "Intrinsic Rewards": -11.538507451887885,
+    "Extrinsic Reward": -11.538507451887885
+}{
+    "Episode": 123,
+    "Time Taken": 24.669835090637207,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 20.738143920898438,
+    "KPIs": {
+        "cost_tot": 0.22729624679808005,
+        "emis_tot": 0.16019597762949356,
+        "ener_tot": 0.959257351074812,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020397820648350624,
+        "pgas_tot": null,
+        "tdis_tot": 15.916447808290958,
+        "time_rat": 3.2573522477553634e-05
+    },
+    "Intrinsic Rewards": -16.143744055089037,
+    "Extrinsic Reward": -16.143744055089037
+}{
+    "Episode": 124,
+    "Time Taken": 25.035332441329956,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 35.62533187866211,
+    "KPIs": {
+        "cost_tot": 0.22312105995554654,
+        "emis_tot": 0.1574326853020306,
+        "ener_tot": 0.9427106904313209,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02092912564482572,
+        "pgas_tot": null,
+        "tdis_tot": 8.117350567654718,
+        "time_rat": 3.2514610460826326e-05
+    },
+    "Intrinsic Rewards": -8.340471627610265,
+    "Extrinsic Reward": -8.340471627610265
+}{
+    "Episode": 125,
+    "Time Taken": 24.677794456481934,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 20.099319458007812,
+    "KPIs": {
+        "cost_tot": 0.2088966305496087,
+        "emis_tot": 0.14813631162129695,
+        "ener_tot": 0.8870437821634554,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02037132594722238,
+        "pgas_tot": null,
+        "tdis_tot": 10.366520613170998,
+        "time_rat": 3.238160222295731e-05
+    },
+    "Intrinsic Rewards": -10.575417243720606,
+    "Extrinsic Reward": -10.575417243720606
+}{
+    "Episode": 126,
+    "Time Taken": 25.26679015159607,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 10.792789459228516,
+    "KPIs": {
+        "cost_tot": 0.20632411584080848,
+        "emis_tot": 0.14646301236140977,
+        "ener_tot": 0.8770240261162268,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020263747975756082,
+        "pgas_tot": null,
+        "tdis_tot": 11.695239304472938,
+        "time_rat": 3.238450834360072e-05
+    },
+    "Intrinsic Rewards": -11.901563420313748,
+    "Extrinsic Reward": -11.901563420313748
+}{
+    "Episode": 127,
+    "Time Taken": 24.950092554092407,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 5.434392929077148,
+    "KPIs": {
+        "cost_tot": 0.19250454435703732,
+        "emis_tot": 0.13660383415407723,
+        "ener_tot": 0.8179870308627383,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020848417796844335,
+        "pgas_tot": null,
+        "tdis_tot": 21.38218171886833,
+        "time_rat": 3.247351439856978e-05
+    },
+    "Intrinsic Rewards": -21.57468626322537,
+    "Extrinsic Reward": -21.57468626322537
+}{
+    "Episode": 128,
+    "Time Taken": 24.295072317123413,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -5.881409168243408,
+    "KPIs": {
+        "cost_tot": 0.1881750252193048,
+        "emis_tot": 0.13336135014896003,
+        "ener_tot": 0.7985709589758095,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020891015753934452,
+        "pgas_tot": null,
+        "tdis_tot": 32.28312812527578,
+        "time_rat": 3.219275484009394e-05
+    },
+    "Intrinsic Rewards": -32.47130315049508,
+    "Extrinsic Reward": -32.47130315049508
+}{
+    "Episode": 129,
+    "Time Taken": 25.05840516090393,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 15.223084449768066,
+    "KPIs": {
+        "cost_tot": 0.2019768895343986,
+        "emis_tot": 0.14301459936281313,
+        "ener_tot": 0.8563748464839122,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.0207577697024949,
+        "pgas_tot": null,
+        "tdis_tot": 27.090144548982124,
+        "time_rat": 3.315805127381017e-05
+    },
+    "Intrinsic Rewards": -27.292121438516524,
+    "Extrinsic Reward": -27.292121438516524
+}{
+    "Episode": 130,
+    "Time Taken": 25.082674980163574,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 7.491122722625732,
+    "KPIs": {
+        "cost_tot": 0.20630849796891165,
+        "emis_tot": 0.1458857710528934,
+        "ener_tot": 0.873567491334692,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020383465207177563,
+        "pgas_tot": null,
+        "tdis_tot": 12.976261339306461,
+        "time_rat": 3.254845107673968e-05
+    },
+    "Intrinsic Rewards": -13.182569837275373,
+    "Extrinsic Reward": -13.182569837275373
+}{
+    "Episode": 131,
+    "Time Taken": 24.717047214508057,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 9.130900382995605,
+    "KPIs": {
+        "cost_tot": 0.21887407903118847,
+        "emis_tot": 0.15479198153407384,
+        "ener_tot": 0.9268980930184051,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02111117362792101,
+        "pgas_tot": null,
+        "tdis_tot": 27.286283246676014,
+        "time_rat": 3.2220008196654144e-05
+    },
+    "Intrinsic Rewards": -27.505157325707202,
+    "Extrinsic Reward": -27.505157325707202
+}{
+    "Episode": 132,
+    "Time Taken": 24.569534063339233,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 12.962713241577148,
+    "KPIs": {
+        "cost_tot": 0.22669259992299357,
+        "emis_tot": 0.16045850503009992,
+        "ener_tot": 0.9608293714377241,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021084460135219908,
+        "pgas_tot": null,
+        "tdis_tot": 6.96138080545347,
+        "time_rat": 3.2593383596687724e-05
+    },
+    "Intrinsic Rewards": -7.188073405376464,
+    "Extrinsic Reward": -7.188073405376464
+}{
+    "Episode": 133,
+    "Time Taken": 24.480469465255737,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 19.001516342163086,
+    "KPIs": {
+        "cost_tot": 0.24178246444826484,
+        "emis_tot": 0.1708002082395964,
+        "ener_tot": 1.022755737961655,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021192249430282945,
+        "pgas_tot": null,
+        "tdis_tot": 22.71724842986171,
+        "time_rat": 3.199162937345959e-05
+    },
+    "Intrinsic Rewards": -22.959030894309972,
+    "Extrinsic Reward": -22.959030894309972
+}{
+    "Episode": 134,
+    "Time Taken": 24.980923175811768,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 17.402801513671875,
+    "KPIs": {
+        "cost_tot": 0.19829392404379353,
+        "emis_tot": 0.1413578946889602,
+        "ener_tot": 0.8464544592153299,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02077790746766547,
+        "pgas_tot": null,
+        "tdis_tot": 11.448147966883734,
+        "time_rat": 3.2355742006705554e-05
+    },
+    "Intrinsic Rewards": -11.646441890927528,
+    "Extrinsic Reward": -11.646441890927528
+}{
+    "Episode": 135,
+    "Time Taken": 26.10321879386902,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.3734912872314453,
+    "KPIs": {
+        "cost_tot": 0.1760532392432071,
+        "emis_tot": 0.12523312875412582,
+        "ener_tot": 0.7498989745756041,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.019835642727475185,
+        "pgas_tot": null,
+        "tdis_tot": 44.66830970146265,
+        "time_rat": 3.413874281461907e-05
+    },
+    "Intrinsic Rewards": -44.84436294070586,
+    "Extrinsic Reward": -44.84436294070586
+}{
+    "Episode": 136,
+    "Time Taken": 25.172826766967773,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.0579092502593994,
+    "KPIs": {
+        "cost_tot": 0.18010673471689534,
+        "emis_tot": 0.12752459961131973,
+        "ener_tot": 0.7636203569540101,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020130855194320212,
+        "pgas_tot": null,
+        "tdis_tot": 38.22833784296758,
+        "time_rat": 3.4108663756380635e-05
+    },
+    "Intrinsic Rewards": -38.40844457768448,
+    "Extrinsic Reward": -38.40844457768448
+}{
+    "Episode": 137,
+    "Time Taken": 24.64922785758972,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 1.5115983486175537,
+    "KPIs": {
+        "cost_tot": 0.19444857750368144,
+        "emis_tot": 0.137872130104929,
+        "ener_tot": 0.8255816173947844,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020714346445961266,
+        "pgas_tot": null,
+        "tdis_tot": 18.858716304019456,
+        "time_rat": 3.2823731107686565e-05
+    },
+    "Intrinsic Rewards": -19.053164881523138,
+    "Extrinsic Reward": -19.053164881523138
+}{
+    "Episode": 138,
+    "Time Taken": 24.921640157699585,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 59.63887023925781,
+    "KPIs": {
+        "cost_tot": 0.23124125161783193,
+        "emis_tot": 0.16414671578724657,
+        "ener_tot": 0.9829144657918953,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020407051632387336,
+        "pgas_tot": null,
+        "tdis_tot": 14.837515785400889,
+        "time_rat": 3.102120623071358e-05
+    },
+    "Intrinsic Rewards": -15.06875703701872,
+    "Extrinsic Reward": -15.06875703701872
+}{
+    "Episode": 139,
+    "Time Taken": 24.58607578277588,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 17.30893898010254,
+    "KPIs": {
+        "cost_tot": 0.23825922214033252,
+        "emis_tot": 0.16854717923873946,
+        "ener_tot": 1.0092645463397574,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020695045045663246,
+        "pgas_tot": null,
+        "tdis_tot": 23.90088437364032,
+        "time_rat": 3.317904062372036e-05
+    },
+    "Intrinsic Rewards": -24.139143595780652,
+    "Extrinsic Reward": -24.139143595780652
+}{
+    "Episode": 140,
+    "Time Taken": 24.360514402389526,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 16.756383895874023,
+    "KPIs": {
+        "cost_tot": 0.2302711352782228,
+        "emis_tot": 0.163339352916483,
+        "ener_tot": 0.9780799575837302,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02092709901023696,
+        "pgas_tot": null,
+        "tdis_tot": 5.8442927614333104,
+        "time_rat": 3.2217516785576226e-05
+    },
+    "Intrinsic Rewards": -6.074563896711533,
+    "Extrinsic Reward": -6.074563896711533
+}{
+    "Episode": 141,
+    "Time Taken": 24.816589832305908,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 44.472660064697266,
+    "KPIs": {
+        "cost_tot": 0.22907156878712973,
+        "emis_tot": 0.1621124709825954,
+        "ener_tot": 0.9707333591772176,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020596953075850775,
+        "pgas_tot": null,
+        "tdis_tot": 14.048585610047143,
+        "time_rat": 3.303219125699745e-05
+    },
+    "Intrinsic Rewards": -14.277657178834273,
+    "Extrinsic Reward": -14.277657178834273
+}{
+    "Episode": 142,
+    "Time Taken": 24.611763954162598,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 2.0789337158203125,
+    "KPIs": {
+        "cost_tot": 0.20258559840113274,
+        "emis_tot": 0.14291146063543575,
+        "ener_tot": 0.8557572493139861,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020084656972146238,
+        "pgas_tot": null,
+        "tdis_tot": 12.798039876185436,
+        "time_rat": 3.249398496731249e-05
+    },
+    "Intrinsic Rewards": -13.000625474586569,
+    "Extrinsic Reward": -13.000625474586569
+}{
+    "Episode": 143,
+    "Time Taken": 25.22235918045044,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 52.951202392578125,
+    "KPIs": {
+        "cost_tot": 0.21639696710782355,
+        "emis_tot": 0.1543862553100456,
+        "ener_tot": 0.9244685946709317,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020430679926473717,
+        "pgas_tot": null,
+        "tdis_tot": 4.395161560826728,
+        "time_rat": 3.273917805580866e-05
+    },
+    "Intrinsic Rewards": -4.611558527934552,
+    "Extrinsic Reward": -4.611558527934552
+}{
+    "Episode": 144,
+    "Time Taken": 24.701658964157104,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 7.927783966064453,
+    "KPIs": {
+        "cost_tot": 0.19460218319986206,
+        "emis_tot": 0.1382487976465433,
+        "ener_tot": 0.8278371116559483,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020097723140211153,
+        "pgas_tot": null,
+        "tdis_tot": 24.07393411511655,
+        "time_rat": 3.443125182043307e-05
+    },
+    "Intrinsic Rewards": -24.268536298316413,
+    "Extrinsic Reward": -24.268536298316413
+}{
+    "Episode": 145,
+    "Time Taken": 24.40173625946045,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -32.25274658203125,
+    "KPIs": {
+        "cost_tot": 0.18306838810020323,
+        "emis_tot": 0.12978006272205267,
+        "ener_tot": 0.7771261240841482,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020316469182228358,
+        "pgas_tot": null,
+        "tdis_tot": 28.83085607499692,
+        "time_rat": 3.1532352327039e-05
+    },
+    "Intrinsic Rewards": -29.013924463097123,
+    "Extrinsic Reward": -29.013924463097123
+}{
+    "Episode": 146,
+    "Time Taken": 24.917633056640625,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 17.378978729248047,
+    "KPIs": {
+        "cost_tot": 0.2312503647711492,
+        "emis_tot": 0.16309357541728758,
+        "ener_tot": 0.9766082360316622,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020588371113722848,
+        "pgas_tot": null,
+        "tdis_tot": 1.8673248586369455,
+        "time_rat": 3.313293532719688e-05
+    },
+    "Intrinsic Rewards": -2.0985752234080945,
+    "Extrinsic Reward": -2.0985752234080945
+}{
+    "Episode": 147,
+    "Time Taken": 24.5742347240448,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 26.896255493164062,
+    "KPIs": {
+        "cost_tot": 0.23388835357092128,
+        "emis_tot": 0.16497212855711893,
+        "ener_tot": 0.9878570572282561,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020923586340625196,
+        "pgas_tot": null,
+        "tdis_tot": 6.469175859927427,
+        "time_rat": 3.2440904902402685e-05
+    },
+    "Intrinsic Rewards": -6.703064213498348,
+    "Extrinsic Reward": -6.703064213498348
+}{
+    "Episode": 148,
+    "Time Taken": 25.094562530517578,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 12.045076370239258,
+    "KPIs": {
+        "cost_tot": 0.24923066209116074,
+        "emis_tot": 0.1761882445446027,
+        "ener_tot": 1.0550194284107945,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020977424098989075,
+        "pgas_tot": null,
+        "tdis_tot": 7.234738712821204,
+        "time_rat": 3.193683212711697e-05
+    },
+    "Intrinsic Rewards": -7.483969374912364,
+    "Extrinsic Reward": -7.483969374912364
+}{
+    "Episode": 149,
+    "Time Taken": 24.93612766265869,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 54.11301803588867,
+    "KPIs": {
+        "cost_tot": 0.22288991645637318,
+        "emis_tot": 0.15798054764531339,
+        "ener_tot": 0.9459913032653491,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020459102920530572,
+        "pgas_tot": null,
+        "tdis_tot": 8.705674695139415,
+        "time_rat": 3.2340198282211544e-05
+    },
+    "Intrinsic Rewards": -8.928564611595787,
+    "Extrinsic Reward": -8.928564611595787
+}{
+    "Episode": 150,
+    "Time Taken": 24.815468311309814,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 49.10216522216797,
+    "KPIs": {
+        "cost_tot": 0.23333694212384443,
+        "emis_tot": 0.1642515082809803,
+        "ener_tot": 0.9835419657543735,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02044448791270083,
+        "pgas_tot": null,
+        "tdis_tot": 6.7581999052039095,
+        "time_rat": 3.180700989942702e-05
+    },
+    "Intrinsic Rewards": -6.991536847327754,
+    "Extrinsic Reward": -6.991536847327754
+}{
+    "Episode": 151,
+    "Time Taken": 25.116686582565308,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -20.120019912719727,
+    "KPIs": {
+        "cost_tot": 0.19069529298620033,
+        "emis_tot": 0.13454448969695051,
+        "ener_tot": 0.8056556269278481,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02020273957539222,
+        "pgas_tot": null,
+        "tdis_tot": 7.718116468530404,
+        "time_rat": 3.349982044368825e-05
+    },
+    "Intrinsic Rewards": -7.9088117615166045,
+    "Extrinsic Reward": -7.9088117615166045
+}{
+    "Episode": 152,
+    "Time Taken": 23.82980728149414,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -4.74334716796875,
+    "KPIs": {
+        "cost_tot": 0.19357318969233123,
+        "emis_tot": 0.1370054648063897,
+        "ener_tot": 0.8203920048286812,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020320920330933127,
+        "pgas_tot": null,
+        "tdis_tot": 15.396323827925185,
+        "time_rat": 3.145888920814272e-05
+    },
+    "Intrinsic Rewards": -15.589897017617517,
+    "Extrinsic Reward": -15.589897017617517
+}{
+    "Episode": 153,
+    "Time Taken": 24.9028799533844,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 2.4697680473327637,
+    "KPIs": {
+        "cost_tot": 0.1903982468332866,
+        "emis_tot": 0.13497442064888693,
+        "ener_tot": 0.8082300637657901,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020069601190767936,
+        "pgas_tot": null,
+        "tdis_tot": 26.63301188361014,
+        "time_rat": 3.31508112016809e-05
+    },
+    "Intrinsic Rewards": -26.823410130443428,
+    "Extrinsic Reward": -26.823410130443428
+}{
+    "Episode": 154,
+    "Time Taken": 24.605429887771606,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 30.507230758666992,
+    "KPIs": {
+        "cost_tot": 0.2095422306869314,
+        "emis_tot": 0.14879246935442092,
+        "ener_tot": 0.8909728703857549,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020294867838006315,
+        "pgas_tot": null,
+        "tdis_tot": 13.737796568179995,
+        "time_rat": 3.2530411210640404e-05
+    },
+    "Intrinsic Rewards": -13.947338798866927,
+    "Extrinsic Reward": -13.947338798866927
+}{
+    "Episode": 155,
+    "Time Taken": 24.831943035125732,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 13.129484176635742,
+    "KPIs": {
+        "cost_tot": 0.23495449320723644,
+        "emis_tot": 0.16736479013343772,
+        "ener_tot": 1.0021843720565138,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020715082701737723,
+        "pgas_tot": null,
+        "tdis_tot": 33.63177870627021,
+        "time_rat": 3.167858278309858e-05
+    },
+    "Intrinsic Rewards": -33.866733199477444,
+    "Extrinsic Reward": -33.866733199477444
+}{
+    "Episode": 156,
+    "Time Taken": 24.49781107902527,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 54.18732452392578,
+    "KPIs": {
+        "cost_tot": 0.22072085952554096,
+        "emis_tot": 0.15579395545584687,
+        "ener_tot": 0.9328979368613584,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020577949614723413,
+        "pgas_tot": null,
+        "tdis_tot": 9.542585281194086,
+        "time_rat": 3.245009710549047e-05
+    },
+    "Intrinsic Rewards": -9.763306140719626,
+    "Extrinsic Reward": -9.763306140719626
+}{
+    "Episode": 157,
+    "Time Taken": 25.130346298217773,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": -6.669042110443115,
+    "KPIs": {
+        "cost_tot": 0.23454406148632578,
+        "emis_tot": 0.1670125971404202,
+        "ener_tot": 1.0000754319785645,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.021049395705317504,
+        "pgas_tot": null,
+        "tdis_tot": 14.612554818113198,
+        "time_rat": 3.24773342994155e-05
+    },
+    "Intrinsic Rewards": -14.847098879599523,
+    "Extrinsic Reward": -14.847098879599523
+}{
+    "Episode": 158,
+    "Time Taken": 25.036937952041626,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 55.121681213378906,
+    "KPIs": {
+        "cost_tot": 0.2281363124715011,
+        "emis_tot": 0.16173883309296253,
+        "ener_tot": 0.9684960065446839,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02061955414970354,
+        "pgas_tot": null,
+        "tdis_tot": 3.9619263219936625,
+        "time_rat": 3.2642900391861245e-05
+    },
+    "Intrinsic Rewards": -4.190062634465163,
+    "Extrinsic Reward": -4.190062634465163
+}{
+    "Episode": 159,
+    "Time Taken": 23.994269609451294,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 33.232521057128906,
+    "KPIs": {
+        "cost_tot": 0.25185286445056615,
+        "emis_tot": 0.17830289774291355,
+        "ener_tot": 1.0676820224126558,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.020751282542710282,
+        "pgas_tot": null,
+        "tdis_tot": 10.56877676274811,
+        "time_rat": 3.1529635821700726e-05
+    },
+    "Intrinsic Rewards": -10.820629627198675,
+    "Extrinsic Reward": -10.820629627198675
+}{
+    "Episode": 160,
+    "Time Taken": 25.19422483444214,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 23.567197799682617,
+    "KPIs": {
+        "cost_tot": 0.21759668258521042,
+        "emis_tot": 0.15474050312975182,
+        "ener_tot": 0.9265898391003106,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02043788140426129,
+        "pgas_tot": null,
+        "tdis_tot": 14.192904547412883,
+        "time_rat": 3.3647442463213805e-05
+    },
+    "Intrinsic Rewards": -14.410501229998093,
+    "Extrinsic Reward": -14.410501229998093
+}{
+    "Episode": 161,
+    "Time Taken": 24.46631622314453,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 48.613189697265625,
+    "KPIs": {
+        "cost_tot": 0.2143483947159496,
+        "emis_tot": 0.15233322338465088,
+        "ener_tot": 0.9121749903272516,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02028266926925612,
+        "pgas_tot": null,
+        "tdis_tot": 10.916097422645452,
+        "time_rat": 3.223690918829075e-05
+    },
+    "Intrinsic Rewards": -11.130445817361402,
+    "Extrinsic Reward": -11.130445817361402
+}{
+    "Episode": 162,
+    "Time Taken": 24.535284519195557,
+    "Length": 7.0,
+    "Date": "February 28",
+    "Loss": 64.43207550048828,
+    "KPIs": {
+        "cost_tot": 0.2350630470931545,
+        "emis_tot": 0.16574382493062165,
+        "ener_tot": 0.9924779935965369,
+        "idis_tot": 0.0,
+        "pdih_tot": null,
+        "pele_tot": 0.02041238905985146,
+        "pgas_tot": null,
+        "tdis_tot": 9.5760728017043,
+        "time_rat": 3.12587973617372e-05
+    },
+    "Intrinsic Rewards": -9.811135848797454,
+    "Extrinsic Reward": -9.811135848797454
+}
