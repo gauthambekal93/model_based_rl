@@ -318,12 +318,13 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
         #print("Env Train time ", time.time() - start)
 
   
+time_taken = 0
 
 exploration_episodes = 1  #was 1
 
 with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['episode', 'time'])
+    writer.writerow(['Type','episode', 'time_steps', 'Length', 'Date', 'Loss', 'KPIs', 'Extrinsic Reward'])
     for i_episode in range(1, n_training_episodes+1): 
         
             print("Episode: ", i_episode)
@@ -340,9 +341,10 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                 combined_env( only_use_actual_env = False, update_env = True, update_policy= True, add_to_memory = True)
                 #combined_env( only_use_actual_env = True, update_env = False, update_policy= True, add_to_memory = False)
                 
-                time_taken = time.time() - start_time
+                #time_taken = time.time() - start_time
                 
-                writer.writerow([i_episode, time_taken])
+                time_taken = time_taken + ( time.time() - start_time )
+               # writer.writerow([i_episode, time_taken])
                 
                 #print("Time taken: ", time.time() - start_time )
                 
@@ -399,19 +401,20 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
         
             
-                 
+                 kpis = env.get_kpis()
                  data = {'Episode': i_episode,
                          'Length':max_episode_length/24/3600,
                           'Date': date.strftime("%B %d"),
                          'Loss': policy_loss.item(),
-                         'KPIs':  env.get_kpis(),
+                         'KPIs':  kpis,
                          "Intrinsic Rewards": sum(rewards),
                          "Extrinsic Reward": list(plot_scores_train_extrinsic.values())[-1] #sum(extrinsic_rewards)
                          }
                  
                  with open(exp_path + '/Results/Train_KPIs.json', "a") as json_file:
                      json_file.write(json.dumps(data, indent=4) )
-             
+                 
+                 writer.writerow(['Train', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item(), kpis, list(plot_scores_train_extrinsic.values())[-1]] )
                 
             if i_episode % 1 == 0:  #need to make it 10   #was 10
                  print("=========Test=========")
@@ -425,6 +428,7 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  plot_scores_test_extrinsic_jan17[i_episode] = sum(extrinsic_rewards_test)
                  
                  date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
+                 kpis = env.get_kpis()
                  data = {'Episode': i_episode,
                          'Date':date.strftime("%B %d"),
                          'Length':episode_length_test/24/3600,
@@ -435,7 +439,9 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  
                  with open(exp_path + '/Results/Test_KPIs.json', "a") as json_file:
                      json_file.write(json.dumps(data, indent=4) )
-                     
+                 
+                 writer.writerow(['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item(), kpis, list(plot_scores_test_extrinsic_jan17.values())[-1] ] )
+    
                  #for t, (test_reward, res) in enumerate(zip(extrinsic_rewards_test, results)):
                  #    writer.writerow(  ['Test_Jan17', str(i_episode), str(t), str(test_reward) ]+list(res.values()) )   
                  
@@ -446,6 +452,7 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  
                  plot_scores_test_extrinsic_apr19[i_episode] = sum(extrinsic_rewards_test)
                  
+                 kpis = env.get_kpis()
                  date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
                  data = {'Episode': i_episode,
                          'Date':date.strftime("%B %d"),
@@ -459,7 +466,7 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                      json_file.write(json.dumps(data, indent=4) )
             
      
-                 
+                 writer.writerow(['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item(), kpis, list(plot_scores_test_extrinsic_apr19.values())[-1]]  )
                     
             if i_episode % 5 == 0: 
                  
