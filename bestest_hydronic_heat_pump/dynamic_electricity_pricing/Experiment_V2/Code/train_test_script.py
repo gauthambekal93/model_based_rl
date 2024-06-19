@@ -371,7 +371,7 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                 # Save the dictionary containing all components
                 torch.save(checkpoint, model_path)
                 
-                '''
+                
                 print("save env model....")
                 model_path = exp_path + '/Models/'+'env_model_'+str(i_episode)+'_.pkl'
         
@@ -384,7 +384,7 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                 
                 # Save the dictionary containing all components
                 torch.save(checkpoint, model_path)
-                '''
+                
         
             if i_episode % 1 == 0:
                  print("=========Train=========")
