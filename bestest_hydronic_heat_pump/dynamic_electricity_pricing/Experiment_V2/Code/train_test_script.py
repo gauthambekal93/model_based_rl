@@ -322,9 +322,11 @@ time_taken = 0
 
 exploration_episodes = 1  #was 1
 
-with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
+with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['Type','episode', 'time_steps', 'Length', 'Date', 'Loss', 'KPIs', 'Extrinsic Reward'])
+    
+    writer.writerow(['Type','episode', 'time_steps', 'Length', 'Date', 'Loss', 'cost_tot', 'emis_tot','ener_tot','idis_tot','pdih_tot','pele_tot','pgas_tot','tdis_tot','extrinsic_reward'])
+                     
     for i_episode in range(1, n_training_episodes+1): 
         
             print("Episode: ", i_episode)
@@ -414,7 +416,8 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  with open(exp_path + '/Results/Train_KPIs.json', "a") as json_file:
                      json_file.write(json.dumps(data, indent=4) )
                  
-                 writer.writerow(['Train', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item(), kpis, list(plot_scores_train_extrinsic.values())[-1]] )
+                 tmp = ['Train', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item()] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + list(plot_scores_train_extrinsic.values())
+                 writer.writerow(tmp )
                 
             if i_episode % 1 == 0:  #need to make it 10   #was 10
                  print("=========Test=========")
@@ -440,7 +443,9 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  with open(exp_path + '/Results/Test_KPIs.json', "a") as json_file:
                      json_file.write(json.dumps(data, indent=4) )
                  
-                 writer.writerow(['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item(), kpis, list(plot_scores_test_extrinsic_jan17.values())[-1] ] )
+                 tmp = ['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item()] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + list(plot_scores_test_extrinsic_jan17.values())
+                    
+                 writer.writerow(tmp )
     
                  #for t, (test_reward, res) in enumerate(zip(extrinsic_rewards_test, results)):
                  #    writer.writerow(  ['Test_Jan17', str(i_episode), str(t), str(test_reward) ]+list(res.values()) )   
@@ -465,8 +470,9 @@ with open(exp_path+'/Results/time_taken.csv', 'w', newline='') as file:
                  with open(exp_path + '/Results/Test_KPIs.json', "a") as json_file:
                      json_file.write(json.dumps(data, indent=4) )
             
-     
-                 writer.writerow(['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item(), kpis, list(plot_scores_test_extrinsic_apr19.values())[-1]]  )
+                 tmp = ['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item()] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + list(plot_scores_test_extrinsic_apr19.values() )
+                   
+                 writer.writerow(tmp )
                     
             if i_episode % 5 == 0: 
                  
