@@ -14,7 +14,7 @@ Created on Thu Apr 25 13:36:01 2024
 
 import os
 
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V1/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V3/Code')
 
 import numpy as np
 import torch
@@ -193,7 +193,7 @@ def bestest_hydronic_heat_pump():
                              ('TDryBul',(265,303)),
                              ('HDirNor',(0,862)),
                              ('InternalGainsRad[1]',(0,219)),
-                             ('PriceElectricPowerHighlyDynamic',(-0.4,0.4)),
+                             ('PriceElectricPowerConstant',(-0.4,0.4)),
                              ('LowerSetp[1]',(280.,310.)),
                              ('UpperSetp[1]',(280.,310.))])
            
@@ -213,7 +213,7 @@ def bestest_hydronic_heat_pump():
                 observations         = observations,
                 predictive_period    = predictive_period,            #was commented
                 regressive_period    = regressive_period,             #was commented
-                scenario              = {'electricity_price':'highly_dynamic'},
+               # scenario              = {'electricity_price':'highly_dynamic'},
                 random_start_time    = random_start_time,   #was True
                 excluding_periods    = excluding_periods,    #was commented
                 max_episode_length   = max_episode_length, #was  7*24*3600, 
@@ -238,7 +238,7 @@ def bestest_hydronic_heat_pump():
                        "action_bins": str(n_bins_act + 1),
                        "points":points,
                        "h_size": str(100), #was str(int((obs_dim//2))),  #was 50, was 5, was 100, was 100
-                       "n_training_episodes": str(300),
+                       "n_training_episodes": str(100), #was 300
                       # "n_evaluation_episodes": str(10),
                        "max_t": str(2000), #was 2000   
                        "gamma": str(0.90),

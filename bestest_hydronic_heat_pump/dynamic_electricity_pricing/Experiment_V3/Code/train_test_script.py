@@ -26,7 +26,7 @@ Created on Sun May 12 18:51:02 2024
 @author: gauthambekal93
 """
 import os
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V1/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V3/Code')
 
 import numpy as np
 import torch
@@ -254,7 +254,7 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
         
         count = 0
         
-        for t in range(672): #was max_t = 1000
+        for t in range(672): 
             
             action, log_prob = policy.act(state )
             
@@ -319,6 +319,8 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
         #print("Env Train time ", time.time() - start)
 
   
+  
+time_taken = 0
 
 exploration_episodes = 1  #was 1
 
@@ -342,7 +344,7 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                 #combined_env( only_use_actual_env = False, update_env = True, update_policy= True, add_to_memory = True)
                 combined_env( only_use_actual_env = True, update_env = False, update_policy= True, add_to_memory = False)
                 
-                time_taken = time.time() - start_time
+                time_taken = time_taken + ( time.time() - start_time )
                 
                 #writer.writerow([i_episode, time_taken])
                 
@@ -529,32 +531,4 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                      plt.savefig( exp_path + '/Results/test_apr19_boptest_hydronic_heat_pump.png')
                      plt.close() 
              
-
-import pandas as pd
-
-
-data = pd.read_csv(exp_path+'/Results/complete_metrics.csv')
-
-for e in set(data['episode']):
-    if e==2: 
-        previous = data.loc[data['episode']==e]['time_steps'].iloc[0]
-        continue
-   
-    current = data.loc[data['episode']==e]['time_steps'].iloc[0]
-    print("episode ",e, "previous",previous,"current ", current)
-    
-    data.loc[data['episode']==e,'time_steps'] = current + previous
-    
-    previous = data.loc[data['episode']==e]['time_steps'].iloc[0]
-
-
-data.to_csv(exp_path+'/Results/complete_metrics_2.csv')
-
-list(data['time_steps'])
-
-time_steps_new = []
-
-for i in range(len(data)-1):
-   time_steps_new.append( np.sum( list(data['time_steps'])[:i+1] ) )
-
-data['time_steps_new'] = time_steps_new
+        
