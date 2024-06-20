@@ -177,6 +177,10 @@ class Policy_Module(nn.Module):
         
         n_steps = len(rewards)
         
+        for i in range(len(rewards)):
+            if i%10 != 0 and (i!= len(rewards)-1):
+                rewards[i] = 0.0
+        
         for t in range(n_steps)[::-1]:
             disc_return_t = (returns[0] if len(returns)>0 else 0)
             returns.appendleft( gamma*disc_return_t + rewards[t]   )
