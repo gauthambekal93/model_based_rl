@@ -178,7 +178,7 @@ class Policy_Module(nn.Module):
         n_steps = len(rewards)
         
         for i in range(len(rewards)):
-            if i%10 != 0 and (i!= len(rewards)-1):
+            if i%50 != 0 and (i!= len(rewards)-1):
                 rewards[i] = 0.0
         
         for t in range(n_steps)[::-1]:
