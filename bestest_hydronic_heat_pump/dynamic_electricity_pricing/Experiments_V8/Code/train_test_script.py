@@ -26,7 +26,7 @@ Created on Sun May 12 18:51:02 2024
 @author: gauthambekal93
 """
 import os
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V5/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V8/Code')
 
 import numpy as np
 import torch
@@ -112,8 +112,9 @@ policy = Policy_Module(int(env_attributes["state_space"]),  int(env_attributes["
 
 policy_optimizer = optim.Adam(policy.parameters(), lr=float(env_attributes["lr"]))
 
-#checkpoint = torch.load(r'model_based_rl/model_based_rl_v1/Results/Result11/Models_Nov_Jan_April/policy_model_15_.pkl')
-#policy.load_state_dict(checkpoint['model_state_dict'])
+checkpoint = torch.load(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V1/Summary_Result_Models/policy_model_70_.pkl')
+
+policy.load_state_dict(checkpoint['model_state_dict'])
 
 
 policy_scheduler_gamma = 0.1
