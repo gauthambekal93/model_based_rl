@@ -12,3 +12,6 @@ This experiment only uses policy agent with sparse rewards on constant pricing s
 
 Experiment_V5:
 This experiment only uses policy agent with sparse rewards on constant pricing scenario. Here the sparse reward is every 20th time step
+
+Experiment_V6:
+This experiment uses policy agent and the learnt env model from dynamic pricing scenario for sparse rewards on constant pricing scenario. Here the sparse reward is every 20th time step

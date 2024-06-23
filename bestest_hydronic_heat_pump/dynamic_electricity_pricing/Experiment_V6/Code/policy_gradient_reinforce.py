@@ -7,7 +7,7 @@ Created on Tue Apr  2 21:14:01 2024
 
 
 import os
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V5/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V6/Code')
 
 #import math
 #import json

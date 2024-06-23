@@ -33,19 +33,31 @@ class Memory:
     def sample_memory(self, sample_size = 2000 ):  #was 1000
         
         if self.memory_size()< sample_size:
-            indices  = np.random.permutation(self.memory_size())
+            indices  = np.arange(0, self.memory_size())
         else:
-            indices  = np.random.permutation(sample_size)
+            indices  = np.arange(0, sample_size)
         
-        #indices  = np.random.permutation(self.memory_size())
-            
         return ( 
             np.array(self.states)[indices], 
             np.array(self.actions)[indices],  
             np.array(self.rewards)[indices],
-            np.array(self.new_states)[indices], 
-           # np.array(self.log_probs)[indices]
+            np.array(self.new_states)[indices]
             )
+    
+    '''    
+    def obtain_train_test_data(self):  
+        
+        indices  = np.arange(650, len(self.states)-1)  #small set of initial values for training
+        
+        indices = np.random.permutation(indices)
+        
+        return ( 
+            np.array(self.states)[indices], 
+            np.array(self.actions)[indices],  
+            np.array(self.rewards)[indices],
+            np.array(self.new_states)[indices]
+            )
+    '''
 
     def memory_size(self):
          return len(self.states)

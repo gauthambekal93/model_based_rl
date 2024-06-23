@@ -26,7 +26,7 @@ Created on Sun May 12 18:51:02 2024
 @author: gauthambekal93
 """
 import os
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V5/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V6/Code')
 
 import numpy as np
 import torch
@@ -128,6 +128,38 @@ plot_scores_train_overall = {}
 plot_scores_test_extrinsic_jan17 = {}
 plot_scores_test_extrinsic_apr19 = {}
 
+'''
+class MinMaxScaler:
+    
+    def fit_transform(self, data):
+        self.min = {}
+        self.max = {}
+        
+        for i in range(data.shape[1]):
+            
+            if i==0: self.min[i] , self.max[i] = 0, 604800
+            
+            if i==1: self.min[i] , self.max[i] = 280, 310
+            
+            if i>=2 and i<=10 : self.min[i] , self.max[i] = 265, 303
+            
+            if i>=11 and i<=19: self.min[i] , self.max[i] = 0, 862
+            
+            if i==0: self.min[i] , self.max[i] = 0, 604800
+            
+            if i==0: self.min[i] , self.max[i] = 0, 604800
+            
+            if i==0: self.min[i] , self.max[i] = 0, 604800
+            
+            
+    def transform(self, data):
+        pass
+
+    def inverse_transform(self, data):
+        pass
+'''    
+    
+
 
 def standerdize_features():
     
@@ -137,23 +169,23 @@ def standerdize_features():
     
     Y_scaler = MinMaxScaler()
     
-    split = 0.80
+    #split = 1.00 #0.80
     
     X = np.concatenate((states, actions ), axis=1)
     
     Y = np.concatenate((  new_states,  rewards.reshape(-1, 1)  ), axis=1)
     
-    split_index = int(len( X ) * split)
+    #split_index = int(len( X ) * split)
                       
-    X_train = X_scaler.fit_transform( X [ : split_index ] ) 
+    X_train = X_scaler.fit_transform( X  ) 
     
-    X_test = X_scaler.transform( X [split_index  : ] )
+    #X_test = X_scaler.transform( X [split_index  : ] )
     
-    Y_train = Y_scaler.fit_transform(Y [ : split_index  ])
+    Y_train = Y_scaler.fit_transform(Y )
     
-    Y_test = Y_scaler.transform( Y[ split_index : ] )
+    #Y_test = Y_scaler.transform( Y[ split_index : ] )
     
-    return X_train, X_test, Y_train, Y_test, X_scaler, Y_scaler
+    return X_train, Y_train,  X_scaler, Y_scaler
 
 
 def test_env(X_test, Y_test):
@@ -164,15 +196,15 @@ def test_env(X_test, Y_test):
 
  
     
-def train_env(X_train, X_test, Y_train, Y_test, X_scaler, Y_scaler):
+def train_env(X_train, Y_train, X_scaler, Y_scaler):
        
-    epochs = 1001 #was 1001
+    epochs = 50 #was 1001 
     
     batch_size = 100 #was 10
 
     for epoch in range(epochs):
         
-        if epoch%100==0:
+        if epoch%50==0:
             print("Epoch ", epoch, "X_train shape ",X_train.shape, "Y_train shape ",Y_train.shape)
         
         train_loss_next_state = []
@@ -196,17 +228,13 @@ def train_env(X_train, X_test, Y_train, Y_test, X_scaler, Y_scaler):
             env_model_optimizer.step()
         
         
-        #next_state_loss_test, reward_loss_test = test_env(X_test, Y_test) #env_model.calc_loss( X_test, Y_test )
-        
-        if epoch%100==0:
+        if epoch%50==0:
             print("Train Loss ",np.mean( train_loss_next_state)," ",np.mean(train_loss_reward) )
-            next_state_loss_test , reward_loss_test = test_env(X_test, Y_test)
-            print(" Test Loss ",  next_state_loss_test," ", reward_loss_test  )
+            #next_state_loss_test , reward_loss_test = test_env(X_test, Y_test)
+            #print(" Test Loss ",  next_state_loss_test," ", reward_loss_test  )
             print( "\n Learning rate ",env_model_optimizer.param_groups[0]["lr"] )
         
-        #if (next_state_loss_test.item()<=0.005) or (reward_loss_test.item()<=0.005): # (next_state_loss_test.item()<=0.0009) or (reward_loss_test.item()<=0.0009):
-        #    break
-        
+    
         if env_model_optimizer.param_groups[0]["lr"] * scheduler_gamma >=0.001 :  
             scheduler.step()
         
@@ -221,25 +249,27 @@ def train_env(X_train, X_test, Y_train, Y_test, X_scaler, Y_scaler):
 
 
 
-actual_env_train_step = 50
+actual_env_train_step = 20  #was 10
 
-loss_thresh = 0.008 #was 0.008, tried 0.001
-
-
+#loss_thresh = 0.008 #was 0.008, tried 0.001
 
 def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory ):
     
     if memory.memory_size() >0 :  #we can only statderdize if data is present in memory
         
-        X_train, X_test, Y_train, Y_test, X_scaler, Y_scaler = standerdize_features()
+        X_train, Y_train, X_scaler, Y_scaler = standerdize_features()
     
         if update_env:  
             
-            next_state_loss, reward_loss = test_env(np.concatenate((X_train, X_test)) , np.concatenate((Y_train, Y_test)) )
-            print("Total loss ", next_state_loss, "  ", reward_loss)
+            indices  = np.arange(650, len(X_train)-1)  #small set of initial values for training
             
-            if (next_state_loss > loss_thresh) or (reward_loss > loss_thresh):
-                 train_env(X_train, X_test, Y_train, Y_test, X_scaler, Y_scaler)  
+            indices = np.random.permutation(indices)
+            
+            X_train = X_train[indices]
+            
+            Y_train = Y_train[indices]
+            
+            train_env(X_train, Y_train, X_scaler, Y_scaler)  
             
     
    
@@ -288,7 +318,7 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
                   
                   if rewards[-1]>0:
                       count+=1
-                  print("Time ",t ,"State ", state, "Reward ", rewards[-1])
+                  print("Time ",t , "Reward ", rewards[-1])
         
          
             #if done: break   #we have commented this part
@@ -337,12 +367,20 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                 
                _, _, _ = combined_env( only_use_actual_env = True, update_env = False, update_policy= False, add_to_memory = True)
                
+               #standerdize_features()
+               
                continue
            
             else:  
                 start_time = time.time()
-
-                combined_env( only_use_actual_env = False, update_env = True, update_policy= True, add_to_memory = True)
+                
+                if i_episode <=10:
+                    
+                    combined_env( only_use_actual_env = False, update_env = False, update_policy= True, add_to_memory = True)
+                else:
+                    combined_env( only_use_actual_env = False, update_env = True, update_policy= True, add_to_memory = True)
+                    
+                
                 #combined_env( only_use_actual_env = True, update_env = False, update_policy= True, add_to_memory = False)
                 
                 time_taken = time_taken + ( time.time() - start_time )
