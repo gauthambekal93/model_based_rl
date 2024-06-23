@@ -8,4 +8,7 @@ Experiment_V3:
 This experiment only uses policy agent on constant pricing scenario
 
 Experiment_V4:
-This experiment only uses policy agent with sparse rewards on constant pricing scenario
+This experiment only uses policy agent with sparse rewards on constant pricing scenario. Here the sparse reward is every 50th time step.
+
+Experiment_V5:
+This experiment only uses policy agent with sparse rewards on constant pricing scenario. Here the sparse reward is every 20th time step
