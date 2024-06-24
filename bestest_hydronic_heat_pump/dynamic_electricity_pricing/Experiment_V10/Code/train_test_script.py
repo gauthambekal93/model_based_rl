@@ -285,7 +285,7 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
         
         count = 0
         
-        for t in range(672): 
+        for t in range(1344):  #was 672
             
             action, log_prob = policy.act(state )
             
