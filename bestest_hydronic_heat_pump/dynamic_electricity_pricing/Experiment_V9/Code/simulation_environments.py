@@ -73,11 +73,11 @@ operational_data = 'http://127.0.0.1:5000/initialize'
 
 
 warmup_period = 24*3600
-episode_length_test = 7*24*3600 #was 7*24*3600
+episode_length_test = 14*24*3600 #was 7*24*3600
 warmup_period_test  = 7*24*3600
 start_time_tests    = [(23-7)*24*3600, (115-7)*24*3600]  # (Jan 16 to Jan 30) and (April 18 to May 02) 
 
-max_episode_length = 7*24*3600 #was 7*24*3600
+max_episode_length = 14*24*3600 #was 7*24*3600
 random_start_time =True#False #True
 step_period = 900
 render_episodes = False # False
@@ -242,7 +242,7 @@ def bestest_hydronic_heat_pump():
                       # "n_evaluation_episodes": str(10),
                        "max_t": str(2000), #was 2000   
                        "gamma": str(0.90),
-                        "lr": str( 0.001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001, was 0.0001
+                        "lr": str( 0.0001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001, was 0.0001
                         "no_of_action_types":len(actions)
                       }
     
