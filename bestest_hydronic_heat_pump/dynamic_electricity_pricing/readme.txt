@@ -36,3 +36,9 @@ Experiment_V10:
 This experiment uses policy agent and the learnt env model from dynamic pricing scenario for sparse rewards on constant pricing scenario. Here the sparse reward is every 50th time step
 The learning rate is reduced to 0.001
 Test and train episode length is of 14 days
+
+ 
+Experiment_V11:
+This experiment uses policy agent from dynamic pricing scenario for sparse rewards on constant pricing scenario. Here the sparse reward is every 50th time step
+The learning rate is reduced to 0.001
+Test and train episode length is of 14 days
