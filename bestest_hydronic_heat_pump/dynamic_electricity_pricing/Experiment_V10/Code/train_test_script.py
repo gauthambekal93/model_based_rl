@@ -94,7 +94,7 @@ memory = Memory()
 
 env_model = Environment_Module(int(env_attributes["state_space"]), n_actions=  int(env_attributes['no_of_action_types']) , alpha=1, beta=0.5) #beta was 0.2
 
-env_model_optimizer = optim.Adam(env_model.parameters(), lr=float(0.0001 ) ) #was 0.001
+env_model_optimizer = optim.Adam(env_model.parameters(), lr=float(0.001 ) ) #was 0.001
 
 
 
@@ -200,7 +200,7 @@ def train_env(X_train, Y_train, X_scaler, Y_scaler):
        
     epochs = 50 #was 1001 
     
-    batch_size = 100 #was 10
+    batch_size = 10 #was 100
 
     for epoch in range(epochs):
         
@@ -261,7 +261,7 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
     
         if update_env:  
             
-            indices  = np.arange(650, len(X_train)-1)  #small set of initial values for training
+            indices  = np.arange(1300, len(X_train)-1)  #small set of initial values for training
             
             indices = np.random.permutation(indices)
             
