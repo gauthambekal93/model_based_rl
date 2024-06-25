@@ -26,7 +26,7 @@ Created on Sun May 12 18:51:02 2024
 @author: gauthambekal93
 """
 import os
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V4/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V12/Code')
 
 import numpy as np
 import torch
@@ -254,7 +254,7 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
         
         count = 0
         
-        for t in range(672): 
+        for t in range(1344): 
             
             action, log_prob = policy.act(state )
             

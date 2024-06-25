@@ -14,7 +14,7 @@ Created on Thu Apr 25 13:36:01 2024
 
 import os
 
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V4/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V12/Code')
 
 import numpy as np
 import torch
@@ -73,11 +73,11 @@ operational_data = 'http://127.0.0.1:5000/initialize'
 
 
 warmup_period = 24*3600
-episode_length_test = 7*24*3600 #was 7*24*3600
+episode_length_test = 14*24*3600 #was 7*24*3600
 warmup_period_test  = 7*24*3600
 start_time_tests    = [(23-7)*24*3600, (115-7)*24*3600]  # (Jan 16 to Jan 30) and (April 18 to May 02) 
 
-max_episode_length = 7*24*3600 #was 7*24*3600
+max_episode_length = 14*24*3600 #was 7*24*3600
 random_start_time =True#False #True
 step_period = 900
 render_episodes = False # False
