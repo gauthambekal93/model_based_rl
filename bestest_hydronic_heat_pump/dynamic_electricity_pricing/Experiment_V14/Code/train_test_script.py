@@ -44,7 +44,7 @@ import torch.optim as optim
 import json
 
 
-from simulation_environments import bestest_hydronic_heat_pump, max_episode_length, start_time_tests,episode_length_test, warmup_period_test
+from simulation_environments import bestest_hydronic, max_episode_length, start_time_tests,episode_length_test, warmup_period_test
 #from simulation_environments import icm_parameters
 #from policy_gradient_reinforce import Policy
 from updated_plot import test_agent, plot_results
@@ -71,7 +71,7 @@ warnings.filterwarnings("ignore", category=UserWarning, message="WARN: env.get_k
 
 year = 2024
 
-env, env_attributes  = bestest_hydronic_heat_pump()
+env, env_attributes  = bestest_hydronic()
 
 n_training_episodes = int( env_attributes['n_training_episodes'] )
 
@@ -129,7 +129,7 @@ policy.load_state_dict(target_model_state_dict)
 
 # Verify the weights have been loaded correctly
 for name, param in policy.named_parameters():
-    print(name, param.shape)
+    print("Name:",name,"  ",target_model_state_dict[name] == source_model_state_dict[name])
 
 
 
@@ -273,7 +273,7 @@ def combined_env( only_use_actual_env, update_env, update_policy, add_to_memory 
         
         count = 0
         
-        for t in range(1344): #was 672 
+        for t in range(max_t): #was 672 
             
             action, log_prob = policy.act(state )
             
@@ -412,8 +412,7 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
             if i_episode % 1 == 0:
                  print("=========Train=========")
                  
-                 day_of_year = plot_results(env, rewards, points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                         'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'],
+                 day_of_year = plot_results(env, rewards, points = env_attributes['points'],
                                  log_dir=os.getcwd(), model_name='last_model', save_to_file=False, testcase ='bestest_hydronic', i_episode=i_episode)
                  
                  #print('Episode {}\tAverage Score: {:.2f}'.format(i_episode, np.mean(scores_deque)))
@@ -444,8 +443,7 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                  
                  
                  observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, policy, start_time_tests[0], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
-                                                                   points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                                                            'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
+                                                                   points = env_attributes['points'], 
                                                                    testcase='bestest_hydronic', i_episode=i_episode)
                  
                  plot_scores_test_extrinsic_jan17[i_episode] = sum(extrinsic_rewards_test)
@@ -468,12 +466,9 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                  tmp = ['Test', i_episode, time_taken, max_episode_length/24/3600,  date.strftime("%B %d") , policy_loss.item()] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_jan17.values())[-1] ] 
                     
                  writer.writerow(tmp )
-                 #for t, (test_reward, res) in enumerate(zip(extrinsic_rewards_test, results)):
-                 #    writer.writerow(  ['Test_Jan17', str(i_episode), str(t), str(test_reward) ]+list(res.values()) )   
-                 
+   
                  observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, policy, start_time_tests[1], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
-                                                                   points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                                                            'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
+                                                                   points=env_attributes['points'], 
                                                                    testcase='bestest_hydronic', i_episode=i_episode)
                  
                  plot_scores_test_extrinsic_apr19[i_episode] = sum(extrinsic_rewards_test)

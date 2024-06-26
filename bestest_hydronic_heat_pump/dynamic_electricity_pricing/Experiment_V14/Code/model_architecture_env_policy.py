@@ -212,7 +212,7 @@ class Policy_Module_Pretrained_Boptest(nn.Module):
     
     def __init__(self, s_size, a_size, h_size, device, no_of_action_types):
         
-        super( Policy_Module, self).__init__()
+        super(  Policy_Module_Pretrained_Boptest, self).__init__()
         
 
         self.fc1 = nn.Linear(s_size, h_size)   #2 is for 2 possible next state  room temperature for the possible actions, 3 is for time, current temp and ambient temp
@@ -222,8 +222,7 @@ class Policy_Module_Pretrained_Boptest(nn.Module):
 
         self.device = device
         
-        #self.create_trajectories = get_trajectories()
-         
+        
     def forward(self, x):
         
         x = F.relu(self.fc1(x))
