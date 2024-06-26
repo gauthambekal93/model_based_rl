@@ -533,7 +533,7 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                  '''
                  
                  if plot_scores_test_extrinsic_jan17:
-                     plt.title('test_jan17_boptest_hydronic_heat_pump')
+                     plt.title('test_nov15_boptest_hydronic_heat_pump')
                      plt.xlabel('Episodes')
                      plt.ylabel('Test overall Rewards')
                      plt.plot( list(plot_scores_test_extrinsic_jan17.keys()), list(plot_scores_test_extrinsic_jan17.values()) )
@@ -542,7 +542,7 @@ with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
                      plt.close()    
                  
                  if plot_scores_test_extrinsic_apr19:
-                     plt.title('test_apr19_boptest_hydronic_heat_pump')
+                     plt.title('test_dec09_boptest_hydronic_heat_pump')
                      plt.xlabel('Episodes')
                      plt.ylabel('Test overall Rewards')
                      plt.plot( list(plot_scores_test_extrinsic_apr19.keys()), list(plot_scores_test_extrinsic_apr19.values()) )
