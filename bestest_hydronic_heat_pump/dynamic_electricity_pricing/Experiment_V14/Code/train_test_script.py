@@ -128,10 +128,24 @@ for name, param in source_model_state_dict.items():
 policy.load_state_dict(target_model_state_dict)
 
 # Verify the weights have been loaded correctly
-for name, param in policy.named_parameters():
-    print("Name:",name,"  ",target_model_state_dict[name] == source_model_state_dict[name])
+#for name, param in policy.named_parameters():
+#    print("Name:",name,"  ",target_model_state_dict[name] == source_model_state_dict[name])
 
+def compare_models(model1, model2):
+    model1_dict = model1.state_dict()
+    model2_dict = model2.state_dict()
+    
+    for layer in model1_dict:
+        if layer in model2_dict:
+            if torch.equal(model1_dict[layer], model2_dict[layer]):
+                print(f"Weights for {layer} are the same.")
+            else:
+                print(f"Weights for {layer} are different.")
+        else:
+            print(f"Layer {layer} not found in the second model.")
 
+# Compare the source and target model weights
+compare_models(policy_pretrained_boptest , policy)
 
 
 

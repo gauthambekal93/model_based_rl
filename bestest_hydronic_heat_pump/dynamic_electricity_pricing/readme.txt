@@ -48,3 +48,9 @@ Experiment_V12:
 This experiment uses policy agent for sparse rewards on constant pricing scenario. Here the sparse reward is every 50th time step
 The learning rate is reduced to 0.001
 Test and train episode length is of 14 days
+
+ 
+Experiment_V12:
+This experiment uses policy agent for sparse rewards with dynamic pricing on Bestest_Hydronic usecase. Here the sparse reward is every 50th time step
+The learning rate is reduced to 0.001
+Test and train episode length is of 14 days
