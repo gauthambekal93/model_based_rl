@@ -479,7 +479,7 @@ class BoptestGymEnv(gym.Env):
             '''
             #start_time = random.randint(0+self.bgn_year_margin, 3.1536e+7-self.bgn_year_margin)  #I have commented this line!!
             #start_time = 27032360  #
-            start_time = 5173160#36881960   #March 02
+            start_time = 30153600
             episode = (start_time, start_time+self.max_episode_length)
             if self.excluding_periods is not None:
                 for period in self.excluding_periods:
