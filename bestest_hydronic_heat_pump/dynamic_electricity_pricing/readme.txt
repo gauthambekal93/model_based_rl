@@ -50,7 +50,17 @@ The learning rate is reduced to 0.001
 Test and train episode length is of 14 days
 
  
-Experiment_V12:
+Experiment_V13:
 This experiment uses policy agent for sparse rewards with dynamic pricing on Bestest_Hydronic usecase. Here the sparse reward is every 50th time step
 The learning rate is reduced to 0.001
 Test and train episode length is of 14 days
+
+
+Experiment_V14:
+This experiment uses policy agent which was pretrained on Bestest_Hydronic_heat_Pump with dynamic pricing. 
+It was then fine tuned on sparse rewards with dynamic pricing on Bestest_Hydronic usecase. Here the sparse reward is every 50th time step
+The learning rate is reduced to 0.001
+Test and train episode length is of 14 days
+
+
+Experiment_V15:
