@@ -348,7 +348,7 @@ def bestest_hydronic():
                          "action_bins": str(n_bins_act + 1),
                          "points":points,
                          "h_size": str(100), #was str(int((obs_dim//2))),  #was 50, was 5, was 100, was 100
-                         "n_training_episodes": str(100), #was 55
+                         "n_training_episodes": str(200), #was 55
                         # "n_evaluation_episodes": str(10),
                          "max_t": str(max_episode_length // step_period), #was 2000   
                          "gamma": str(0.90),
