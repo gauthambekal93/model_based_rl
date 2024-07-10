@@ -18,7 +18,7 @@ This experiment uses policy agent and the learnt env model from dynamic pricing 
 
 Experiment_V7:
 This experiment uses policy agent and the learnt env model from dynamic pricing scenario for sparse rewards on constant pricing scenario. Here the sparse reward is every 50th time step
-The learning rate is reduced to 0.0001
+The learning rate is reduced to 0.001 # the 0.0001 was not the correct learning rate most probably
 
 Experiment_V8:
 This experiment uses policy agent from dynamic pricing scenario for sparse rewards on constant pricing scenario. Here the sparse reward is every 50th time step
@@ -64,3 +64,9 @@ Test and train episode length is of 14 days
 
 
 Experiment_V15:
+This experiment uses policy agent  and the learnt env model  which was pretrained on Bestest_Hydronic_heat_Pump with dynamic pricing. 
+It was then fine tuned on sparse rewards with dynamic pricing on Bestest_Hydronic usecase. Here the sparse reward is every 50th time step
+The learning rate is reduced to 0.001
+Test and train episode length is of 14 days
+
+

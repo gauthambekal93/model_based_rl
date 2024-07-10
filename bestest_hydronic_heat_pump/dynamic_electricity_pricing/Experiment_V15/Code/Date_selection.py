@@ -11,6 +11,7 @@ from datetime import datetime, timedelta
 seconds = 27032360  #Nov 09
 seconds =31536000
 seconds = 30153600 
+seconds =  5173160
 #seconds= (23-7)*24*3600  # Jan 17
 
 #seconds =  (115-7)*24*3600   #april 19
