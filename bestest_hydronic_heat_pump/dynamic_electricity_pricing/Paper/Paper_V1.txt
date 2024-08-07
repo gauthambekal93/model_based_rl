@@ -1,0 +1,328 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+ \usepackage{float}
+\usepackage{graphicx}
+\usepackage{glossaries}
+
+
+
+\maketitle
+\section{{Transfer Learning-Based Reinforcement Learning versus Model-Based Approaches in HVAC System Optimization }}
+
+
+\author[1]{Ahmed Ghareeb},
+\author[2]{Gautham Bekal}
+\author[3]{Ashish Pujari}
+
+\affil[1]{Department of Mechanical Engineering, University of Kirkuk, Iraq}
+\affil[2]{name, University Y}
+\affil[3]{Department of Mechanical Engineering, University of North Carolina, NC, Charlotte, USA}
+
+\date{July 2024}
+
+\begin{document}
+
+
+
+
+\section{Abstract}
+Buildings with HVAC systems, are extremely important since they are used throughout the world for human comfort and sustenance. Traditionally HVAC systems are controlled using a physical models of the environment. However, with the advent of big data and data analytics, data driven modelling approaches such as utilizing deep reinforcement learning have been developed. Two major challenges with Reinforcement learning  based approaches are sample inefficiency and generalizability, especially when carrying out transfer learning in HVAC systems.
+In this study, a novel way to perform transfer learning for HVAC systems using deep reinforcement learning is presented. 
+By using model based RL and carrying out transfer learning of the environment model, instead of a transfer learning on Reinforcement Learning agent, we show improvements on challenging downstream tasks.
+
+\vspace{\baselineskip}
+\textbf{Keywords: }Transfer Learning; Machine Learning; HVAC; Control system; Model Based Reinforcement Learning
+
+\textbf{Nomenclature}
+
+Abbreviations
+\newacronym{hvac}{HVAC}{Heating, Ventilation, and Air Conditioning}
+\newacronym{rl}{RL}{Reinforcement Learning}
+\newacronym{ml}{ML}{Machine Learning}
+
+
+Greek letters
+
+Superscripts and subscripts
+
+
+\section{Introduction}
+
+
+
+Heating, Ventilation, and Air Conditioning (HVAC) systems have a major impact on energy use and consumption and are essential for preserving indoor comfort, air quality, and overall building function. With increased efficiency, they have the potential to save 20–40 percent of the total energy consumed in commercial buildings and up to 48 percent in residential buildings [1]. In a particular environment, HVAC systems can account for 60–70 percent of a building energy demand, which results in increased running costs and greenhouse gas emissions [2]. In addition to lowering costs and having a positive environmental impact, increased HVAC efficiency also increases occupant productivity and comfort [3]. Innovative control strategies, such transfer learning (TL) and  reinforcement learning (RL), present viable options for effectively and sustainably maximizing HVAC performance and energy efficiency.
+
+Since the advent of deep learning a variety of RL based approaches have been developed to solve HVAC control related issues. However, RL based approaches primarily have two challenges, sample inefficiency and generalizability. 
+One of the ways to handle sample inefficiency is using model based reinforcement learning which involves explity creating an approximate model of the environment and let the RL system learn from both the actual and the surrogate environment. The second problem of generalizabilty is usually dealt with using the approach of transfer learning which has been extensively used in fields of natural language processing and computer vision.
+In case of RL for HVAC systems this involved training and an agent on a specific HVAC simulator and they varying the building parameters during fine-tuning phase of the agent.
+Unfortunately, such approaches have a severe shortcoming in RL domain, since RL the agent is trained to optimize long term reward trajectories and by definition are trained for narrow set of tasks. A significant variation in the secondary environment leads to poor generalization, as shown in our experiments.
+In order to mitigate both of the the aforementioned issue we combine model based rl with transfer learning.
+Crucially, we design series of experiments where the transfer learning happens at the envronment model leavel instead of directly finetuning the RL agent itself as in the existing literature.
+The motivation is that the surrogate model used to approximate the pretraining environment is much more easily generalizable compared to narrowly trained RL agent.
+Consequently we carry out variety of experiments and importantly we build a sparse reward based challing environment on which we show that generalizabilty is an extremely challenging task for direct RL based transfer learning.
+
+
+
+
+
+-challenges (very short what observed in the literature)
+- What we are solving in one or two sentences?
+- Motivation 
+
+
+
+\section{Related work}
+
+In recent years, RL has emerged as a powerful tool for optimizing control systems, particularly in HVAC applications. Traditional control methods often struggle with efficiency and adaptability, prompting researchers to explore the potential of RL to enhance energy conservation and indoor comfort. In this context,  Gao and Wang [1] investigate HVAC system RL techniques that are model-based and model-free. They compare the computing needs and efficiency of both methods using the Building Optimization Testing (BOPTEST) framework. Combining model-based and sophisticated reinforcement learning methods such as Dueling Deep Q-Networks and Soft Actor-Critic, they are implemented. Comparing RL controllers to conventional approaches, they find that all of them improve interior temperature regulation and save operating costs. Remarkably, despite initial model flaws, model-based reinforcement learning outperforms model-free RL with shorter training times. 
+
+More recently, TL has been extensively studied in various domains, yet to extensively investigated in HVAC systems domain. 
+
+
+- How TR is implemented in the literature? 
+-what is knowledge gap and the uniqueness of our work?
+
+In the paper Enhancing HVAC control by RL and transfer learning, the authors use a moudular neural net architecture where the hidden layers are transferred from the pretraing environment to finetuning environment. The assumtion they make is that, the RL agent trained on first environment should have information useful for the 2nd environment and is store in the hidden layers.
+However, they were only able to get a marginal improvement of 1 to 4percent even when the finuting environment was not a sparse reward system. This confirms our analysis that transfer learning of direct RL agent leads to minmal improvement. Nevertheless, we use their modular architecture as a starting step for constructing our model based RL framework with transfer learning.
+We utilize the modular architecture when constructing the environment model and fine-tuning on secondary environment. 
+
+In  the paper one to many, the authors use a different neural net architecture to carry out transfer learning across similar environments. However, similar to above paper we see that the transfer learning is at RL agent level instead of transfer learning at environment model level.
+
+In the paper, comparative study of model based and model free rl, authors analyze model based and model free RL using actor critic and q learning approaches. Here, they show the sample efficiency problem being mitigated compared to vanilla version on RL algorithm.
+However, the authors carry out only a single experiment and no transfer learning on other environments.
+We utilize their approach and further carry out detailed experiment in a transfer learning setting along with additional sparse reward problem.
+
+- Computational efficiency ? are the proposed algorithm faster that other? actions? states? less? 
+Our approach of carrying out transfer leaning on the learnt environment model, leads to greater generalizability as well as sample efficiency compared to approaches in existing literature.
+The transfer learning on a completely different environment from BOPTEST hydronic heat pump to boptest hydronic shows the effectiveness of our transfer learning approach in generalizability.
+Further, good results on caarrying out finetuning on an extremly sparse environment shows the frameworks ability to handle sample efficiency problem which plagues rl algorithms.
+Our framework is extremely generic and even though we have used a simple policy gradient algorithm called reinforce in our experiments it can be modified to handle any standard RL algorithm.
+
+\section{Methodology}
+
+Model based rl
+
+1) transfer learning in detail
+
+
+2) notion of learning an environment.
+
+3) algorithm and its explanation
+
+4) Reproducibility of our work is important , step by step implementation , 
+putting example code (github) at the end of the result section 
+
+5) The dataset (BOPTEST) ? which Hyrdo, stats on data, preprocessing. 
+
+6) eval. metrics ? how we are evaluating our work? bench-marked based on what? what was the reference study? 
+
+
+
+While transfer learning in reinforcement learning shows great potential, its applications have been limited. To address this, we propose a novel approach: transferring an environment model learned by a non-linear function approximator (e.g., deep neural networks). This method is particularly valuable when dealing with two similar environments where one such environment is challenging to train due to sparse rewards. 
+
+The fundamental concept of transfer learning is that knowledge acquired while mastering one task can enhance the learning process for a related, yet distinct, task.
+To apply transfer learning we first need to train a deep learning model on a specific dataset and then further use the pre-trained model on a different dataset.
+In reinforcement learning, the dataset refers to the environment on which agent
+learns and then further trained on a new environment to maximize a reward function.
+
+In our experiments, we use BOPTEST Hydronic Heat Pump (citation) for training a reinforcement learning framework , and then fine-tuned on BOPTEST Hydronic environment. 
+However, unlike the tradition RL based transfer learning in the literature, we first construct an environment model for BOPTEST Hydronic Heat Pump using a simple feed forward neural net.
+We then further fine-tune the simple neural net on the second environment called Boptest Hydronic.
+The reinforcement learning agent uses both the actual environment as well as learnt neural net based model for learning a policy which maximizes a reward function respectively.
+
+The notion of an environment model refers to a model that uses current state and action as input and generates next state and reward as the output.
+Once such a model is learnt on BOPTEST Hydronic Heat Pump environemnt we then use the hidden layers of the learnt model to finetune on BOPTEST Hydronic which is the second environment.
+We replace the first and last layers since states and action dimensions can change based on the environment.
+
+
+The crucial difference in our experiments for transfer learning compared to existing literature is that our finetuning task is much more complex than the pretraining environment, which really tests our frameworks generalization capability.
+To do this we have a longer episode length for the fine-tuning environment than for pretraining environment.
+Also, we have modified the finetuning environment to have sparse rewards instead of dense rewards, thus making the finetuning taks much more complex.
+For the sparse reward setting, we update the enviroenment such that the reward from the environment is only obtained once every 50th time , compared to reward every time time step in the original environemnt.
+
+
+
+The underlying rationale of carrying out transfer learning on an environment model rather than directly on the pretrained RL agent is as follows.
+In our policy gradient algorithm, we are trying to maximize long term reward, which means that the 
+learnt RL model is highly tuned towards a very specific task.
+Consequently, as will be seen our experiments, any drastic change in our fine-tuning environment leads to poor generalization. We hypothize that, transfer learning of the learnt environment model is much easier. The reaon being, the environemnt model's objective is to only predict next state and action, thus leading to very little temporal dependency. 
+This can also be interpretted as,  the environment  Boptest Hydronic Heat Pump and  BOPTEST Hydronic 
+are closely related to each other in terms of next state and reward prediction compared to long term trajectories.
+
+
+
+The study by [Authors] (\cite{AuthorYear}) highlights the benefits of employing a supplementary model to learn the system's environment. These benefits are particularly evident in systems where the dynamics—the process of obtaining a new state and associated reward—are the bottleneck to the learning process. This advantage is further amplified in scenarios where the agent accrues rewards sparsely. 
+
+
+The algorithm \ref{alg:alg1} formalizes this idea.
+
+\begin{algorithm}
+
+\caption{RL Policy gradient algorithm with no transfer learning}\label{alg:alg1}
+
+\begin{algorithmic}
+  \State Initialize variables
+   \State $\theta =  \theta_I $
+  \State $policy\_loss  = -\sum_{t=0}^{1344}  log(P_\theta(s_t)) * R_t $
+  \State After training
+  \State $\theta =  \theta_T$
+\end{algorithmic}
+
+\end{algorithm}
+
+
+The algorithm \ref{alg:alg2} formalizes this idea.
+
+\begin{algorithm}
+
+\caption{RL Policy gradient algorithm with transfer learning}\label{alg:alg2}
+
+\begin{algorithmic}
+  \State Initialize variables
+  \State $ \theta^p = \theta^p_I $
+  \State $policy\_loss  = -\sum_{t=0}^{672}  log(P_{\theta^p}(s_t)) * R_t $
+\State After pretraining
+\State $\theta^p = \theta^p_{pretraining}$
+
+\State Finetuning
+$policy_loss =  -\sum_{t=1}^{1344} log (P_\theta{*p}(s_t)) * R_t  $
+  \State where,
+\If{$i \% 50 \neq 0$}
+      \State $R_t = 0$
+    \EndIf
+
+\State After finetuning
+\State $\theta^p = \theta^p_F $
+\end{algorithmic}
+
+\end{algorithm}
+
+The algorithm \ref{alg:alg3} formalizes this idea.
+
+\begin{algorithm}[H]
+
+\caption{RL Policy gradient algorithm with transfer learning of environment model}\label{alg:alg3}
+
+\begin{algorithmic}
+  \State Initialize variables
+\State $\theta^E = \theta^E_I$
+\State Pretraining
+\State $ (E_\theta^E(S_t, a_t)[0]  - S_{t+1} )^2 + (E_\theta{^E})(S_t,a_t)[1] - R_t)^2$
+\State Finetuning
+\State $\theta^E = \theta^E_F$
+\State Now training the policy gradient algorithm
+\State $policy\_loss = -\sum_{t=1}^{1344} log(P_\theta{^p_I}(S_t) ) R_t$
+\State where,
+\If{$i \% 50 \neq 0$} 
+ \State Use the actual environment
+  \Else
+    \State Use the surrogate environment
+\EndIf
+\end{algorithmic}
+
+\end{algorithm}
+
+\section{Results and discussion}
+
+\textbf{Pretraining phase}.
+
+In the pretraining phase we use the Bestest hydronic heat pump environment, and then tested on Jan 16 for an episode length of 1 week. The model obtains dense reward, at every 15 mins time step.
+As can be seen from the diagram 1 (need reference) the model based reinforcement learning performs very well, as confirmed by the paper (citation).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Experiment results/Bestest_hydronic_heat_pump_Pretraining_Test_data_Jan_16.png} % Replace with the actual path to your image
+  \caption{This is a caption for the image.}
+  \label{fig:myimage}
+\end{figure}
+
+
+
+
+\textbf{Fine-tuning}
+
+We carry out the finetuning experiment first on the same bestest hydronic heat pump environment used for pretraining phase. However, we make only slight modifications to the environment where we use constant pricing scenario instead of dynamic pricing scenario on which models were pretrained on.
+This is scenario 1 where the fine-tuning task is of slightly lower complexity than the pretraining task.
+
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Experiment results/Bestest_hydronic_heat_pump_Test_data_Jan_16.png} % Replace with the actual path to your image
+  \caption{This is a caption for the image.}
+  \label{fig:myimage}
+\end{figure}
+
+
+Now, in the second finetuning scenario we utilize a much more challenging task compared to the pretraining task.
+The difficulty is three fold, as explained below.
+First, we use a completly different environment called bestest hydronic for finetuning purpose, which has a different state and action dimension compared to the pretraining environment.
+Second, during finetuning we extend the length of the episode to twice the length used in pretraing phase.
+Third, during finetuning we use sparse rewards in bestest hydronic, where a reard is given only once every 50th time step.
+
+The idea of using sparse rewards is motivated from NLP and CV tasks where there is minimal data availability during fine-tuning.
+
+
+\textbf{Finetuning on bestest hydronic environment for Nov 13}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Experiment results/Bestest_hydronic_Test_data_Nov_13} % Replace with the actual path to your image
+  \caption{This is a caption for the image.}
+  \label{fig:myimage}
+\end{figure}
+
+
+\textbf{Finetuning on bestest hydronic environment for Dec 06}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{Experiment results/Bestest_hydronic_Test_data_Dec_06.png} % Replace with the actual path to your image
+  \caption{This is a caption for the image.}
+  \label{fig:myimage}
+\end{figure}
+
+
+
+
+
+\section{Conclusions}
+
+
+
+\textbf{Declaration of Competing Interest - }The authors have no known competing interest.
+
+\textbf{Data Availability – }Data can be requested from the corresponding author on reasonable request.
+
+
+\section{References}
+
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{reference.bib}
+
+\end{document}
+
+
+
+\begin{comment}
+
+1) Journals
+
+i) https://www.sciencedirect.com/journal/journal-of-building-engineering
+ii) https://www.tandfonline.com/journals/tbps20
+iii) https://link.springer.com/journal/12273
+
+
+
+Ahmed Paper 
+https://docs.google.com/document/d/1ydP_2zEIZ2W-1vL5mmYhymiE4QRPA3LXqssNqe64KQo/edit
+
+
+
+
+
+
+\end{comment}
