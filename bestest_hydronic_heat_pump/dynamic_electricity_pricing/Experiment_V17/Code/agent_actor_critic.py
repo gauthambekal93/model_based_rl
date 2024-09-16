@@ -7,7 +7,7 @@ Created on Tue Apr  2 21:14:01 2024
 
 
 import os
-os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V16/Code')
+os.chdir(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V17/Code')
 
 #import math
 #import json
@@ -47,7 +47,7 @@ seed = 42
 random.seed(seed)
 # Seed for random exploration and epsilon-greedy schedule
 np.random.seed(seed)
-
+from torch.distributions import Categorical
 
 class Actor(nn.Module):
     
@@ -85,26 +85,36 @@ class Critic(nn.Module):
 
 
 
-def select_action(x, actor, critic):
+def select_action(x, critic, actor):
+    
+    x= torch.tensor(x).to("cpu").reshape(1,-1)
     
     action_logits = actor(x)
     
-    state_value = critic(x)
+    state_value = critic(x).reshape(-1)
     
-    action_pd = torch.distributions.Categorical( logits=action_logits )  
+    all_actions, all_log_prob = [], []
     
-    action = action_pd.sample()
+      
+    for probs in action_logits:
+          
+          m = Categorical(probs)
+          action = m.sample()
+          all_actions.append(np.int32( action.item() ) )
+          all_log_prob.append(m.log_prob(action))
+      
     
-    action_log_prob = action_pd.log_prob(action)
     
-    entropy = action_pd.entropy()
+    #all_log_prob = torch.stack(all_log_prob, dim =0)
+    #all_actions = np.stack(all_actions, axis =0)
+    all_log_prob = torch.cat(all_log_prob, dim=0)
     
-    return (action, action_log_prob, state_value, entropy)    
+    return ( all_actions, all_log_prob, state_value )    
     
     
         
         
-def get_losses( rewards, action_log_probs, value_preds, entropy, gamma, lam, ent_coef, device, n_envs):
+def get_losses( action_log_probs, rewards, value_preds, gamma, lam, device, n_envs=1):
     
     T = len(rewards)
     advantages = torch.zeros(T, n_envs, device=device)
@@ -122,8 +132,8 @@ def get_losses( rewards, action_log_probs, value_preds, entropy, gamma, lam, ent
     # calculate the loss of the minibatch for actor and critic
     critic_loss = advantages.pow(2).mean()
 
-    # give a bonus for higher entropy to encourage exploration
-    actor_loss =  -(advantages.detach() * action_log_probs).mean() - ent_coef * entropy.mean()  
+   
+    actor_loss =  -(advantages.detach() * action_log_probs).mean() #- ent_coef * entropy.mean()  
     
     return ( critic_loss, actor_loss)
 

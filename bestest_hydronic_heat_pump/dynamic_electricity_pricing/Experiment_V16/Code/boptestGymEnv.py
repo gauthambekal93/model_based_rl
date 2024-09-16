@@ -468,27 +468,42 @@ class BoptestGymEnv(gym.Env):
             It should be analogous to the info returned by the `step` method. 
          
         '''        
-   
-        
+       
         def find_start_time():
+            
+            while True:
+                start_time = random.randint(0+self.bgn_year_margin, 3.1536e+7-self.bgn_year_margin)  #I have commented this line!!
+                
+                end_time = start_time + self.max_episode_length
+                
+                tmp = [ x for x in  self.excluding_periods if (start_time not in range(x[0], x[1]) ) and (end_time not in range(x[0], x[1]) ) ]
+                     
+                if len(tmp) == len(self.excluding_periods) :
+                    
+                    return start_time
+            
+    
+        #def find_start_time():
             '''Recursive method to find a random start time out of 
             `excluding_periods`. An episode and an excluding_period that
             are just touching each other are not considered as being 
             overlapped. 
             
             '''
-            #start_time = random.randint(0+self.bgn_year_margin, 3.1536e+7-self.bgn_year_margin)  #I have commented this line!!
+            
+       
+            
             #start_time = 27032360  #
-            start_time = 30153600
-            episode = (start_time, start_time+self.max_episode_length)
-            if self.excluding_periods is not None:
-                for period in self.excluding_periods:
-                    if episode[0] < period[1] and period[0] < episode[1]:
+            #start_time = 30153600
+            #episode = (start_time, start_time+self.max_episode_length)
+            #if self.excluding_periods is not None:
+           #     for period in self.excluding_periods:
+           #         if episode[0] < period[1] and period[0] < episode[1]:
                         # There is overlapping between episode and this period
                         # Try to find a good starting time again
-                        start_time = find_start_time()
+           #             start_time = find_start_time()
             # This point is reached only when a good starting point is found
-            return start_time
+           # return start_time
         
     
             
@@ -496,7 +511,7 @@ class BoptestGymEnv(gym.Env):
         # Assign random start_time if it is None
         if self.random_start_time:
             self.start_time = find_start_time()
-        
+   
         # Initialize the building simulation
         res = requests.put('{0}/initialize'.format(self.url), 
                            json={'start_time':int(self.start_time),

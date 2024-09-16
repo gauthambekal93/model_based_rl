@@ -9,12 +9,13 @@ from datetime import datetime, timedelta
 
 # Given number of seconds
 seconds = 27032360  #Nov 09
-seconds =31536000
-seconds = 5173160
+#seconds =31536000
+#seconds = 5173160
+
 #seconds= (23-7)*24*3600  # Jan 17
 
 #seconds =  (115-7)*24*3600   #april 19
-
+seconds = 5173160
 #seconds =  36881960 #27032360 +  9849600
 #Summer period (from June 21st till September 22nd). 
 
