@@ -1,0 +1,2 @@
+Type,episode,time_steps,Length,Date,actor_loss,critic_loss,cost_tot,emis_tot,ener_tot,idis_tot,pdih_tot,pele_tot,pgas_tot,tdis_tot,extrinsic_reward
+Train,1,88.18418455123901,7.0,"April 04, 2024",-11.37092771830366,40.39884500421484,0.5903332362319549,0.4065355503517872,2.434344612884948,0.0,,0.023957202089845767,,689.5981068427579,-690.1884400789899
