@@ -62,15 +62,15 @@ class Agent_Memory:
         self.action_log_probs = []
         self.actions = []
         self.rewards = []
-        self.new_states = []
+        self.next_states = []
         self.value_preds = []
     
-    def remember(self, state, action, action_log_prob, reward, new_state, value_preds):
+    def remember(self, state, action, action_log_prob, reward, next_state, value_preds):
         self.states.append( torch.tensor(state) )
         self.actions.append(torch.tensor(action))
         self.action_log_probs.append( action_log_prob )
         self.rewards.append(torch.tensor(reward))
-        self.new_states.append(torch.tensor(new_state))
+        self.next_states.append(torch.tensor(next_state))
         self.value_preds.append(value_preds)
 
     def clear_memory(self):
@@ -78,7 +78,7 @@ class Agent_Memory:
         self.actions = []
         self.action_log_probs = []
         self.rewards = []
-        self.new_states = []
+        self.next_states = []
         self.value_preds = []
         
     def sample_memory(self, sample_size = 2000 ):  #was 1000
@@ -89,7 +89,7 @@ class Agent_Memory:
                 torch.stack(self.actions, dim = 0), 
                 torch.stack(self.action_log_probs, dim = 0),
                 torch.stack(self.rewards, dim = 0).unsqueeze(dim=1), 
-                torch.stack(self.new_states, dim = 0),    
+                torch.stack(self.next_states, dim = 0),    
                 torch.stack(self.value_preds, dim = 0) 
                )
 

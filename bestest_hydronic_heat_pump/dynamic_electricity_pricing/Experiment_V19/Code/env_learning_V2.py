@@ -55,7 +55,7 @@ class train_environment:
             
         latent_dim, hidden_dim  =  input_dim * 5, input_dim * 5  #was 3 , 20 
         
-        self.epochs, self.batch_size =3000, 100 #3000, 100  #seems like we should have more epochs for further training
+        self.epochs, self.batch_size = 200, 100 #3000, 100  #seems like we should have more epochs for further training
         
         self.model = Bayesian_Env_Model(input_dim, output_dim, latent_dim , hidden_dim)
         
@@ -158,22 +158,23 @@ def prediction_and_uncertanity(model, data):
      
         mu_z, std_z = model.model.forward_encoder(data)
         
-        z_sample = model.model.sample_latent_variable(mu_z, std_z, no_of_z_samples = 1) 
+        #z_sample = model.model.sample_latent_variable(mu_z, std_z, no_of_z_samples = 1) 
         
-        mu_y_sample, _  = model.model.forward_decoder(  z_sample )
+        #mu_y_sample, _  = model.model.forward_decoder(  z_sample )
         
         z_samples = model.model.sample_latent_variable(mu_z, std_z, no_of_z_samples = 1000)  #this will be of shape (batch_size, no. of samples, z dim)
         
         mu_y_samples, _  = model.model.forward_decoder(  z_samples )
         
         uncertanity = torch.mean( torch.std(mu_y_samples, dim = 1), dim =0 ) 
-    
+        
+        mu_y_sample = torch.mean(mu_y_samples, dim = 1)
+        
         return mu_y_sample, uncertanity
 
 
 def run_trajectories(model_room_temp, model_dry_bulb_temp, model_rewards, state, action):
-                
-     
+        
         room_temp, room_temp_uncertanity  = prediction_and_uncertanity(model_room_temp,  torch.cat([state, action], dim= 1 ) )
         
         dry_bulb_last_timestep, dry_bulb_last_timestep_uncertanity = prediction_and_uncertanity( model_dry_bulb_temp, state )
@@ -184,29 +185,26 @@ def run_trajectories(model_room_temp, model_dry_bulb_temp, model_rewards, state,
         
         dry_bulb_tmp = state[:, 3:]
         
-        next_state = torch.cat( [ time_step, room_temp.reshape(1,1) , dry_bulb_tmp,  dry_bulb_last_timestep.reshape(1,1) ], dim = 1)  #next_state, future_dry_temp in crrent time, dry_bulb_temp
+        next_state = torch.cat( [ time_step, room_temp , dry_bulb_tmp,  dry_bulb_last_timestep ], dim = 1)  #next_state, future_dry_temp in crrent time, dry_bulb_temp
         
         return next_state, reward,  torch.cat( [ room_temp_uncertanity, dry_bulb_last_timestep_uncertanity, reward_uncertanity ] , dim = 0)
     
     
-def obtain_uncertanity_range(model, min_uncertanity = None, max_uncertanity = None):
-    uncertanity = []
-   
-    model.create_dataset()
-    
-    for data in model.train_x:
-        
-        mu_z, std_z = model.model.forward_encoder(data)
-        
-        z_samples = model.model.sample_latent_variable(mu_z, std_z, no_of_z_samples = 1000)  #this will be of shape (batch_size, no. of samples, z dim)
-        
-        mu_y_samples, _  = model.model.forward_decoder(  z_samples )
-        
-        uncertanity.append( torch.std(mu_y_samples, dim = 1).item() )
-        
-    return np.min(uncertanity), np.max(uncertanity)
+def get_initial_uncertanity_range(model):
 
+    model.create_dataset()
+        
+    mu_z, std_z = model.model.forward_encoder(model.train_x)
     
+    z_samples = model.model.sample_latent_variable(mu_z, std_z, no_of_z_samples = 1000)  #this will be of shape (batch_size, no. of samples, z dim)
+    
+    mu_y_samples, _  = model.model.forward_decoder(  z_samples )
+    
+    uncertanities = torch.std(mu_y_samples, dim = 1)
+    
+    return torch.min( uncertanities, dim=0 )[0] ,  torch.max( uncertanities, dim=0 )[0]
+
+ 
 
 if __name__ == "__main__":
     
@@ -277,8 +275,8 @@ if __name__ == "__main__":
    
 
 
-total_sum = torch.sum( torch.exp( -1.0* uncertanity[:, 2] ), dim =0)
-probs = torch.exp( -1.0* uncertanity[:, 2] ) / total_sum
+#total_sum = torch.sum( torch.exp( -1.0* uncertanity[:, 2] ), dim =0)
+#probs = torch.exp( -1.0* uncertanity[:, 2] ) / total_sum
 
 
 

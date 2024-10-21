@@ -50,11 +50,7 @@ class Env_Memory:
     
         #self.task_data = {}
         self.n_actions = n_actions
-        
-    def initialize_new_task(self):
-
-        #self.task_data[task_no] = []
-        self.task_data = []
+        self.data = []
         
     def remember(self, state, action, next_state, reward):  #this needs to be updated since we need all the states running in trajectory
            
@@ -64,12 +60,12 @@ class Env_Memory:
         next_state = torch.tensor(next_state)
         reward = torch.tensor([reward])
         
-        self.task_data = self.task_data + [ torch.cat([state, action ,next_state, reward], dim=0) ]
+        self.data  = self.data  + [ torch.cat([state, action ,next_state, reward], dim=0) ]
     
         
     def clear_memory(self):
 
-        self.task_data = []
+        self.data = []
     
     def sample_memory(self ): 
         data = pd.read_csv(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V19/trajectory_data/tensor_data_2.csv' , index_col= False)
@@ -80,7 +76,7 @@ class Env_Memory:
     def save_to_csv(self):
         
         #tensor_numpy = np.stack(self.task_data[ task_no ] , axis = 0)
-        tensor_numpy = np.stack(self.task_data , axis = 0)
+        tensor_numpy = np.stack(self.data , axis = 0)
         
         df = pd.DataFrame(tensor_numpy)
         

@@ -49,7 +49,7 @@ from updated_plot import test_agent, plot_results
 #from memory_module import Memory
 from agent_actor_critic import Actor, Critic, get_losses, select_action, Agent_Memory
 
-from env_learning_V2 import train_environment, run_trajectories, obtain_uncertanity_range
+from env_learning_V2 import train_environment, run_trajectories, get_initial_uncertanity_range
 
 from env_model_architecture_V2 import Env_Memory
 
@@ -92,7 +92,6 @@ exp_path = json_data['experiment_path']
 
 
 plot_scores_train_extrinsic = {}
-
 
 plot_scores_test_extrinsic_jan17 = {}
 plot_scores_test_extrinsic_apr19 = {}
@@ -184,28 +183,52 @@ def collect_from_actual_env(state, action, action_log_prob, state_value):
     
 
 
-def collect_from_surrogate_env(state, action, action_log_prob, state_value):
+def collect_from_surrogate_env(state, action):
+    
+    state = torch.tensor(state).reshape(1, -1)
+    
+    action = torch.nn.functional.one_hot ( torch.tensor(action[0],  dtype=torch.int64), 
+                                          num_classes = actor.fc3[0].out_features ).reshape(1,-1)
     
     next_state, reward, uncertanity = run_trajectories( model_room_temp, model_dry_bulb_temp, model_rewards, state, action )
-    
-    memory.remember(state, action, action_log_prob, reward, next_state, state_value)
     
     return next_state, reward, uncertanity
 
 
 
-def use_surrogate_data(uncertanity, min_uncertanity, max_uncertanity):
+def update_uncertanity_range( uncertanity ):
+    
+    if uncertanity is None:
+      min_uncertanity[0], max_uncertanity[0] =  get_initial_uncertanity_range(model_room_temp)
+      min_uncertanity[1], max_uncertanity[1] =  get_initial_uncertanity_range(model_dry_bulb_temp)
+      min_uncertanity[2], max_uncertanity[2] =  get_initial_uncertanity_range(model_rewards)
+    
+    else:
+          if uncertanity[0] < min_uncertanity[0]:    min_uncertanity[0] = uncertanity[0]
+          if uncertanity[1] < min_uncertanity[1]:    min_uncertanity[1] = uncertanity[1]
+          if uncertanity[2] < min_uncertanity[2]:    min_uncertanity[2] = uncertanity[2]
+          
+          if uncertanity[0] > max_uncertanity[0]:    max_uncertanity[0] = uncertanity[0]
+          if uncertanity[1] > max_uncertanity[1]:    max_uncertanity[1] = uncertanity[1]
+          if uncertanity[2] > max_uncertanity[2]:    max_uncertanity[2] = uncertanity[2]
+          
+
+
+def use_surrogate_data():
     
     def generate_random_number(low, high):
         return low + torch.rand(1).item() * (high - low)
     
-    rand_no = generate_random_number( min_uncertanity,  max_uncertanity )
+    rand_nums = torch.cat( [ generate_random_number( low, high ) for low, high in zip(min_uncertanity, max_uncertanity) ] , dim =0)
+        
+    return (rand_nums > uncertanity).all()   #all the uncertanities should be true
+      
     
-    if rand_no > uncertanity:
-       return True
-    else: 
-        return False
     
+    
+
+
+
 
 actor, critic, actor_optimizer, critic_optimizer, agent_update_step = initialize_agent()
 
@@ -223,11 +246,11 @@ with open(exp_path+'/Results/complete_metrics_2.csv', 'w', newline='') as file:
 train_time, test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0, 0
 
 #we simply initialize them to prevent syntax error
-min_uncertanity, max_uncertanity, uncertanity = None, None, None
+min_uncertanity, max_uncertanity, uncertanity = [None, None, None], [None, None, None], None
     
 for i_episode in range(1, n_training_episodes+1): 
         
-        with open(exp_path+'/Results/complete_metrics.csv', 'a', newline='') as file:
+        with open(exp_path+'/Results/complete_metrics_2.csv', 'a', newline='') as file:
             
             writer = csv.writer(file)
             
@@ -250,18 +273,20 @@ for i_episode in range(1, n_training_episodes+1):
                 
                 else:
                     
-                    min_uncertanity, max_uncertanity = obtain_uncertanity_range  (min_uncertanity, max_uncertanity, uncertanity)
+                    next_state, reward, uncertanity = collect_from_surrogate_env( state, action )
                     
-                    next_state, reward, uncertanity = collect_from_surrogate_env( state, action, action_log_prob, state_value )
-                
-                    if  not use_surrogate_data(uncertanity, min_uncertanity, max_uncertanity):
+                    update_uncertanity_range  ( uncertanity)
+                    
+                    if  use_surrogate_data():
                         
+                        memory.remember(state, action, action_log_prob, reward, next_state, state_value)
+                    else:
                         next_state, reward, done = collect_from_actual_env( state, action, action_log_prob, state_value )
 
                 
-                if ( (t % agent_update_step == 0 ) or (t == (max_t - 1)) ) and ( t !=0 ) :
+                if ( (t % agent_update_step == 0 ) or ( t == (max_t - 1)) ) and ( t !=0 ) :
                     
-                    critic_loss, actor_loss = update_policy(only_use_actual_env = True)
+                    critic_loss, actor_loss = update_policy()
                     
                     episode_actor_loss.append(actor_loss.item())
                     
@@ -283,8 +308,8 @@ for i_episode in range(1, n_training_episodes+1):
             if i_episode == env_update_step:
                update_surrogate_env() 
                
-            if i_episode ==1:   #here we will pass all 3 models and obtain uncertanity range instead of a single model
-                min_uncertanity, max_uncertanity = obtain_uncertanity_range(model_room_temp)
+            if i_episode ==1:   
+               update_uncertanity_range(uncertanity)
                
             
             
