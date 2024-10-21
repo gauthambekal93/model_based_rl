@@ -55,7 +55,7 @@ class train_environment:
             
         latent_dim, hidden_dim  =  input_dim * 5, input_dim * 5  #was 3 , 20 
         
-        self.epochs, self.batch_size = 200, 100 #3000, 100  #seems like we should have more epochs for further training
+        self.epochs, self.batch_size = 10, 100 #3000, 100  #seems like we should have more epochs for further training
         
         self.model = Bayesian_Env_Model(input_dim, output_dim, latent_dim , hidden_dim)
         

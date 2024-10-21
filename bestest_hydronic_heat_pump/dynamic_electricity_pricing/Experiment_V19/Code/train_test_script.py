@@ -141,7 +141,7 @@ def initialize_memory_buffers():
 
 def update_policy():
     
-        state, actions, action_log_probs, rewards, next_state, value_preds = memory.sample_memory()
+        state, actions, action_log_probs, rewards, next_state, value_preds, source = memory.sample_memory()
         
         critic_loss, actor_loss = get_losses(action_log_probs, rewards, value_preds, gamma, lam = 0.95 , device ="cpu")
         
@@ -175,7 +175,7 @@ def collect_from_actual_env(state, action, action_log_prob, state_value):
     
     next_state, reward, done, _, res  = env.step(np.array(action) )
     
-    memory.remember(state, action, action_log_prob, reward, next_state, state_value)
+    memory.remember(state, action, action_log_prob, reward, next_state, state_value, source = "actual")
                            
     env_memory.remember( state, action, next_state, reward)                 
 
@@ -192,7 +192,9 @@ def collect_from_surrogate_env(state, action):
     
     next_state, reward, uncertanity = run_trajectories( model_room_temp, model_dry_bulb_temp, model_rewards, state, action )
     
-    return next_state, reward, uncertanity
+    return next_state.detach().numpy().reshape(-1), reward.item() , uncertanity
+    
+
 
 
 
@@ -279,7 +281,7 @@ for i_episode in range(1, n_training_episodes+1):
                     
                     if  use_surrogate_data():
                         
-                        memory.remember(state, action, action_log_prob, reward, next_state, state_value)
+                        memory.remember(state, action, action_log_prob, reward, next_state, state_value, source="fake")
                     else:
                         next_state, reward, done = collect_from_actual_env( state, action, action_log_prob, state_value )
 

@@ -83,7 +83,7 @@ start_time_tests    = [(23-7)*24*3600, (115-7)*24*3600, (325-7)*24*3600, (348-7)
 #start_time_tests    = [(325-7)*24*3600, (348-7)*24*3600]  
 
 max_episode_length = 7*24*3600 #was 7*24*3600
-random_start_time = False # was False 
+random_start_time = True # was False 
 step_period = 900
 render_episodes = False # False
 
