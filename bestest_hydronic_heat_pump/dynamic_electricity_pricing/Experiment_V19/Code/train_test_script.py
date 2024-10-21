@@ -44,17 +44,20 @@ import json
 
 
 from simulation_environments import bestest_hydronic_heat_pump, max_episode_length, start_time_tests,episode_length_test, warmup_period_test
-from env_learning import Env_Memory, Bayesian_Learning
+
 from updated_plot import test_agent, plot_results
-from memory_module import Memory
-from agent_actor_critic import Actor, Critic, get_losses, select_action
+#from memory_module import Memory
+from agent_actor_critic import Actor, Critic, get_losses, select_action, Agent_Memory
 
+from env_learning_V2 import train_environment, run_trajectories, obtain_uncertanity_range
 
-from sklearn.preprocessing import MinMaxScaler
+from env_model_architecture_V2 import Env_Memory
+
+#from sklearn.preprocessing import MinMaxScaler
 import datetime
 import time
 
-import torch.optim.lr_scheduler as lr_scheduler
+#import torch.optim.lr_scheduler as lr_scheduler
 
 import matplotlib.pyplot as plt
 
@@ -86,30 +89,7 @@ with open('all_paths.json', 'r') as openfile:  json_data = json.load(openfile)
 
 exp_path = json_data['experiment_path']
 
-memory = Memory()
 
-
-actor = Actor(int(env_attributes["state_space"]),  int(env_attributes["action_bins"]), int(env_attributes["h_size"]), device, env_attributes["no_of_action_types"]).to(device) #was  int(env_attributes["action_space"])
-
-critic = Critic(int(env_attributes["state_space"]), int(env_attributes["h_size"]), device).to(device) #was  int(env_attributes["action_space"])
-
-actor_optimizer = optim.Adam( actor.parameters(), lr= float(env_attributes["actor_lr"]) )
-
-critic_optimizer = optim.Adam( critic.parameters(), lr =  float(env_attributes["critic_lr"]) )
-
-agent_update_step = 20 #was 100
-#checkpoint = torch.load(r'model_based_rl/model_based_rl_v1/Results/Result11/Models_Nov_Jan_April/policy_model_15_.pkl')
-#policy.load_state_dict(checkpoint['model_state_dict'])
-
-
-#policy_scheduler_gamma = 0.1
-#policy_scheduler = lr_scheduler.StepLR(policy_optimizer, step_size=10, gamma= policy_scheduler_gamma)
-
-env_train_step = 1 #50
-
-env_memory = Env_Memory( int(env_attributes["action_bins"]) )   #need to check this line
-
-bayesian_learning = Bayesian_Learning()   
 
 plot_scores_train_extrinsic = {}
 
@@ -121,17 +101,48 @@ plot_scores_test_extrinsic_dec08 = {}
 
 
 
-actual_env_train_step = 10
-
-loss_thresh = 0.008 
-
-
-
-def update_policy( only_use_actual_env ):
+def initialize_agent():
     
-    if only_use_actual_env:
+     agent_update_step = 20
+     
+     actor = Actor(int(env_attributes["state_space"]),  int(env_attributes["action_bins"]), int(env_attributes["h_size"]), device, env_attributes["no_of_action_types"]).to(device) #was  int(env_attributes["action_space"])
+     
+     critic = Critic(int(env_attributes["state_space"]), int(env_attributes["h_size"]), device).to(device) #was  int(env_attributes["action_space"])
+     
+     actor_optimizer = optim.Adam( actor.parameters(), lr= float(env_attributes["actor_lr"]) )
+     
+     critic_optimizer = optim.Adam( critic.parameters(), lr =  float(env_attributes["critic_lr"]) )
+     
+     return actor, critic, actor_optimizer, critic_optimizer, agent_update_step
         
-        states, actions, action_log_probs, rewards, new_states, value_preds = memory.sample_memory()
+ 
+def initialize_env_models():
+    
+    env_update_step = 1 #50 
+
+    model_room_temp = train_environment(model_type = "room_temperature")
+    
+    model_dry_bulb_temp = train_environment(model_type = "dry_bulb_temperature")
+    
+    model_rewards = train_environment(model_type = "rewards")
+    
+    return  model_room_temp, model_dry_bulb_temp, model_rewards, env_update_step
+   
+
+
+def initialize_memory_buffers():
+    
+    memory = Agent_Memory()
+    
+    env_memory = Env_Memory( int(env_attributes["action_bins"]) )  
+    
+    return memory, env_memory
+
+
+
+def update_policy():
+    
+        state, actions, action_log_probs, rewards, next_state, value_preds = memory.sample_memory()
         
         critic_loss, actor_loss = get_losses(action_log_probs, rewards, value_preds, gamma, lam = 0.95 , device ="cpu")
         
@@ -149,26 +160,72 @@ def update_policy( only_use_actual_env ):
        
         return critic_loss, actor_loss
     
-def train_env_model(env_memory, i_episode, num_epochs=1000):
-    # Initialize the model and MAML optimizer
-
-    for epoch in range(num_epochs):
-        # Generate a batch of tasks (train and validation data for each task)
-        task_batch = env_memory.sample_memory()
+    
+    
+def update_surrogate_env():
         
-        #env_memory.save_to_csv(task_batch)
+        model_room_temp.train_model()
         
-        bayesian_learning.outer_update(epoch, task_batch)
+        model_dry_bulb_temp.train_model()
+
+        model_rewards.train_model()
+        
+ 
+    
+def collect_from_actual_env(state, action, action_log_prob, state_value):
+    
+    next_state, reward, done, _, res  = env.step(np.array(action) )
+    
+    memory.remember(state, action, action_log_prob, reward, next_state, state_value)
+                           
+    env_memory.remember( state, action, next_state, reward)                 
+
+    return next_state, reward, done
+    
 
 
-with open(exp_path+'/Results/complete_metrics.csv', 'w', newline='') as file:
+def collect_from_surrogate_env(state, action, action_log_prob, state_value):
+    
+    next_state, reward, uncertanity = run_trajectories( model_room_temp, model_dry_bulb_temp, model_rewards, state, action )
+    
+    memory.remember(state, action, action_log_prob, reward, next_state, state_value)
+    
+    return next_state, reward, uncertanity
+
+
+
+def use_surrogate_data(uncertanity, min_uncertanity, max_uncertanity):
+    
+    def generate_random_number(low, high):
+        return low + torch.rand(1).item() * (high - low)
+    
+    rand_no = generate_random_number( min_uncertanity,  max_uncertanity )
+    
+    if rand_no > uncertanity:
+       return True
+    else: 
+        return False
+    
+
+actor, critic, actor_optimizer, critic_optimizer, agent_update_step = initialize_agent()
+
+model_room_temp, model_dry_bulb_temp, model_rewards, env_update_step = initialize_env_models()
+
+memory, env_memory = initialize_memory_buffers()
+
+
+with open(exp_path+'/Results/complete_metrics_2.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['Type','episode', 'time_steps', 'Length', 'Date', 'actor_loss', 'critic_loss','cost_tot', 'emis_tot','ener_tot','idis_tot','pdih_tot','pele_tot','pgas_tot','tdis_tot','extrinsic_reward'])
     file.close()
  
-train_time, test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0, 0
     
-for i_episode in range(0, n_training_episodes+1): 
+train_time, test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0, 0
+
+#we simply initialize them to prevent syntax error
+min_uncertanity, max_uncertanity, uncertanity = None, None, None
+    
+for i_episode in range(1, n_training_episodes+1): 
         
         with open(exp_path+'/Results/complete_metrics.csv', 'a', newline='') as file:
             
@@ -181,20 +238,26 @@ for i_episode in range(0, n_training_episodes+1):
             episode_rewards, episode_actor_loss, episode_critic_loss = [], [], []
             
             start_time = time.time()
-            
-            env_memory.initialize_new_task()
-            
+        
             for t in range(max_t): 
                 
                 print("Time step ", t)
                 
                 action, action_log_prob, state_value = select_action(state, critic, actor)
                 
-                new_state, reward, done, _, res  = env.step(np.array(action))
+                if i_episode==1:
+                    next_state, reward, done = collect_from_actual_env( state, action, action_log_prob, state_value )
                 
-                memory.remember(state, action, action_log_prob, reward, new_state, state_value)
+                else:
+                    
+                    min_uncertanity, max_uncertanity = obtain_uncertanity_range  (min_uncertanity, max_uncertanity, uncertanity)
+                    
+                    next_state, reward, uncertanity = collect_from_surrogate_env( state, action, action_log_prob, state_value )
                 
-                env_memory.remember( state, action, reward, new_state)
+                    if  not use_surrogate_data(uncertanity, min_uncertanity, max_uncertanity):
+                        
+                        next_state, reward, done = collect_from_actual_env( state, action, action_log_prob, state_value )
+
                 
                 if ( (t % agent_update_step == 0 ) or (t == (max_t - 1)) ) and ( t !=0 ) :
                     
@@ -211,15 +274,20 @@ for i_episode in range(0, n_training_episodes+1):
                 
                 plot_scores_train_extrinsic[i_episode] = plot_scores_train_extrinsic.get(i_episode, 0) + reward  #only used for plotting purpose
                 
-                state = new_state.copy()
+                state = next_state.copy()
                 
             train_time = train_time + ( time.time() - start_time)
             
             env_memory.save_to_csv()
             
-            if i_episode == env_train_step:
-               train_env_model( env_memory, i_episode )
+            if i_episode == env_update_step:
+               update_surrogate_env() 
                
+            if i_episode ==1:   #here we will pass all 3 models and obtain uncertanity range instead of a single model
+                min_uncertanity, max_uncertanity = obtain_uncertanity_range(model_room_temp)
+               
+            
+            
             if i_episode % 10 ==0:
                 print("save policy model....")
                 

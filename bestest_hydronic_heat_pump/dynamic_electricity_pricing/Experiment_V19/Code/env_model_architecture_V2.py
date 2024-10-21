@@ -46,7 +46,7 @@ from torch.distributions import Categorical
 
 class Env_Memory:
     
-    def __init__(self, n_actions):
+    def __init__(self, n_actions = None):
     
         #self.task_data = {}
         self.n_actions = n_actions
@@ -56,32 +56,27 @@ class Env_Memory:
         #self.task_data[task_no] = []
         self.task_data = []
         
-    def remember(self, state, action, reward, new_state):  #this needs to be updated since we need all the states running in trajectory
+    def remember(self, state, action, next_state, reward):  #this needs to be updated since we need all the states running in trajectory
            
         
         state = torch.tensor(state)
         action = torch.nn.functional.one_hot ( torch.tensor(action, dtype =torch.long), num_classes = self.n_actions ).reshape(-1)
-        new_state = torch.tensor(new_state)
+        next_state = torch.tensor(next_state)
         reward = torch.tensor([reward])
         
-        #self.task_data[task_no] = self.task_data[task_no] + [ torch.cat([state, action ,new_state, reward], dim=0) ]
-        self.task_data = self.task_data + [ torch.cat([state, action ,new_state, reward], dim=0) ]
+        self.task_data = self.task_data + [ torch.cat([state, action ,next_state, reward], dim=0) ]
     
         
     def clear_memory(self):
 
-        #self.task_data = {}
         self.task_data = []
     
     def sample_memory(self ): 
+        data = pd.read_csv(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V19/trajectory_data/tensor_data_2.csv' , index_col= False)
         
-        #indices = np.arange(1, task_no + 1)
-       
-        #return { k: torch.stack(self.task_data[k], dim = 0) for k in indices }
+        return data    # was, return self.task_data   
+    
         
-        return self.task_data   
-        
-
     def save_to_csv(self):
         
         #tensor_numpy = np.stack(self.task_data[ task_no ] , axis = 0)
@@ -89,7 +84,7 @@ class Env_Memory:
         
         df = pd.DataFrame(tensor_numpy)
         
-        df.to_csv(exp_path+"/trajectory_data/tensor_data"+".csv", index=False) 
+        df.to_csv(exp_path+"/trajectory_data/tensor_data_2"+".csv", index=False) 
         
         
         

@@ -49,6 +49,55 @@ random.seed(seed)
 np.random.seed(seed)
 from torch.distributions import Categorical
 
+
+seed = 42
+np.random.seed(seed)
+torch.manual_seed(seed) 
+random.seed(seed)  
+
+
+class Agent_Memory:
+    def __init__(self):
+        self.states = []
+        self.action_log_probs = []
+        self.actions = []
+        self.rewards = []
+        self.new_states = []
+        self.value_preds = []
+    
+    def remember(self, state, action, action_log_prob, reward, new_state, value_preds):
+        self.states.append( torch.tensor(state) )
+        self.actions.append(torch.tensor(action))
+        self.action_log_probs.append( action_log_prob )
+        self.rewards.append(torch.tensor(reward))
+        self.new_states.append(torch.tensor(new_state))
+        self.value_preds.append(value_preds)
+
+    def clear_memory(self):
+        self.states = []
+        self.actions = []
+        self.action_log_probs = []
+        self.rewards = []
+        self.new_states = []
+        self.value_preds = []
+        
+    def sample_memory(self, sample_size = 2000 ):  #was 1000
+
+        
+        return (
+                torch.stack(self.states, dim = 0), 
+                torch.stack(self.actions, dim = 0), 
+                torch.stack(self.action_log_probs, dim = 0),
+                torch.stack(self.rewards, dim = 0).unsqueeze(dim=1), 
+                torch.stack(self.new_states, dim = 0),    
+                torch.stack(self.value_preds, dim = 0) 
+               )
+
+    def memory_size(self):
+         return len(self.states)
+
+
+
 class Actor(nn.Module):
     
     def __init__(self, s_size, a_size, h_size, device, no_of_action_types = 4):
@@ -104,9 +153,6 @@ def select_action(x, critic, actor):
           all_log_prob.append(m.log_prob(action))
       
     
-    
-    #all_log_prob = torch.stack(all_log_prob, dim =0)
-    #all_actions = np.stack(all_actions, axis =0)
     all_log_prob = torch.cat(all_log_prob, dim=0)
     
     return ( all_actions, all_log_prob, state_value )    
