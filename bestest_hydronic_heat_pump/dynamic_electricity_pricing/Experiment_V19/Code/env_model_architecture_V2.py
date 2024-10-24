@@ -84,10 +84,8 @@ class Env_Memory:
             return torch.cat( [self.data, sampled_data], dim =1) 
         
     
-        
     def save_to_csv(self):
         
-        #tensor_numpy = np.stack(self.task_data[ task_no ] , axis = 0)
         tensor_numpy = np.stack(self.data , axis = 0)
         
         df = pd.DataFrame(tensor_numpy)
