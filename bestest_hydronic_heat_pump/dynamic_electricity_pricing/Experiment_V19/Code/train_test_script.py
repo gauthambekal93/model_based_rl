@@ -228,11 +228,6 @@ def use_surrogate_data():
     return (rand_nums > uncertanity).all()   #all the uncertanities should be true
       
     
-    
-    
-#for low, high in zip(min_uncertanity, max_uncertanity):
-#   print(  generate_random_number(low, high))
-
 
 
 actor, critic, actor_optimizer, critic_optimizer, agent_update_step = initialize_agent()
