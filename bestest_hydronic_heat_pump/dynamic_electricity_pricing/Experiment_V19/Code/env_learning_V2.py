@@ -71,11 +71,11 @@ class train_environment:
         self.model.load_state_dict(torch.load( r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V19/Models/'+str(self.model_type)+'_'+str(self.epochs)+'.pth' ))
         self.create_dataset()
         
-    def create_dataset(self):
+    def create_dataset(self, env_memory):
         
-        data = Env_Memory().sample_memory()
-        
-        data = torch.tensor(data.values, dtype = torch.float32 )
+        data = env_memory.sample_memory()
+
+        #data = torch.tensor(data.values, dtype = torch.float32 )
         
         if self.model_type == "room_temperature":
             
@@ -96,9 +96,9 @@ class train_environment:
         self.test_x, self.test_y = X[  indices[split_idx: ] ], Y[  indices[split_idx: ] ]      
         
         
-    def train_model(self):    
+    def train_model(self, env_memory ):    
         
-        self.create_dataset()
+        self.create_dataset(env_memory)
         
         for epoch in range(1, self.epochs):
             

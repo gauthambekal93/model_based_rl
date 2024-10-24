@@ -42,7 +42,7 @@ torch.manual_seed(seed)
 random.seed(seed)  
 from torch.distributions import Categorical
 
-
+data_path =r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V19/trajectory_data/tensor_data_2.csv'
 
 class Env_Memory:
     
@@ -51,6 +51,7 @@ class Env_Memory:
         #self.task_data = {}
         self.n_actions = n_actions
         self.data = []
+        self.train_size = 1000
         
     def remember(self, state, action, next_state, reward):  #this needs to be updated since we need all the states running in trajectory
            
@@ -68,9 +69,20 @@ class Env_Memory:
         self.data = []
     
     def sample_memory(self ): 
-        data = pd.read_csv(r'C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V19/trajectory_data/tensor_data_2.csv' , index_col= False)
         
-        return data    # was, return self.task_data   
+        num_samples = self.train_size - len(self.data)
+        
+        if not os.path.exists(data_path) or num_samples < 0:
+            
+            return torch.stack(self.data , axis = 0) 
+        
+        else:
+            old_data = torch.tensor( pd.read_csv(data_path , index_col= False),  dtype = torch.float32 )
+
+            sampled_data = old_data[torch.randint(0, old_data.shape[0], (num_samples ,) ) ]
+            
+            return torch.cat( [self.data, sampled_data], dim =1) 
+        
     
         
     def save_to_csv(self):

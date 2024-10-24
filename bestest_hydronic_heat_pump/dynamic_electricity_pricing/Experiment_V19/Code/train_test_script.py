@@ -163,11 +163,13 @@ def update_policy():
     
 def update_surrogate_env():
         
-        model_room_temp.train_model()
+        model_room_temp.train_model(env_memory)
         
-        model_dry_bulb_temp.train_model()
+        model_dry_bulb_temp.train_model(env_memory)
 
-        model_rewards.train_model()
+        model_rewards.train_model(env_memory)
+        
+        
         
  
     
@@ -206,13 +208,13 @@ def update_uncertanity_range( uncertanity ):
       min_uncertanity[2], max_uncertanity[2] =  get_initial_uncertanity_range(model_rewards)
     
     else:
-          if uncertanity[0] < min_uncertanity[0]:    min_uncertanity[0] = uncertanity[0]
-          if uncertanity[1] < min_uncertanity[1]:    min_uncertanity[1] = uncertanity[1]
-          if uncertanity[2] < min_uncertanity[2]:    min_uncertanity[2] = uncertanity[2]
+          if uncertanity[0] < min_uncertanity[0]:    min_uncertanity[0] = uncertanity[0].reshape(1)
+          if uncertanity[1] < min_uncertanity[1]:    min_uncertanity[1] = uncertanity[1].reshape(1)
+          if uncertanity[2] < min_uncertanity[2]:    min_uncertanity[2] = uncertanity[2].reshape(1)
           
-          if uncertanity[0] > max_uncertanity[0]:    max_uncertanity[0] = uncertanity[0]
-          if uncertanity[1] > max_uncertanity[1]:    max_uncertanity[1] = uncertanity[1]
-          if uncertanity[2] > max_uncertanity[2]:    max_uncertanity[2] = uncertanity[2]
+          if uncertanity[0] > max_uncertanity[0]:    max_uncertanity[0] = uncertanity[0].reshape(1)
+          if uncertanity[1] > max_uncertanity[1]:    max_uncertanity[1] = uncertanity[1].reshape(1)
+          if uncertanity[2] > max_uncertanity[2]:    max_uncertanity[2] = uncertanity[2].reshape(1)
           
 
 
@@ -228,7 +230,8 @@ def use_surrogate_data():
     
     
     
-
+#for low, high in zip(min_uncertanity, max_uncertanity):
+#   print(  generate_random_number(low, high))
 
 
 
@@ -305,10 +308,12 @@ for i_episode in range(1, n_training_episodes+1):
                 
             train_time = train_time + ( time.time() - start_time)
             
-            env_memory.save_to_csv()
+            #env_memory.save_to_csv()
             
             if i_episode == env_update_step:
                update_surrogate_env() 
+               env_memory.save_to_csv()
+               env_memory.clear_memory()
                
             if i_episode ==1:   
                update_uncertanity_range(uncertanity)
