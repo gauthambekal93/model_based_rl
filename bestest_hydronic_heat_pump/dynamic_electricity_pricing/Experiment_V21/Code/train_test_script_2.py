@@ -24,18 +24,13 @@ import torch.nn as nn
 import json
 
 
-from simulation_environments import bestest_hydronic_heat_pump, max_episode_length, start_time_tests,episode_length_test, warmup_period_test
+from simulation_environments import bestest_hydronic_heat_pump
 
-from updated_plot import test_agent, plot_results
-#from memory_module import Memory
 from agent_actor_critic import Actor, Critic,  Agent_Memory
 
-import datetime
+from save_results import save_models, save_train_results, save_test_results
+
 import time
-
-
-import matplotlib.pyplot as plt
-
 import warnings
 import csv
 import copy
@@ -45,8 +40,6 @@ warnings.filterwarnings("ignore", category=UserWarning, message="WARN: env.step_
 warnings.filterwarnings("ignore", category=UserWarning, message="WARN: env.get_kpis to get variables from other wrappers is deprecated*")
 
  
-
-year = 2024
 
 env, env_attributes  = bestest_hydronic_heat_pump()
 
@@ -70,13 +63,7 @@ rl_data_path = json_data['rl_data_path']
 
 plot_scores_train_extrinsic = {}
 
-plot_scores_test_extrinsic_jan17 = {}
-plot_scores_test_extrinsic_apr19 = {}
-plot_scores_test_extrinsic_nov15 = {}
-plot_scores_test_extrinsic_dec08 = {}
-
-
-train_start_episode = 1
+train_start_episode = 5
 rho = 0.99
 alpha = 0.15
 no_of_updates = 2
@@ -115,7 +102,7 @@ def initialize_agent():
      return actor, actor_optimizer, critic_1 , critic_optimizer_1, critic_2 , critic_optimizer_2, critic_target_1, critic_target_2
 
     
-    
+  
     
 def collect_from_actual_env( action):
     
@@ -133,15 +120,15 @@ def collect_from_actual_env( action):
 def compute_target( reward_samples, next_state_samples, done_samples ):
     
     with torch.no_grad():
-        next_continuous_action, _, action_log_probs = actor.select_action(next_state_samples)
+        next_action, _, action_log_probs = actor.select_action(next_state_samples)
     
-    q_val_target_1 = critic_target_1.get_q_value(next_state_samples, next_continuous_action)
+    q_val_target_1 = critic_target_1.get_q_value(next_state_samples, next_action)
     
-    q_val_target_2 = critic_target_2.get_q_value(next_state_samples, next_continuous_action)
+    q_val_target_2 = critic_target_2.get_q_value(next_state_samples, next_action)
     
     q_val_next = torch.min( q_val_target_1 , q_val_target_2) 
     
-    q_val_target = reward_samples +  gamma*( 1 - done_samples )* ( q_val_next  - alpha * action_log_probs   ) #need to replace with log probs !!!
+    q_val_target = reward_samples +  gamma*( 1 - done_samples )* ( q_val_next  - alpha * action_log_probs   ) 
     
     return q_val_target
 
@@ -149,6 +136,7 @@ def compute_target( reward_samples, next_state_samples, done_samples ):
 
 def train_critic( state_samples, action_samples , q_val_target ):
     
+        
     critic_loss_1 = mse_loss (  critic_1.get_q_value(state_samples, action_samples),  q_val_target )
     
     critic_loss_2 = mse_loss (  critic_2.get_q_value(state_samples, action_samples),  q_val_target )
@@ -163,17 +151,31 @@ def train_critic( state_samples, action_samples , q_val_target ):
     
     critic_loss_2.backward()
     
+    # Optional: Gradient clipping for stability
+    torch.nn.utils.clip_grad_norm_(critic_1.parameters(), max_norm=1.0)
+    
+    torch.nn.utils.clip_grad_norm_(critic_2.parameters(), max_norm=1.0)
+   
     
     critic_optimizer_1.step()
     
     critic_optimizer_2.step()
     
-    
+    return critic_loss_1.item(), critic_loss_2.item()
 
 
 def train_actor(state_samples):
     
+    
     action, _, action_log_probs = actor.select_action(state_samples)
+    
+    # Freeze critic parameters
+    for param in critic_1.parameters():
+        param.requires_grad = False
+        
+    for param in critic_2.parameters():
+        param.requires_grad = False
+    
     
     q_val_1 = critic_1.get_q_value( state_samples, action )  
     
@@ -181,7 +183,7 @@ def train_actor(state_samples):
     
     q_val = torch.min( q_val_1, q_val_2  )
     
-    actor_loss = - 1.0* ( q_val - alpha* (action_log_probs ) )  #we need maximize actor_loss 
+    actor_loss = - torch.mean( ( q_val - alpha* (action_log_probs ) ) ) #we need maximize actor_loss 
     
     
     actor_optimizer.zero_grad()
@@ -191,6 +193,15 @@ def train_actor(state_samples):
     actor_optimizer.step()
     
     
+    # Unfreeze critic parameters
+    for param in critic_1.parameters():
+       param.requires_grad = True
+    
+    for param in critic_2.parameters():
+       param.requires_grad = True
+     
+    return actor_loss.item()    
+    
     
 
 def update_target_critic():
@@ -198,9 +209,6 @@ def update_target_critic():
     
     global critic_target_1, critic_target_2   
     
-    critic_target_1 = rho * critic_target_1 + (1 - rho) * critic_1
-    
-    critic_target_2 = rho * critic_target_2 + (1 - rho) * critic_2
     
     for target_param, param in zip(critic_target_1.parameters(), critic_1.parameters()):
         target_param.data.copy_(rho * target_param.data + (1 - rho) * param.data)
@@ -219,14 +227,12 @@ memory = Agent_Memory()
 
 with open(metrics_path, 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['Type','episode', 'time_steps', 'Length', 'Date', 'actor_loss', 'critic_loss','baseline_loss','cost_tot', 'emis_tot','ener_tot','idis_tot','pdih_tot','pele_tot','pgas_tot','tdis_tot','extrinsic_reward'])
+    writer.writerow(['Type','episode', 'time_steps', 'Length', 'Date', 'actor_loss', 'critic_1_loss','critic_2_loss','cost_tot', 'emis_tot','ener_tot','idis_tot','pdih_tot','pele_tot','pgas_tot','tdis_tot','extrinsic_reward'])
     file.close()
  
 
     
-train_time, test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0, 0
-
-
+train_time = 0
    
 for i_episode in range(1, n_training_episodes+1): 
         
@@ -238,47 +244,58 @@ for i_episode in range(1, n_training_episodes+1):
             
             print("Episode: ", i_episode, time_step)
             
-            episode_rewards, episode_actor_loss, episode_critic_loss = [], [], []
+            episode_rewards, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss = [], [], [], []
             
-            continuous_action, discrete_action, _ = actor.select_action(state)
+            start_time = time.time()
+            
+            action, discrete_action, _ = actor.select_action(state)
                 
             next_state, reward, done = collect_from_actual_env( discrete_action )
             
-            memory.remember( i_episode, state, continuous_action, reward, next_state, done)
+            memory.remember( i_episode, state, action, reward, next_state, done)
+            
+            plot_scores_train_extrinsic[i_episode] = plot_scores_train_extrinsic.get(i_episode, 0) + reward
             
             state = next_state.copy()
             
-            time_step += 1
-            
+            time_step +=1
         
-        if i_episode > train_start_episode : 
-                
-                for update in range(1, no_of_updates):
+            if i_episode > train_start_episode : 
                     
-                    state_samples, action_samples, reward_samples, next_state_samples, done_samples =  memory.sample_memory()
-                    
-                    q_val_target = compute_target( reward_samples, next_state_samples, done_samples )
-                    
-                    train_critic(state_samples, action_samples , q_val_target)
-                    
-                    train_actor(state_samples)
-                    
-                    update_target_critic()
-                    
-                
-                
-               
+                    for update in range(1, no_of_updates):
+                        
+                        state_samples, action_samples, reward_samples, next_state_samples, done_samples =  memory.sample_memory()
+                        
+                        q_val_target = compute_target( reward_samples, next_state_samples, done_samples )
+                        
+                        l1, l2 = train_critic(state_samples, action_samples , q_val_target)
+                        
+                        a1 = train_actor(state_samples) 
+                        
+                        update_target_critic()
+                        
+                        episode_critic_1_loss.append(l1)
+                        
+                        episode_critic_2_loss.append(l2)
+                        
+                        episode_actor_loss.append(a1)
+                        
+                        episode_rewards.append(reward)
+        
+        train_time = train_time + ( time.time() - start_time)                
+                        
+        if i_episode % 10 == 0:
+            
+            save_models(i_episode, exp_path, train_time, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2)
+            
+            save_train_results(i_episode, metrics_path, env , exp_path, train_time, episode_rewards, plot_scores_train_extrinsic, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss)
+            
+            save_test_results(i_episode, metrics_path, env, exp_path, actor)
+        
 
 
-
-
-
-
-
-
-
-
-
+        
+      
 
 
 

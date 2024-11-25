@@ -42,7 +42,7 @@ from torch.distributions import Normal
 
 
 class Agent_Memory:
-    def __init__(self, buffer_size = 5000):
+    def __init__(self, buffer_size = 10000):
         
         self.states = deque(maxlen=buffer_size) 
         self.actions = deque(maxlen=buffer_size) 
@@ -60,7 +60,7 @@ class Agent_Memory:
         
 
     
-    def sample_memory(self, sample_size = 200 ):  
+    def sample_memory(self, sample_size = 64 ):  
         
         
         random_numbers = torch.randint(0, len(self.states), (sample_size,))
@@ -113,12 +113,21 @@ class Actor(nn.Module):
         
         return mu, std
         
+    def sampled_action(self, mu, std):
+        
+        noise_samples = self.normal_dist.sample( sample_shape = ( mu.shape[0], mu.shape[1] )  ) 
+        
+        sampled_actions =   ( mu ) + (noise_samples * std) 
+        
+        return sampled_actions
     
     def get_action_log_probs(self, actions, mu, std):
        
         normal_dist = Normal(mu, std)
         
-        action_log_probs = normal_dist.log_prob(actions) + nn.log(1 - self.tanh(actions) )
+        adjustment = torch.log( 1 - self.tanh(actions)**2  + 1e-6 ) 
+        
+        action_log_probs = normal_dist.log_prob(actions) - adjustment
         
         return action_log_probs
     
@@ -129,6 +138,7 @@ class Actor(nn.Module):
         return discrete_actions
     
     
+        
     def select_action(self, state):
     
         if state.ndim ==1:
@@ -139,15 +149,15 @@ class Actor(nn.Module):
 
         mu, std = self.forward(state)
         
-        noise_samples = self.normal_dist.sample( sample_shape = ( mu.shape[0], mu.shape[1] )  ) 
-        
-        continuous_actions =  self.tanh ( ( mu ) + (noise_samples * std) )
+        sampled_actions = self.sampled_action( mu, std)
        
-        action_log_probs = self.get_action_log_probs(continuous_actions, mu, std) 
-       
-        discrete_actions = self.discretize_action( continuous_actions)
+        bounded_actions = torch.tanh(sampled_actions)
         
-        return continuous_actions, discrete_actions, action_log_probs
+        discrete_actions = self.discretize_action( bounded_actions )
+        
+        action_log_probs = self.get_action_log_probs(sampled_actions, mu, std) 
+       
+        return bounded_actions, discrete_actions, action_log_probs
    
       
     

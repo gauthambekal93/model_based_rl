@@ -171,7 +171,7 @@ def twozone_commercial_hydronic():
                       "n_training_episodes": str(1000),
                       "n_evaluation_episodes": (10),
                       "max_t": str(1000),   
-                      "gamma": str(0.90),
+                      "gamma": str(0.99),
                       "lr": str(0.001)
 
                       }
@@ -254,9 +254,9 @@ def bestest_hydronic_heat_pump():
                        "n_training_episodes": str(500), #was 300
                       # "n_evaluation_episodes": str(10),
                        "max_t": str( int(max_episode_length / step_period) ), #was 2000   
-                       "gamma": str(0.90),
-                        "actor_lr": str( 0.001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001, was 0.0001
-                        "critic_lr":str(0.005),   #was 0.001
+                       "gamma": str(0.99),
+                        "actor_lr": str( 0.0001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001, was 0.0001
+                        "critic_lr":str(0.0005),   #was 0.001
                         "baseline_lr":str(0.001),
                         "no_of_action_types":len(actions)
                       }
@@ -338,7 +338,7 @@ def bestest_hydronic():
                          "n_training_episodes": str(200), #was 55
                         # "n_evaluation_episodes": str(10),
                          "max_t": str(max_episode_length // step_period), #was 2000   
-                         "gamma": str(0.90),
+                         "gamma": str(0.99),
                           "lr": str( 0.001),  #was 0.0001  #was 0.01  was 0.001, 0.0001, was 0.01 #was0.01  #was 0.001,  was 0.001, was 0.0001
                           "no_of_action_types":len(actions)
                         }
