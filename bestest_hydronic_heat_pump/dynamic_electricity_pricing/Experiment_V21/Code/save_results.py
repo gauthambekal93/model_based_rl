@@ -19,9 +19,8 @@ from simulation_environments import max_episode_length, start_time_tests,episode
 
 year = 2024
 
-test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0, 0
+test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0
 
-plot_scores_train_extrinsic = {}
 plot_scores_test_extrinsic_jan17 = {}
 plot_scores_test_extrinsic_apr19 = {}
 plot_scores_test_extrinsic_nov15 = {}
@@ -82,7 +81,6 @@ def save_train_results(i_episode, metrics_path, env , exp_path, train_time, epis
 
         file.close()
 
-    return plot_scores_train_extrinsic
 
 
 def save_test_results(i_episode, metrics_path, env, exp_path, actor):
@@ -93,118 +91,117 @@ def save_test_results(i_episode, metrics_path, env, exp_path, actor):
     
     with open(metrics_path, 'a', newline='') as file:
             
-             writer = csv.writer(file)   
+            writer = csv.writer(file)   
          
-             if i_episode % 10 == 0:  #need to make it 10   #was 25
-                  print("=========Test=========")
-                  
-                  start = time.time()
-                  observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor, start_time_tests[0], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
-                                                                    points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                                                             'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
-                                                                    testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
-                  
-                  test_jan17_time = test_jan17_time + (time.time() - start)
-                  
-                  plot_scores_test_extrinsic_jan17[i_episode] = sum(extrinsic_rewards_test)
-                  
-                  test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
-                  
-                  kpis = env.get_kpis()
-                  
-                  tmp = ['Test', i_episode, test_jan17_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_jan17.values())[-1] ] 
-                     
-                  writer.writerow(tmp )
-                  
-                  plt.title('test_jan17_boptest_hydronic_heat_pump')
-                  plt.xlabel('Episodes')
-                  plt.ylabel('Test overall Rewards')
-                  plt.plot( list(plot_scores_test_extrinsic_jan17.keys()), list(plot_scores_test_extrinsic_jan17.values()) )
-                  plt.tight_layout()
-                  plt.savefig(exp_path+'/Results/test_jan17_boptest_hydronic_heat_pump.png')
-                  plt.close()  
-                  
-                  
-                  #------------------------------------------------------------#
-                  
-                  start = time.time()
-                  observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[1], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
-                                                                    points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                                                             'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
-                                                                    testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
-                  
-                  test_apr19_time = test_apr19_time + (time.time() - start)
-                  
-                  plot_scores_test_extrinsic_apr19[i_episode] = sum(extrinsic_rewards_test)
-                  
-                  test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
-                  
-                  kpis = env.get_kpis()
-     
-                  tmp = ['Test', i_episode, test_apr19_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_apr19.values())[-1] ] 
-                    
-                  writer.writerow(tmp )
-                  
-                  plt.title('test_apr19_boptest_hydronic_heat_pump')
-                  plt.xlabel('Episodes')
-                  plt.ylabel('Test overall Rewards')
-                  plt.plot( list(plot_scores_test_extrinsic_apr19.keys()), list(plot_scores_test_extrinsic_apr19.values()) )
-                  plt.tight_layout()
-                  plt.savefig( exp_path + '/Results/test_apr19_boptest_hydronic_heat_pump.png')
-                  plt.close() 
-                  
-                  #------------------------------------------------------------#
-                  
-                  start = time.time()
-                  observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[2], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
-                                                                    points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                                                             'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
-                                                                    testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
-                  test_nov15_time = test_nov15_time + (time.time() - start)
-                  
-                  plot_scores_test_extrinsic_nov15[i_episode] = sum(extrinsic_rewards_test)
-                  
-                  test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
-                  
-                  kpis = env.get_kpis()
-     
-                  tmp = ['Test', i_episode, test_nov15_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_nov15.values())[-1] ] 
-                    
-                  writer.writerow(tmp )
-                  
-                  plt.title('test_nov15_boptest_hydronic_heat_pump')
-                  plt.xlabel('Episodes')
-                  plt.ylabel('Test overall Rewards')
-                  plt.plot( list(plot_scores_test_extrinsic_nov15.keys()), list(plot_scores_test_extrinsic_nov15.values()) )
-                  plt.tight_layout()
-                  plt.savefig( exp_path + '/Results/test_nov15_boptest_hydronic_heat_pump.png')
-                  plt.close() 
-                  
-                  #------------------------------------------------------------#
-                  start = time.time()   
-                  observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[3], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
-                                                                   points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
-                                                                            'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
-                                                                   testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
-                  test_dec08_time = test_dec08_time + (time.time() - start)
-                  
-                  plot_scores_test_extrinsic_dec08[i_episode] = sum(extrinsic_rewards_test)
-                  
-                  test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
-                  
-                  kpis = env.get_kpis()
-    
-                  tmp = ['Test', i_episode, test_dec08_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_dec08.values())[-1] ] 
-                   
-                  writer.writerow(tmp )
-                  
-                  plt.title('test_dec08_boptest_hydronic_heat_pump')
-                  plt.xlabel('Episodes')
-                  plt.ylabel('Test overall Rewards')
-                  plt.plot( list(plot_scores_test_extrinsic_dec08.keys()), list(plot_scores_test_extrinsic_dec08.values()) )
-                  plt.tight_layout()
-                  plt.savefig( exp_path + '/Results/test_dec08_boptest_hydronic_heat_pump.png')
-                  plt.close() 
+            print("=========Test=========")
+            
+            start = time.time()
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor, start_time_tests[0], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
+                                                              points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
+                                                                       'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
+                                                              testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
+            
+            test_jan17_time = test_jan17_time + (time.time() - start)
+            
+            plot_scores_test_extrinsic_jan17[i_episode] = sum(extrinsic_rewards_test)
+            
+            test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
+            
+            kpis = env.get_kpis()
+            
+            tmp = ['Test', i_episode, test_jan17_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_jan17.values())[-1] ] 
+               
+            writer.writerow(tmp )
+            
+            plt.title('test_jan17_boptest_hydronic_heat_pump')
+            plt.xlabel('Episodes')
+            plt.ylabel('Test overall Rewards')
+            plt.plot( list(plot_scores_test_extrinsic_jan17.keys()), list(plot_scores_test_extrinsic_jan17.values()) )
+            plt.tight_layout()
+            plt.savefig(exp_path+'/Results/test_jan17_boptest_hydronic_heat_pump.png')
+            plt.close()  
+            
+            
+            #------------------------------------------------------------#
+            
+            start = time.time()
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[1], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
+                                                              points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
+                                                                       'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
+                                                              testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
+            
+            test_apr19_time = test_apr19_time + (time.time() - start)
+            
+            plot_scores_test_extrinsic_apr19[i_episode] = sum(extrinsic_rewards_test)
+            
+            test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
+            
+            kpis = env.get_kpis()
+   
+            tmp = ['Test', i_episode, test_apr19_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_apr19.values())[-1] ] 
+              
+            writer.writerow(tmp )
+            
+            plt.title('test_apr19_boptest_hydronic_heat_pump')
+            plt.xlabel('Episodes')
+            plt.ylabel('Test overall Rewards')
+            plt.plot( list(plot_scores_test_extrinsic_apr19.keys()), list(plot_scores_test_extrinsic_apr19.values()) )
+            plt.tight_layout()
+            plt.savefig( exp_path + '/Results/test_apr19_boptest_hydronic_heat_pump.png')
+            plt.close() 
+            
+            #------------------------------------------------------------#
+            
+            start = time.time()
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[2], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
+                                                              points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
+                                                                       'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
+                                                              testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
+            test_nov15_time = test_nov15_time + (time.time() - start)
+            
+            plot_scores_test_extrinsic_nov15[i_episode] = sum(extrinsic_rewards_test)
+            
+            test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
+            
+            kpis = env.get_kpis()
+   
+            tmp = ['Test', i_episode, test_nov15_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_nov15.values())[-1] ] 
+              
+            writer.writerow(tmp )
+            
+            plt.title('test_nov15_boptest_hydronic_heat_pump')
+            plt.xlabel('Episodes')
+            plt.ylabel('Test overall Rewards')
+            plt.plot( list(plot_scores_test_extrinsic_nov15.keys()), list(plot_scores_test_extrinsic_nov15.values()) )
+            plt.tight_layout()
+            plt.savefig( exp_path + '/Results/test_nov15_boptest_hydronic_heat_pump.png')
+            plt.close() 
+            
+            #------------------------------------------------------------#
+            start = time.time()   
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[3], episode_length_test, warmup_period_test, log_dir=os.getcwd(), model_name='last_model', save_to_file=False, plot=True, 
+                                                             points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
+                                                                      'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], 
+                                                             testcase='bestest_hydronic_heat_pump', i_episode=i_episode)
+            test_dec08_time = test_dec08_time + (time.time() - start)
+            
+            plot_scores_test_extrinsic_dec08[i_episode] = sum(extrinsic_rewards_test)
+            
+            test_date = datetime.datetime(year, 1, 1) + datetime.timedelta(days=int(day_of_year) - 1)
+            
+            kpis = env.get_kpis()
+  
+            tmp = ['Test', i_episode, test_dec08_time, max_episode_length/24/3600,  test_date.strftime("%B %d, %Y") , "NA", "NA", "NA" ] +[kpis['cost_tot'] , kpis['emis_tot'], kpis['ener_tot'], kpis['idis_tot'], kpis['pdih_tot'],kpis['pele_tot'],kpis['pgas_tot'],kpis['tdis_tot'] ] + [list(plot_scores_test_extrinsic_dec08.values())[-1] ] 
+             
+            writer.writerow(tmp )
+            
+            plt.title('test_dec08_boptest_hydronic_heat_pump')
+            plt.xlabel('Episodes')
+            plt.ylabel('Test overall Rewards')
+            plt.plot( list(plot_scores_test_extrinsic_dec08.keys()), list(plot_scores_test_extrinsic_dec08.values()) )
+            plt.tight_layout()
+            plt.savefig( exp_path + '/Results/test_dec08_boptest_hydronic_heat_pump.png')
+            plt.close() 
 
 
-             file.close()
+            file.close()

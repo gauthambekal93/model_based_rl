@@ -63,10 +63,10 @@ rl_data_path = json_data['rl_data_path']
 
 plot_scores_train_extrinsic = {}
 
-train_start_episode = 5
+train_start_episode = 2
 rho = 0.99
 alpha = 0.15
-no_of_updates = 2
+no_of_updates = 1
 
 mse_loss = nn.MSELoss()
 
@@ -240,11 +240,11 @@ for i_episode in range(1, n_training_episodes+1):
         
         state = env.reset()[0]
         
+        episode_rewards, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss = [], [], [], []
+        
         while done==0:
             
             print("Episode: ", i_episode, time_step)
-            
-            episode_rewards, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss = [], [], [], []
             
             start_time = time.time()
             
@@ -260,9 +260,9 @@ for i_episode in range(1, n_training_episodes+1):
             
             time_step +=1
         
-            if i_episode > train_start_episode : 
+            if i_episode >= train_start_episode : 
                     
-                    for update in range(1, no_of_updates):
+                    for update in range(no_of_updates):
                         
                         state_samples, action_samples, reward_samples, next_state_samples, done_samples =  memory.sample_memory()
                         
@@ -284,13 +284,15 @@ for i_episode in range(1, n_training_episodes+1):
         
         train_time = train_time + ( time.time() - start_time)                
                         
-        if i_episode % 10 == 0:
-            
-            save_models(i_episode, exp_path, train_time, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2)
-            
+     
+        if i_episode >= train_start_episode : 
             save_train_results(i_episode, metrics_path, env , exp_path, train_time, episode_rewards, plot_scores_train_extrinsic, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss)
-            
+        
+        if i_episode % 5 == 0:
             save_test_results(i_episode, metrics_path, env, exp_path, actor)
+            
+        if i_episode % 5 == 0:
+               save_models(i_episode, exp_path, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2)    
         
 
 
