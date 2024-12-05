@@ -1,4 +1,4 @@
-Experiment_V1:
+sExperiment_V1:
 This experiment only uses policy agent on dynamic pricing scenario
 
 Experiment_V2:
@@ -69,4 +69,38 @@ It was then fine tuned on sparse rewards with dynamic pricing on Bestest_Hydroni
 The learning rate is reduced to 0.001
 Test and train episode length is of 14 days
 
+
+Experiment_V16:
+This experiment uses actor-critic network with 10 action dimensions.
+The experiment uses random dates for train episodes and tested on 4 test periods (Jan 17. April 19, Nov 15, Dec 08 all for 2024)
+Episode length is of 7 days
+Learning rate of actor is 0.0001
+Learning rate of critic is 0.001
+Ran for 300 epochs
+
+
+Experiment_V17:
+This experiment uses actor-critic network with 10 action dimensions.
+The experiment uses only March 01 for train episodes and tested on 4 test periods (Jan 17. April 19, Nov 15, Dec 08 all for 2024)
+Episode length is of 7 days
+Learning rate of actor is 0.001
+Learning rate of critic is 0.005
+Ran for 500 epochs
+
+
+Experiment_V18:
+Meta learning approach for model based reinforcement learning.
+We did not go ahead with this approach for now, reason being I think week over week data does not vary much from the env_model perspective. The reason being we are only predicting one step ahead.
+
+
+Experiment_V19:
+Uses VAE as env model, but the implementation is INCORRECT !!! since when the trajectory gets switched from env model to actual model it will continue trajectory from where actual env left and not at the point where env model left.
+
+
+Experiment_V20:
+Only used to recreate the error which we described in Experiment_V19
+
+Experiment_V21:
+We SAC based RL agent.
+The pseudo code was based on (https://spinningup.openai.com/en/latest/algorithms/sac.html) without any env model.
 

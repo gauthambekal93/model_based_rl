@@ -1,0 +1,144 @@
+!next
+Test Loss  0.07148883491754532
+0 None
+
+!next
+
+!next
+
+!next
+Test Loss  0.42258086800575256
+1 None
+
+!next
+
+!next
+
+!next
+Test Loss  0.05060802400112152
+2 None
+
+!next
+
+!next
+
+!next
+Test Loss  0.12031245231628418
+3 None
+
+!next
+
+!next
+
+!next
+Test Loss  2.5175126211252064e-05
+4 None
+
+ABOVE RESULTS ARE FROM FLAWED CODE
+=======================
+Test Loss  0.7522380948066711
+0 None
+Test Loss  0.45248839259147644
+1 None
+Test Loss  0.1500275582075119
+2 None
+Test Loss  0.09870557487010956
+3 None
+Test Loss  0.004013061057776213
+4 None
+
+Test Loss  0.7522380948066711
+0 None
+Test Loss  0.45248839259147644
+1 None
+Test Loss  0.1500275582075119
+2 None
+Test Loss  0.09870557487010956
+3 None
+Test Loss  0.004013061057776213
+4 None
+
+Test Loss  0.17722967267036438
+0 None
+Test Loss  0.7225300073623657
+1 None
+Test Loss  0.1619936227798462
+2 None
+Test Loss  0.1418953835964203
+3 None
+Test Loss  1.9956694814027287e-05
+
+
+#---------This is correct result with regularizer for 5 tasks-----------
+Test Loss  0.03609080985188484
+0 None
+Test Loss  0.005816313438117504
+1 None
+Test Loss  0.000580844352953136
+2 None
+Test Loss  0.0013563447864726186
+3 None
+Test Loss  3.7746878660982475e-05
+4 None
+#----------------------------------------
+
+#---------Result with simple nn for 5 tasks-------------------------------
+Test loss  tensor(0.0556, grad_fn=<MseLossBackward0>)
+0 None
+Test loss  tensor(0.1423, grad_fn=<MseLossBackward0>)
+1 None
+Test loss  tensor(0.0632, grad_fn=<MseLossBackward0>)
+2 None
+Test loss  tensor(0.0375, grad_fn=<MseLossBackward0>)
+3 None
+Test loss  tensor(2.7345e-05, grad_fn=<MseLossBackward0>)
+
+
+
+#-----------------HYPERNET FOR 10 TASKS---------------
+Test Loss  0.07255558669567108
+0 None
+Test Loss  0.00532137043774128
+1 None
+Test Loss  0.006364882458001375
+2 None
+Test Loss  0.09897122532129288
+3 None
+Test Loss  0.005360411014407873
+4 None
+Test Loss  0.003794481046497822
+5 None
+Test Loss  0.0003505874774418771
+6 None
+Test Loss  0.0003066266654059291
+7 None
+Test Loss  0.014142810367047787
+8 None
+Test Loss  3.3880995033541694e-05
+9 None
+#-----------------------------------------------------
+
+
+
+
+Test loss  tensor(0.0379, grad_fn=<MseLossBackward0>)
+0 None
+Test loss  tensor(0.1022, grad_fn=<MseLossBackward0>)
+1 None
+Test loss  tensor(0.0828, grad_fn=<MseLossBackward0>)
+2 None
+Test loss  tensor(0.1036, grad_fn=<MseLossBackward0>)
+3 None
+Test loss  tensor(0.1221, grad_fn=<MseLossBackward0>)
+4 None
+Test loss  tensor(0.0886, grad_fn=<MseLossBackward0>)
+5 None
+Test loss  tensor(0.0530, grad_fn=<MseLossBackward0>)
+6 None
+Test loss  tensor(0.0757, grad_fn=<MseLossBackward0>)
+7 None
+Test loss  tensor(0.0257, grad_fn=<MseLossBackward0>)
+8 None
+Test loss  tensor(1.5316e-05, grad_fn=<MseLossBackward0>)
+9 None
+4 None

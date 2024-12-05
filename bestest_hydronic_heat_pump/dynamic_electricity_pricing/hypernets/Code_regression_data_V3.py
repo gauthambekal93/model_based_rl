@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Tue Dec  3 10:22:30 2024
+
+@author: gauthambekal93
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Thu Nov 28 18:31:44 2024
 
 @author: gauthambekal93
@@ -13,13 +20,14 @@ import torch
 import torch.nn as nn
 
 import torch.optim as optim
+import torch.distributions as dist
 
 seed = 42
 np.random.seed(seed)
 torch.manual_seed(seed) 
 random.seed(seed)  
 
-
+from model_architectures import Target_Model, Hypernet
 
 num_tasks = 10 #10 #was 2
 
@@ -72,113 +80,6 @@ def target_model_predictions(X, weights, bias ):
 
 
 
-class Target_Model():
-    
-    def __init__(self, input_dim, hidden_dim, output_dim):
-        
-        self.weight1 = torch.rand(input_dim, hidden_dim)
-        
-        self.bias1 = torch.rand( (1, hidden_dim) )
-        
-        self.weight2 = torch.rand(hidden_dim, hidden_dim)
-        
-        self.bias2 = torch.rand( (1, hidden_dim) )
-        
-        self.weight3 = torch.rand(hidden_dim, 1)
-        
-        self.bias3 = torch.rand( (1, 1) )
-        
-        self.leaky_relu = nn.LeakyReLU(negative_slope=0.01)
-        
-    def predict_target(self, X):
-        
-        logits = self.leaky_relu (  torch.matmul ( X, self.weight1)  + self.bias1 )  
-        
-        logits = self.leaky_relu (  torch.matmul ( logits, self.weight2 ) + self.bias2 )
-        
-        logits = self.leaky_relu  ( torch.matmul ( logits, self.weight3 ) + self.bias3 )
-        
-        return logits
-   
-    def update_params(self, weights, bias ):
-        
-        self.weight1 = weights[0].reshape(self.weight1.shape).clone()
-        self.bias1 = bias[0].reshape(self.bias1.shape).clone()
-        
-        self.weight2 = weights[1].reshape(self.weight2.shape).clone()
-        self.bias2 = bias[1].reshape(self.bias2.shape).clone()
-        
-        self.weight3 = weights[2].reshape(self.weight3.shape).clone()
-        self.bias3 = bias[2].reshape(self.bias3.shape).clone()
-        
-        
-
-
-class Hypernet(nn.Module):
-    
-    def __init__(self, input_dim, hidden_dim, w1_dim, b1_dim, w2_dim, b2_dim, w3_dim, b3_dim  ):
-        super().__init__()
-        
-        self.common1 = nn.Linear(input_dim, hidden_dim)
-        
-        self.common2 = nn.Linear(hidden_dim, hidden_dim)
-        
-        self.weight1 = nn.Linear(hidden_dim, w1_dim)
-        
-        self.bias1 = nn.Linear(hidden_dim, b1_dim)
-        
-        self.weight2 = nn.Linear(hidden_dim, w2_dim)
-        
-        self.bias2 = nn.Linear(hidden_dim, b2_dim)
-        
-        self.weight3 = nn.Linear(hidden_dim, w3_dim)
-        
-        self.bias3 = nn.Linear(hidden_dim, b3_dim)
-        
-        self.leaky_relu = nn.LeakyReLU(negative_slope=0.01)
-        
-        
-    def forward(self, X, layer_no):
-       
-       logits = self.leaky_relu ( self.common1(X) )
-       
-       logits = self.leaky_relu ( self.common2(logits) )
-       
-       if layer_no ==0 :
-           return self.leaky_relu (self.weight1 (logits)) , self.leaky_relu (self.bias1 (logits))
-           
-       if layer_no == 1 :
-           return self.leaky_relu (self.weight2 (logits)), self.leaky_relu (self.bias2 (logits))
-      
-       if layer_no == 2 :
-          return self.leaky_relu (self.weight3 (logits)), self.leaky_relu (self.bias3 (logits))
-       
-      
-   
-    def generate_weights_bias(self, task_index, num_layers):
-    
-        
-        task_id =  torch.nn.functional.one_hot( torch.tensor(task_index) , num_classes = num_tasks)   
-        
-        weights, bias = [], []
-        
-        for i in range(0, num_layers):
-            
-            layer_id = torch.nn.functional.one_hot( torch.tensor(i) , num_classes=num_layers)    
-            
-            X = torch.cat( [ task_id, layer_id ] ).to(dtype=torch.float32)
-            
-            if X.dim() ==1: 
-                X = X.reshape(1,-1)
-            
-            W, b = self.forward( X, i )        
-            
-            weights.append(W )
-            
-            bias.append(b)
-            
-        return weights, bias
-           
     
 
 def create_target_model():
@@ -245,7 +146,7 @@ def test_model(test_X, test_y, model, task_index):
 
 def calculate_loss(y_pred, y, task_index, hypernet, hypernet_old):
     
-    beta, regularizer,total_difference = 0.01, 0.0 , 0.0  # was 0.01  
+    beta, regularizer = 0.01, 0.0   # was 0.01  
     
     for previous_task_index in range(0, task_index): 
         
@@ -255,14 +156,13 @@ def calculate_loss(y_pred, y, task_index, hypernet, hypernet_old):
         
         for layer_no in range(len( weights )):
                 
-            regularizer = regularizer + mse_loss(weights[layer_no], weights_old[layer_no] )  +  mse_loss(bias[layer_no], bias_old[layer_no] )
-             
-            #WE NEED TO FIGURE OUT WHERE TO PLACE PARAM DIFFERENCE SINCE ITS BEING SUMMED OVER ALL TASKS, WHICH SHOULD BE REPLACED BY COSECUTIVE TASKS ?
-            #total_difference += torch.sum(torch.abs(weights[layer_no] - weights_old[layer_no] )) + torch.sum(torch.abs(bias[layer_no] - bias_old[layer_no] ))
-            
-    loss = mse_loss(y_pred, y )  + beta * regularizer    
+            regularizer = regularizer  + mse_loss( hypernet.W_mus[layer_no] , hypernet_old.W_mus[layer_no] ) + mse_loss( hypernet.b_mus[layer_no], hypernet_old.b_mus[layer_no] )
     
-    print("mse ", loss.item(), "Regularizer ", beta * regularizer,  "param_diff ", total_difference   )
+    kl_divergence = hypernet.calculate_kl_divergence()
+        
+    loss = mse_loss(y_pred, y )  + kl_divergence + beta * regularizer    
+    
+    print("mse ", loss.item(),"KL Divergence ", kl_divergence.item(), "Regularizer ", beta * regularizer   )
     
     return loss, hypernet
     
@@ -330,28 +230,6 @@ for task_index, dataset in enumerate(datasets):
     
     
     
-'''
-for param in hypernet.parameters():
-        print(param)
-        break
-        
-        
-for param in hypernet_old.parameters():
-          print(param)      
-          break
-        
-        
-task_index = 0
-train_X, train_y, test_X, test_y = create_data(task_index)
-test_model(test_X, test_y, hypernet, task_index)
-
-   
-task_index = 0 
-train_X, train_y, test_X, test_y = create_data(task_index)   
-test_model(test_X, test_y, hypernet_old, task_index)
-'''        
-
-
   
         
         

@@ -68,12 +68,8 @@ class MLP(nn.Module):
        outputs =self.leaky_relu( self.fc3(logits) )
        
        return outputs
-   
-epochs = 10000
 
-mse_loss = nn.MSELoss()
     
-
 
 def create_model():
     model = MLP(input_dim, hidden_dim = input_dim*2)
@@ -82,6 +78,7 @@ def create_model():
     
     return model, model_optimizer
 
+'''
 def create_data(task_index):
     
     X, y = torch.tensor( datasets[task_index].values[:, :-1], dtype=torch.float32), torch.tensor(datasets[task_index].values[:, -1:], dtype=torch.float32)
@@ -91,16 +88,36 @@ def create_data(task_index):
     train_X, train_y, test_X, test_y = X[ : split], y[: split], X[split: ], y[split:] 
    
     return train_X, train_y, test_X, test_y
+'''
 
+
+
+def create_data(task_index):
+    
+    X, y = torch.tensor( datasets[task_index].values[:, :-1], dtype=torch.float32), torch.tensor(datasets[task_index].values[:, -1:], dtype=torch.float32)
+
+    split = int(0.80 * len(X))
+
+    train_X, train_y, test_X, test_y = X[ : split], y[: split], X[split: ], y[split:] 
+   
+    min_y, max_y = train_y.min(), train_y.max() 
+   
+    train_y = (train_y - min_y) / (max_y - min_y)
+    
+    test_y = (test_y - min_y) / (max_y - min_y)
+    
+    return train_X, train_y, test_X, test_y
    
 
-def train_model(train_X, train_y, model, model_optimizer):   
+def train_model(train_X, train_y, model, model_optimizer, model_old):   
    
-   index  = torch.arange(0, 100)
+   #index  = torch.arange(0, batch_size)
 
    for epoch in range(1, epochs):  
       
-      index = index[torch.randperm(index.size(0))]
+      #index = index[torch.randperm(index.size(0))]
+      
+      index  = torch.randperm(len(train_X) )[:batch_size]
       
       batch_X , batch_y =  train_X[index], train_y[index]
       
@@ -108,13 +125,22 @@ def train_model(train_X, train_y, model, model_optimizer):
       
       loss = mse_loss(output, batch_y ) 
       
+      total_difference = 0.0
+          
+      if model_old:
+          
+          for param1, param2 in zip(model.parameters(), model_old.parameters()):
+              
+               total_difference += torch.sum(torch.abs(param1.data - param2.data))  # Sum of absolute differences
+
+      print("Epoch ", epoch, "Loss ", loss.item() , "param_diff", total_difference)
+      
       model_optimizer.zero_grad()
       
       loss.backward()
       
       model_optimizer.step()
      
-   #return model, model_optimizer
 
 
 def test_model(test_X, test_y, model):
@@ -128,9 +154,49 @@ def test_model(test_X, test_y, model):
     
     
 model, model_optimizer = create_model()
+
+model_old = None
     
 task_index = 0    
 
+batch_size = 20
+
+datasets = [ create_data(task_index) for task_index in range(num_tasks) ]
+
+epochs = 1000 #WAS 10000
+
+mse_loss = nn.MSELoss()
+
+for task_index in range(num_tasks):
+    
+    if task_index>0:
+        model_old, _ = create_model()
+        
+        model_old.load_state_dict(torch.load("model.pth"))
+        
+        for param in model_old.parameters():
+            param.requires_grad = False
+            
+    train_X, train_y, test_X, test_y = datasets[task_index]
+    
+    train_model(train_X, train_y, model, model_optimizer, model_old)
+      
+    torch.save( model.state_dict(), "model.pth")    
+
+
+
+
+
+for task_index, dataset in enumerate(datasets):
+    train_X, train_y, test_X, test_y = dataset
+    print( task_index , test_model(test_X, test_y, model ) )
+
+
+
+
+
+    
+'''    
 train_X, train_y, test_X, test_y =   create_data(task_index)  
 
 print("Test loss on 0 before training 0: ")
@@ -176,3 +242,4 @@ print("Test loss on 0 after training 0 and 1: ")
 
 test_model(test_X, test_y, model)
 
+'''
