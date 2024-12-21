@@ -1,0 +1,44 @@
+class Environment_Memory():
+    
+    def __init__(self, buffer_size = 5000): #was 200   
+        
+        self.train_X = deque(maxlen=buffer_size) 
+        self.train_y = deque(maxlen=buffer_size) 
+        self.test_X = deque(maxlen=buffer_size) 
+        self.test_y = deque(maxlen=buffer_size) 
+        self.buffer_size = buffer_size
+        
+    def remember(self, i_episode, state, action, reward, next_state ):
+        
+        input_data = torch.cat( [ torch.tensor( state ).reshape(1,-1) , 
+                                  action.detach().clone()  ]  , 
+                                  dim = 1)
+        
+        output_data =  torch.cat( [ torch.tensor(next_state[ 1 ]).reshape(1,1)  ,    #room temp
+                                   torch.tensor(next_state[ -1 ]).reshape(1,1),      #dry bulb temp
+                                   torch.tensor(reward).reshape(1,1) ],              #reward
+                                   dim = 1)
+        
+        if random.random() <= 0.8:   #a uniform value between 0 and 1 is sampled, 80 % chance we are having training data. 
+            
+            self.train_X.append( input_data )
+            self.train_y.append(  output_data ) 
+            
+        else:
+            
+            self.test_X.append( input_data )
+            self.test_y.append(  output_data ) 
+        
+       
+    def sample_memory(self, sample_size = 1 ):
+    
+        random_numbers = torch.randint(0, len(self.train_X), (sample_size,))
+            
+        return ( torch.cat(list(self.train_X), dim = 0)[random_numbers] ,  torch.cat(list(self.train_y), dim = 0)[random_numbers] )
+
+
+    def memory_size(self):
+         return len(self.train_X) + len(self.test_X)
+     
+    def is_full(self):
+        return self.buffer_size == len(self.train_X) + len(self.test_X)
