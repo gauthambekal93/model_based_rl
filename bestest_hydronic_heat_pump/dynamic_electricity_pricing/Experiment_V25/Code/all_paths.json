@@ -1,0 +1,14 @@
+{
+    "experiment_path": "C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V25",
+
+    "metrics_path":"C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V25/Results/complete_metrics_V1.csv",   
+    
+    "rl_data_path":"C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V25/trajectory_data/rl_data_V1.csv",
+    
+    "env_data_path":"C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V25/trajectory_data/env_train_data_V1.csv",
+    
+    "model_path": "C:/Users/gauthambekal93/Research/model_based_rl/bestest_hydronic_heat_pump/dynamic_electricity_pricing/Experiment_V25/Models/"
+
+}
+
+
