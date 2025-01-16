@@ -34,7 +34,7 @@ import time
 import re
 from env_model import ReaTZon_Model, TDryBul_Model, Reward_Model
 
-from env_memory import Environment_Memory_Train
+from memory_module import Environment_Memory_Train
 mse_loss = nn.MSELoss()
 
 

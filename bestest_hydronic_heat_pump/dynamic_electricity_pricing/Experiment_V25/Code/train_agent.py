@@ -26,7 +26,9 @@ import json
 
 from simulation_environments import bestest_hydronic
 
-from agent_model import Actor, Critic, Agent_Memory, Synthetic_Memory
+from agent_model import Actor, Critic
+
+from memory_module import Agent_Memory, Synthetic_Memory
 
 #from save_results import save_models, save_train_results, save_test_results
 
