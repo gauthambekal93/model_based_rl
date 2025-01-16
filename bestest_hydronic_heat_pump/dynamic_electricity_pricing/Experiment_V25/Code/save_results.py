@@ -33,7 +33,7 @@ test_jan17_time, test_apr19_time, test_nov15_time, test_dec08_time = 0, 0, 0, 0
 
 
 
-def save_models(i_episode, exp_path, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2, agent_memory, env_type):
+def save_models(i_episode, exp_path, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2, agent_actual_memory, agent_synthetic_memory, env_type):
     
     print("save policy model....")
     
@@ -52,8 +52,11 @@ def save_models(i_episode, exp_path, actor,actor_optimizer,critic_1, critic_opti
     torch.save(checkpoint, exp_path + '/Models/'+'critic_model_2_'+str(i_episode)+'_.pkl')    
     
    
-    with open(exp_path + '/Models/'+"agent_buffer_data.pkl" , "wb") as f:
-      pickle.dump(agent_memory, f)
+    with open(exp_path + '/Models/'+"agent_actual_data.pkl" , "wb") as f:
+      pickle.dump(agent_actual_memory, f)
+      
+    with open(exp_path + '/Models/'+"agent_synthetic_data.pkl" , "wb") as f:
+      pickle.dump(agent_synthetic_memory, f)  
     
     
 def save_train_results(i_episode, metrics_path, env , exp_path, points, train_time, episode_rewards, plot_scores_train_extrinsic, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss, env_type):
@@ -92,7 +95,7 @@ def save_train_results(i_episode, metrics_path, env , exp_path, points, train_ti
 
 
 
-def save_test_results(i_episode, metrics_path, env, exp_path, points, actor, env_type):
+def save_test_results(i_episode, metrics_path, env, state_mask, exp_path, points, actor, env_type):
     
     #global test_jan17_time, test_apr19_time #test_nov15_time, test_dec08_time
     
@@ -135,7 +138,7 @@ def save_test_results(i_episode, metrics_path, env, exp_path, points, actor, env
             print("=========Test=========")
             
             start = time.time()
-            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor, start_time_tests[0], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, state_mask, actor, start_time_tests[0], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
                                                               points = points, 
                                                               testcase = env_type, i_episode=i_episode)
             
@@ -163,7 +166,7 @@ def save_test_results(i_episode, metrics_path, env, exp_path, points, actor, env
             #------------------------------------------------------------#
             
             start = time.time()
-            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[1], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, state_mask, actor,  start_time_tests[1], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
                                                               points=points, 
                                                               testcase = env_type, i_episode=i_episode)
             
@@ -191,7 +194,7 @@ def save_test_results(i_episode, metrics_path, env, exp_path, points, actor, env
             
             '''
             start = time.time()
-            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[2], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, state_mask, actor,  start_time_tests[2], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
                                                               points=points, 
                                                               testcase = env_type, i_episode=i_episode)
             test_nov15_time = test_nov15_time + (time.time() - start)
@@ -216,7 +219,7 @@ def save_test_results(i_episode, metrics_path, env, exp_path, points, actor, env
             
             #------------------------------------------------------------#
             start = time.time()   
-            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, actor,  start_time_tests[3], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
+            observations, actions, extrinsic_rewards_test, kpis, day_of_year, results = test_agent(env, state_mask, actor,  start_time_tests[3], episode_length_test, warmup_period_test, log_dir=os.getcwd(), save_to_file=True, plot=True, 
                                                              points=points, 
                                                              testcase = env_type, i_episode=i_episode)
             test_dec08_time = test_dec08_time + (time.time() - start)

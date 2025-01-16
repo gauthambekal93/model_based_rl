@@ -31,7 +31,7 @@ class Environment_Memory_Train():
     
     def __init__(self, buffer_size , train_test_ratio ): #was 200   
     
-        
+        self.name = "Train"
         self.train_test_ratio = train_test_ratio
         
         self.states = deque(maxlen = buffer_size) 
@@ -43,13 +43,15 @@ class Environment_Memory_Train():
         
         self.buffer_size = buffer_size
         
-        self.train_index =[]
-        self.validation_index = []
+        self.train_index = deque(maxlen = int(buffer_size * train_test_ratio ) )  
+        
+        self.validation_index = deque(maxlen = int(buffer_size * (1 - train_test_ratio )) ) 
         
         
-    def remember(self, i_episode, state, action, discrete_action, reward, next_state, env):
+    def remember(self, agent_actual_memory):
     
-    
+        
+        '''
         self.states.append( {  k : v for k, v in zip( env.observations, state) } )  
         
         action_names = env.actions + list( ["oveFan_u"] + ["ovePum_u"] )
@@ -58,14 +60,22 @@ class Environment_Memory_Train():
         
         temp =  np.where(discrete_action == 0, 0 , 1) 
         
-        action = np.concatenate( [ action, temp , temp ], axis = 1  ).reshape(-1)
+        action = np.concatenate( [ action, temp , temp ], axis = 1  ).reshape(-1) #we concatenate temp twice with same value because fan and pum have same defualt values at any given time.
         
         self.actions.append( {  k:v for k, v in zip( action_names, action) } )
         
         self.next_states.append( {  k:v for k, v in zip( env.observations, next_state) } )
         
         self.rewards.append(  {"reward": reward}  )
-      
+        '''
+        
+        self.states.append( agent_actual_memory.states[-1] )
+        
+        self.actions.append( agent_actual_memory.actions[-1] )
+        
+        self.next_states.append( agent_actual_memory.next_states[-1] )
+        
+        self.rewards.append( agent_actual_memory.rewards[-1] )
         
         last_index = len(self.states) - 1
         
@@ -103,48 +113,31 @@ class Environment_Memory_Train():
         
 
 
-
+'''
 class Environment_Memory_Test():
     
     def __init__(self, buffer_size ): #was 200   
         
-        self.states = deque(maxlen = buffer_size) 
-        self.actions = deque(maxlen = buffer_size) 
-        self.rewards = deque(maxlen = buffer_size) 
-        self.next_states = deque(maxlen = buffer_size) 
-        
+        self.name = "Test"
         
         self.time_diff =  None
-        
-        self.buffer_size = buffer_size
     
-        self.test_index = []
         
+    def remember(self, states, actions, discrete_actions, env):
         
-    def remember(self, i_episode, state, action, discrete_action, reward, next_state, env):
-    
-    
-        self.states.append( {  k : v for k, v in zip( env.observations, state) } )
+        self.states = pd.DataFrame(states.numpy(), columns=env.observations)
         
         action_names = env.actions + list( ["oveFan_u"] + ["ovePum_u"] )
         
-        action = action.detach().clone().numpy()
+        actions = actions.detach().clone().numpy()
         
-        temp =  np.where(discrete_action == 0, 0 , 1) 
+        temp =  np.where(discrete_actions == 0, 0 , 1) 
         
-        action = np.concatenate( [ action, temp , temp ], axis = 1  ).reshape(-1)
+        actions = np.concatenate( [ actions, temp , temp ], axis = 1  )
         
-        self.actions.append( {  k:v for k, v in zip( action_names, action) } )
+        self.actions = pd.DataFrame(actions, columns = action_names )
         
-        self.next_states.append( {  k:v for k, v in zip( env.observations, next_state) } )
-        
-        self.rewards.append(  {"reward": reward}  )
-      
-        last_index = len(self.states) - 1
-        
-        self.test_index.append(last_index)
-            
-        
+
     
     def sample_random_states(self, sample_size = 1 ):
     
@@ -168,3 +161,4 @@ class Environment_Memory_Test():
         self.rewards.clear()
         self.next_states.clear()
         self.test_index = []        
+'''

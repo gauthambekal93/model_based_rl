@@ -159,6 +159,7 @@ def bestest_hydronic_heat_pump():
     
     excluded_states = ["reaTSetHea_y","reaTSetCoo_y"] 
     
+    #env_attributes should have sample and batch size seperately. sample size can change based on if synthetic data is present or not. batch size will be constant.
     env_attributes = {
                          "state_space": str( obs_dim  - len(excluded_states) ) ,  
                          "actions": actions,
@@ -173,8 +174,10 @@ def bestest_hydronic_heat_pump():
                           "critic_lr": 0.0008  ,   #was    0.0005, As per paper ==> 0.002
                           "no_of_action_types":len(actions),
                           "buffer_size": 35000,
-                          "sample_size": 1024,   #new parameter added previously we used a default value of 256
-                           "filter_mask": [ False if observations in excluded_states else True for index, observations in enumerate( env.observations)  ] 
+                          "multiplicative_factor": 3, #was 9
+                          "batch_size": 1024,   #new parameter added previously we used a default value of 256
+                           "state_mask": [ False if observations in excluded_states else True for index, observations in enumerate( env.observations)  ],
+                           "action_mask": [True, False, False]
                         } 
     
     env_model_attributes = {
@@ -185,17 +188,21 @@ def bestest_hydronic_heat_pump():
                         "reward_model_input": 3 + 3, # 3 beacuse we use  "reaTZon_y", "reaTSetHea_y","reaTSetCoo_y" and another 3 for actions 
                         "hidden_layers": 32,
                          "lr": 0.0001,  
-                         "state_model_output": 2,
+                         "real_zone_output": 1,
+                         "dry_bulb_output": 1 , 
                          "reward_model_output": 1,
                          "task_index": 0,
-                         "epochs": 1000, #was 300 , #3000
+                         "epochs": 500, #was 300 , #3000, 1000
                          "hypernet_old":None,
-                         "buffer_size": 300, #was 4000
+                         "buffer_size": 200, #was 4000, 5000
                          "batch_size": 20, #was 20,
                          "train_test_ratio":0.80,
-                         "buffer_size_2": 50000,
-                         "train_test_ratio_2": 0.0001
-
+                         #"buffer_size_2": 50000,
+                         "train_test_ratio_2": 0.0001,
+                         "ReaTZon_Model_loss_thresh": 0.0030,
+                         "TDryBul_Model_loss_thresh": 0.0030,
+                         "Reward_Model_loss_thresh": 0.0070,   
+                        
                        }
     
     return  env,  env_attributes , env_model_attributes

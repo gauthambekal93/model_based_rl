@@ -24,106 +24,128 @@ torch.manual_seed(seed)
 random.seed(seed)  
 
 
-
-def collect_from_learnt_env(state_samples, action_samples, reward_samples, next_state_samples, done_samples, actor, realT_zon_model, dry_bulb_model, reward_model, task_index):
-       
-      state_samples_duplication = state_samples * 9
+def create_synthetic_data( actor, realT_zon_model, dry_bulb_model, reward_model, agent_actual_memory, agent_synthetic_memory, env_attributes, env_model_attributes, env ):
       
-      actions, _, _ = actor.select_action(state_samples_duplication)  #9 actions to be sampled by the agent per, state
+      if agent_synthetic_memory.memory_size() == 0:
+          
+          state_samples, _, _, _, _, _ =  agent_actual_memory.sample_memory(  sample_size = agent_actual_memory.memory_size() )
+      
+      else:
+          
+          state_samples, _, _, _, _, _ =  agent_actual_memory.sample_memory(  last_element = True )
+          
+      
+      state_samples = state_samples.repeat( env_attributes["multiplicative_factor"], 1 )
+      
+      #should check the below line for sanity purpose
+      actions, discrete_actions, _ = actor.select_action( state_samples[ :,   env_attributes["state_mask"] ]  )  #9 actions to be sampled by the agent per, state
       
       actions = actions.detach().clone()
       
-      #------------------------------------------------------------------------
-      X = torch.cat( [state_samples, actions] , dim = 1)
+      temp =  np.where(discrete_actions == 0, 0 , 1) 
       
-      weights, bias = realT_zon_model.hypernet.generate_weights_bias(task_index )   #weights and bias generated initially is nearly 20 times larger than other code
+      actions = torch.cat( [ actions, torch.tensor(temp) , torch.tensor(temp) ], axis = 1  )
+      
+      #input_column_index = [ i for i, obs in enumerate( env.observations) if obs in realT_zon_model.input_columns ]
+      
+      
+      """ Predict the Zone operative temperature"""
+      test_X =  torch.cat([ state_samples[:, realT_zon_model.input_state_index ], actions ] , dim = 1 )
+       
+      weights, bias = realT_zon_model.hypernet.generate_weights_bias(env_model_attributes["task_index"] )   #weights and bias generated initially is nearly 20 times larger than other code
      
       realT_zon_model.target_model.update_params(weights, bias)
       
-      realT_zon_predictions = realT_zon_model.target_model.predict_target(X)   #even before any gradient update this produced hugre predictions avg (825)
-           
-      #------------------------------------------------------------------------
+      predicted_realT_zon = realT_zon_model.target_model.predict_target(test_X)   
       
-      X = torch.cat( [state_samples, actions] , dim = 1)
       
-      weights, bias = dry_bulb_model.hypernet.generate_weights_bias(task_index )   #weights and bias generated initially is nearly 20 times larger than other code
+      
+      """ Predict the Dry bulb temperature"""
+      #test_X = dry_bulb_model.get_dataset(env_memory_test)
+      
+      #input_column_index = [ i for i, obs in enumerate( env.observations) if obs in dry_bulb_model.input_columns ]
+      
+      test_X =   state_samples[:, dry_bulb_model.input_state_index ]
+      
+      weights, bias = dry_bulb_model.hypernet.generate_weights_bias(env_model_attributes["task_index"] )   #weights and bias generated initially is nearly 20 times larger than other code
      
       dry_bulb_model.target_model.update_params(weights, bias)
       
-      dry_bulb_predictions = dry_bulb_model.target_model.predict_target(X)   #even before any gradient update this produced hugre predictions avg (825)
+      predicted_dry_bulb = dry_bulb_model.target_model.predict_target(test_X)  
+
+          
+      #we can use the env.observations to obtain the ways columns are arranged and create next state
+        
+      #test_X = reward_model.get_dataset(env_memory_test)
       
-      #------------------------------------------------------------------------
       
-      time_delta = 0 #needs to add time difference between two states
-      
-      next_state_predictions = state_samples[:, 0] + time_delta , realT_zon_predictions, dry_bulb_predictions
-      
-      #-----------------------------------------------------------------------
-      X = torch.cat( [state_samples, actions] , dim = 1)
-      
-      weights, bias = reward_model.hypernet.generate_weights_bias(task_index )   #weights and bias generated initially is nearly 20 times larger than other code
      
+      
+      time_diff = agent_actual_memory.states[1][0,0] - agent_actual_memory.states[0][0,0] 
+      
+      time_data = state_samples[:, [0]] + time_diff
+      
+      next_state_predictions = torch.empty(( len(state_samples),  0 ))
+      
+      dry_bulb_indices = []
+      
+      for observation in env.observations:
+          
+          if "time" in observation:
+              next_state_predictions  = torch.cat ( [ next_state_predictions, time_data ] , dim = 1)
+
+              
+          if "reaTZon" in observation:
+              next_state_predictions = torch.cat ( [ next_state_predictions, predicted_realT_zon ] , dim = 1)
+
+
+          if ("TDryBul" in observation ) and len( dry_bulb_indices ) == 0:
+              
+              dry_bulb_indices = [i for i , obs in enumerate( env.observations) if "TDryBul" in obs]
+              
+              dry_bulb = state_samples[:, dry_bulb_indices]
+              
+              dry_bulb = torch.cat([dry_bulb, predicted_dry_bulb] , dim =1)
+              
+              dry_bulb =  dry_bulb[: , 1:]
+              
+              next_state_predictions = torch.cat ( [ next_state_predictions, dry_bulb ] , dim = 1)
+              
+              
+          if "reaTSetCoo" in observation:
+              tmp = torch.empty((next_state_predictions.shape[0], 1))
+              
+              next_state_predictions = torch.cat ( [ next_state_predictions, tmp ] , dim = 1)
+          
+            
+          if "reaTSetHea_y" in observation:
+              tmp = torch.empty((next_state_predictions.shape[0], 1))
+              
+              next_state_predictions = torch.cat ( [ next_state_predictions, tmp ] , dim = 1)
+              
+
+      """ Predict the Reward """
+     #input_column_index = [ i for i, obs in enumerate( env.observations) if obs in reward_model.input_columns ]
+       
+      test_X = torch.cat([ state_samples[:, reward_model.input_state_index], actions ] , dim = 1 )
+       
+      weights, bias = reward_model.hypernet.generate_weights_bias(env_model_attributes["task_index"] )   #weights and bias generated initially is nearly 20 times larger than other code
+      
       reward_model.target_model.update_params(weights, bias)
+       
+      predicted_rewards = reward_model.target_model.predict_target(test_X)  
+       
+      predicted_rewards = reward_model.inverse_scale(predicted_rewards)
+
+ 
+      start = time.time()
+      for state_sample, action, next_state, reward in zip( state_samples, actions, next_state_predictions, predicted_rewards) :
+          agent_synthetic_memory.remember (state_sample, action, next_state, reward )
       
-      reward_predictions = reward_model.target_model.predict_target(X)   #even before any gradient update this produced hugre predictions avg (825)
+      print(time.time() - start)
       
-      reward_predictions = reward_model.inverse_scale(reward_predictions)
+  
       
-      #------------------------------------------------------------------------
-      
-      #------------------------------------------------------------------------
-      done_predictions = 0 
-      
-      #------------------------------------------------------------------------
-      
-      synthetic_data = torch.cat( [ state_samples_duplication, actions, next_state_predictions, reward_predictions, done_predictions ], dim = 1 )
-      
-      actual_data = torch.cat( [ state_samples, action_samples, reward_samples, next_state_samples, done_samples], dim = 1 )
-      
-      
-      #start = time.time()
-      
-      #env_sample_size, hypernet_sample_size = 10, 1000   #instead of 1 we can have N number of sates used and thus speed up data aquasition
-      
-      #states =  env_memory.sample_random_states( sample_size = env_sample_size )
-      
-      current_time = env_memory.time_diff + states[:, 0:1 ]
-      
-      #actions, discrete_actions, _ = actor.select_action(states)
-      
-      #actions = actions.detach().clone()
-      
-      input_data = torch.cat( [  states , actions  ]  , dim = 1)
-      
-      input_data = (input_data - env_memory.X_min ) / (env_memory.X_max - env_memory.X_min)   # scaling the input
-      
-      weights, bias = hypernet.generate_weights_bias(task_index , sample_size = hypernet_sample_size )  
-      
-      predictions = []
-      
-      for i in range(hypernet_sample_size):
-          
-          target_model.update_params( [ weights[0][i], weights[1][i], weights[2][i] ] , [ bias[0][i], bias[1][i], bias[2][i] ] )
-          
-          sample_predictions = target_model.predict_target(input_data)
-          
-          predictions.append(sample_predictions)
-      
-      predictions = torch.stack( predictions , dim = 0)  
-      
-      uncertanities  = torch.mean( torch.std ( predictions , dim = 0) , dim =1).detach().clone()   
-      
-      final_predictions = torch.mean(predictions , dim = 0 ).detach().clone()   
-      
-      final_predictions = final_predictions * (env_memory.y_max - env_memory.y_min)  +  env_memory.y_min #inverse scaling the output
-      
-      next_state_preds = torch.cat( [ current_time , final_predictions[:, 0:1], states[:, 3:], final_predictions[:, 1:2] ], dim =1 ) 
-      
-      rewards = final_predictions[:, 2: ]
-      
-      #print("time take: ",time.time() - start)
-      
-      return states , actions, rewards, next_state_preds , uncertanities
   
      
 

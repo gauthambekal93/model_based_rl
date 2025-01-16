@@ -31,26 +31,26 @@ torch.manual_seed(seed)
 random.seed(seed)  
 
 import time 
-
+import re
 from env_model import ReaTZon_Model, TDryBul_Model, Reward_Model
 
-from env_memory import Environment_Memory_Train, Environment_Memory_Test
+from env_memory import Environment_Memory_Train
 mse_loss = nn.MSELoss()
 
 
-def initialize_env_model(env_model_attributes):     
+def initialize_env_model(env, env_model_attributes):     
      
-     realT_zon_model = ReaTZon_Model(env_model_attributes)
+     realT_zon_model = ReaTZon_Model(env, env_model_attributes)
     
-     dry_bulb_model = TDryBul_Model(env_model_attributes)
+     dry_bulb_model = TDryBul_Model(env, env_model_attributes)
      
-     reward_model = Reward_Model(env_model_attributes)
+     reward_model = Reward_Model(env, env_model_attributes)
      
      env_memory_train = Environment_Memory_Train(env_model_attributes["buffer_size"] ,  env_model_attributes["train_test_ratio"])
      
-     env_memory_test = Environment_Memory_Test(env_model_attributes["buffer_size_2"] )
+     #env_memory_test = Environment_Memory_Test(env_model_attributes["buffer_size_2"] )
      
-     return realT_zon_model, dry_bulb_model, reward_model, env_memory_train , env_memory_test
+     return realT_zon_model, dry_bulb_model, reward_model, env_memory_train #, env_memory_test
  
 
 
@@ -82,7 +82,7 @@ def calculate_train_loss( epoch, y_pred, y, task_index, hypernet, hypernet_old):
     
        
    
-def validate_model(test_X, test_y, hypernet, target_model, task_index, sample_size = 1000):
+def validate_model(validation_X, validation_y, hypernet, target_model, task_index, sample_size = 1000):
     
     weights, bias = hypernet.generate_weights_bias(task_index , sample_size)
     
@@ -91,7 +91,7 @@ def validate_model(test_X, test_y, hypernet, target_model, task_index, sample_si
     for i in range(sample_size):
         target_model.update_params( [ weights[0][i], weights[1][i], weights[2][i] ] , [ bias[0][i], bias[1][i], bias[2][i] ] )
         
-        sample_predictions = target_model.predict_target(test_X)   #shape: 42 x 3
+        sample_predictions = target_model.predict_target(validation_X)   #shape: 42 x 3
         
         final_predictions.append(sample_predictions)
     
@@ -99,15 +99,15 @@ def validate_model(test_X, test_y, hypernet, target_model, task_index, sample_si
     
     final_predictions = torch.stack( final_predictions , dim = 0)
     
-    test_loss = mse_loss( torch.mean(final_predictions, dim = 0), test_y ) 
+    validation_loss = mse_loss( torch.mean(final_predictions, dim = 0), validation_y ) 
     
     uncertanity  = torch.mean( torch.std ( final_predictions , dim = 0) )
     
-    print("Hypernet Test Loss: ", test_loss.item(), "Uncertanity: ", uncertanity.item() )
+    print("Hypernet Validation Loss: ", validation_loss.item(), "Uncertanity: ", uncertanity.item() )
     
     print("------------------------------------------------------------------------------------")
     
-    return  test_loss.item(), torch.mean(final_predictions, dim = 0)
+    return  validation_loss.item(), torch.mean(final_predictions, dim = 0)
     
   
 def data_processing(env_memory):
@@ -139,20 +139,48 @@ def calculate_max_grad(hypernet):
 
 
 
+def load_env_model(exp_path, model, task_index):
+    
+    model_files = [f for f in os.listdir(exp_path + '/Models/' ) if ('Task_No_{0}_hypernet_{1}'.format(task_index, model.name) in f) and f.endswith('.pkl')]
+    
+    if model_files:
+        
+        checkpoint = torch.load(exp_path + '/Models/'+model_files[0])
+        
+        model.hypernet.load_state_dict(checkpoint['model_state_dict'])
+        
+        model.hypernet_optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        
+    if model_files:
+       return True
+    else:
+        return False
+        
+        
+    
 
-
-def train_hypernet(model, env_memory, exp_path,  env_model_attributes ):
+def train_hypernet(model, env_memory, exp_path, env_model_attributes ):
     
     task_index, epochs, batch_size = env_model_attributes["task_index"], env_model_attributes["epochs"] , env_model_attributes["batch_size"]
     
-    hypernet_old =  env_model_attributes["hypernet_old"]
+    is_trained = load_env_model(exp_path, model, task_index)
+    
+    hypernet_old =  env_model_attributes["hypernet_old"]  #I dont think a second model is needed
     
     train_X, train_y, validation_X, validation_y = model.get_dataset(env_memory)
-     
+    
+    loss_threshold = env_model_attributes["{0}_loss_thresh".format(model.name) ]
+    
+    #IF initial training is completed initially, we only train the last batch of data, since we append the latest obtianed data to end of memory queue, for fewer epochs. 
+    if is_trained:
+        
+        train_X, train_y = train_X[ - batch_size : ] , train_y[ - batch_size :]
+        
+        epochs = 1
+             
     for epoch in range(epochs):
                 
         indices  = torch.randperm(len(train_X) )
-        
         
         for batch_no in range( 0, int(len(train_X) ), batch_size ):
             
@@ -176,42 +204,50 @@ def train_hypernet(model, env_memory, exp_path,  env_model_attributes ):
             
             model.hypernet_optimizer.step()        
          
-        if epoch %50 ==0:
-             test_loss, test_predictions = validate_model(validation_X, validation_y, model.hypernet, model.target_model, task_index )
+            
+        if epoch % 100 ==0:
+            
+             validation_loss, validation_predictions = validate_model(validation_X, validation_y, model.hypernet, model.target_model, task_index )
              
-             if test_loss <= 0.0070:
+             if validation_loss <= loss_threshold:
                  
                  checkpoint = { 'model_state_dict': model.hypernet.state_dict(),  'optimizer_state_dict': model.hypernet_optimizer.state_dict() }
         
-                 torch.save(checkpoint, exp_path + '/Models/'+'hypernet_'+model.name+"_"+str(epoch)+'_.pkl')
+                 torch.save(checkpoint, exp_path + '/Models/'+'Task_No_'+str(task_index)+'_hypernet_'+model.name+"_"+str(epoch)+'_.pkl')
                  
-                 break
+                 env_model_attributes["{0}_loss_thresh".format(model.name) ] =  validation_loss
+                 
+                 return 
     
-        if epoch % 999 ==0  :
+    
+    if is_trained is False :
         
-             checkpoint = { 'model_state_dict': model.hypernet.state_dict(),  'optimizer_state_dict': model.hypernet_optimizer.state_dict() }
+        checkpoint = { 'model_state_dict': model.hypernet.state_dict(),  'optimizer_state_dict': model.hypernet_optimizer.state_dict() }
     
-             torch.save(checkpoint, exp_path + '/Models/'+'hypernet_'+model.name+"_"+str(epoch)+'_.pkl')
-         
+        torch.save(checkpoint, exp_path + '/Models/'+'Task_No_'+str(task_index)+'_hypernet_'+model.name+"_"+str(epoch)+'_.pkl')
+             
+        
+
+     
             
-    
+'''   
 def diagnosis_hypernet(realT_zon_model, dry_bulb_model, reward_model, env_memory, exp_path, env_model_attributes ):
     
     task_index = env_model_attributes["task_index"]
     
     
-    _, _, test_X, test_y = realT_zon_model.get_dataset(env_memory)
+    _, _, validation_X, validation_y  = realT_zon_model.get_dataset(env_memory)
     
-    test_loss, test_predictions  = validate_model(test_X, test_y, realT_zon_model.hypernet, realT_zon_model.target_model, task_index )
-    
-    
-    _, _, test_X, test_y = dry_bulb_model.get_dataset(env_memory)
-    
-    test_loss, test_predictions  = validate_model(test_X, test_y, dry_bulb_model.hypernet, dry_bulb_model.target_model, task_index )
+    validation_loss, validation_predictions  = validate_model(validation_X, validation_y, realT_zon_model.hypernet, realT_zon_model.target_model, task_index )
     
     
-    _, _, test_X, test_y = reward_model.get_dataset(env_memory)
+    _, _, validation_X, validation_y = dry_bulb_model.get_dataset(env_memory)
     
-    test_loss, test_predictions  = validate_model(test_X, test_y, reward_model.hypernet, reward_model.target_model, task_index )
+    validation_loss, validation_predictions  = validate_model(validation_X, validation_y, dry_bulb_model.hypernet, dry_bulb_model.target_model, task_index )
+    
+    
+    _, _, validation_X, validation_y = reward_model.get_dataset(env_memory)
+    
+    validation_loss, validation_predictions  = validate_model(validation_X, validation_y, reward_model.hypernet, reward_model.target_model, task_index )
         
-        
+'''        

@@ -26,7 +26,7 @@ import json
 
 from simulation_environments import bestest_hydronic
 
-from agent_model import Actor, Critic, Agent_Memory
+from agent_model import Actor, Critic, Agent_Memory, Synthetic_Memory
 
 #from save_results import save_models, save_train_results, save_test_results
 
@@ -101,9 +101,11 @@ def initialize_agent(env_attributes):
      for param in critic_target_2.parameters():
         param.requires_grad = False
      
-     agent_memory = Agent_Memory(env_attributes["buffer_size"])
+     agent_actual_memory = Agent_Memory(env_attributes["buffer_size"])
      
-     return actor, actor_optimizer, critic_1 , critic_optimizer_1, critic_2 , critic_optimizer_2, critic_target_1, critic_target_2, agent_memory
+     agent_synthetic_memory = Synthetic_Memory(env_attributes["buffer_size"] * env_attributes["multiplicative_factor"] )
+     
+     return actor, actor_optimizer, critic_1 , critic_optimizer_1, critic_2 , critic_optimizer_2, critic_target_1, critic_target_2, agent_actual_memory, agent_synthetic_memory
 
     
 

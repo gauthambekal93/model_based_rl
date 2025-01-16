@@ -36,9 +36,9 @@ from save_results import save_models, save_train_results, save_test_results
 
 from train_agent import initialize_agent, load_models , update_hyperparameters, collect_from_actual_env, compute_target, train_critic, train_actor, update_target_critic
 
-from train_env_model import initialize_env_model, train_hypernet,  diagnosis_hypernet
+from train_env_model import initialize_env_model, train_hypernet
 
-from synthetic_data_collection import collect_from_learnt_env
+from synthetic_data_collection import  create_synthetic_data
 
 env, env_attributes, env_model_attributes  = bestest_hydronic_heat_pump()
 
@@ -69,14 +69,14 @@ no_of_updates = 1
 
 last_loaded_epoch = 0
 
-actor, actor_optimizer, critic_1 , critic_optimizer_1, critic_2 , critic_optimizer_2, critic_target_1, critic_target_2, agent_memory = initialize_agent(env_attributes)
+actor, actor_optimizer, critic_1 , critic_optimizer_1, critic_2 , critic_optimizer_2, critic_target_1, critic_target_2, agent_actual_memory, agent_synthetic_memory = initialize_agent(env_attributes)
 
 #actor, actor_optimizer, critic_1 , critic_optimizer_1, critic_2 , critic_optimizer_2, critic_target_1, critic_target_2, agent_memory, last_loaded_epoch = load_models(actor, actor_optimizer, critic_1, critic_optimizer_1, critic_2, critic_optimizer_2, env_attributes)
 
 #update_hyperparameters(actor_optimizer, critic_optimizer_1, critic_optimizer_2, env_attributes)
 
 
-realT_zon_model, dry_bulb_model, reward_model, env_memory_train , env_memory_test  = initialize_env_model(env_model_attributes)
+realT_zon_model, dry_bulb_model, reward_model, env_memory_train   = initialize_env_model(env, env_model_attributes)
 
 if last_loaded_epoch !=0:  
     
@@ -101,8 +101,6 @@ else:
      
     
 
-
-
 completed_initial_env_train = False  
 
 for i_episode in range(last_loaded_epoch + 1, n_training_episodes+1): 
@@ -119,15 +117,13 @@ for i_episode in range(last_loaded_epoch + 1, n_training_episodes+1):
             
             if time_step % 100 == 0:  print("Episode: ", i_episode, time_step)
             
-            action, discrete_action, _ = actor.select_action(state [ env_attributes["filter_mask"] ] )
+            action, discrete_action, _ = actor.select_action(state [ env_attributes["state_mask"] ] )
             
             next_state, reward, done = collect_from_actual_env( env, discrete_action )  
         
-            agent_memory.remember( i_episode, state, action, reward, next_state, done)
+            agent_actual_memory.remember( state, action, discrete_action, reward, next_state, done)
         
-            env_memory_train.remember(i_episode, state, action, discrete_action, reward, next_state, env) 
-            
-            state = next_state.copy()
+            env_memory_train.remember(agent_actual_memory) 
             
             time_step +=1
             
@@ -136,9 +132,9 @@ for i_episode in range(last_loaded_epoch + 1, n_training_episodes+1):
             episode_rewards.append(reward)
             
             
-            if ( env_memory_train.is_full() ) and ( not completed_initial_env_train) : 
+            if  env_memory_train.is_full()  : 
                 
-                train_hypernet(realT_zon_model, env_memory_train, exp_path, env_model_attributes) 
+                train_hypernet(realT_zon_model, env_memory_train, exp_path, env_model_attributes ) 
                 
                 train_hypernet(dry_bulb_model, env_memory_train, exp_path, env_model_attributes) 
                 
@@ -149,36 +145,26 @@ for i_episode in range(last_loaded_epoch + 1, n_training_episodes+1):
                 
             if completed_initial_env_train:
                 
-                env_memory_test.remember(i_episode, state, action, discrete_action, reward, next_state, env) 
+                create_synthetic_data( actor, realT_zon_model, dry_bulb_model, reward_model, agent_actual_memory, agent_synthetic_memory, env_attributes, env_model_attributes, env )
                 
-                if env_memory_test.is_full():
-                    
-                    diagnosis_hypernet(realT_zon_model, dry_bulb_model, reward_model, env_memory_train, exp_path,  env_model_attributes )
-                    
-                    env_memory_test.clear_buffer()
-        
             
-            if  (agent_memory.memory_size() >= max_t )  : 
+            if  (agent_actual_memory.memory_size() >= 200 )  : #was max_t 
                     
                     for update in range(no_of_updates):
                         
-                        state_samples, action_samples, reward_samples, next_state_samples, done_samples, _ =  agent_memory.sample_memory( env_attributes["filter_mask"], sample_size = env_attributes["sample_size"])
-                        
-                        if completed_initial_env_train:
-                            
-                           state_samples, action_samples, reward_samples, next_state_samples, done_samples = collect_from_learnt_env(state_samples, action_samples, reward_samples, next_state_samples, done_samples, actor, realT_zon_model, dry_bulb_model, reward_model, task_index = 0)
-                        
+                        state_samples, action_samples, discrete_action_samples, reward_samples, next_state_samples, done_samples =  agent_actual_memory.sample_memory(  sample_size = env_attributes["batch_size"])
+                                
                         batch_size =  env_attributes["sample_size"]
                         
                         for i in range(0, state_samples.size(0), batch_size):
                             
-                            batch_states = state_samples[i:i + batch_size]
+                            batch_states = state_samples[i:i + batch_size, env_attributes["state_mask"] ]
                             
                             batch_actions = action_samples[i:i + batch_size]
                             
                             batch_rewards = reward_samples[i:i + batch_size]
                             
-                            batch_next_states = next_state_samples[i:i + batch_size]
+                            batch_next_states = next_state_samples[i:i + batch_size, env_attributes["state_mask"] ]
                             
                             batch_done = done_samples[i:i + batch_size]
                             
@@ -196,9 +182,10 @@ for i_episode in range(last_loaded_epoch + 1, n_training_episodes+1):
                             episode_critic_2_loss.append(l2)
                             
                             episode_actor_loss.append(a1)
-                            
+            
+            state = next_state.copy()                
         
-        
+    
         train_time = train_time + ( time.time() - start_time)                
                         
         env_type = "bestest_hydronic_heat_pump"
@@ -206,10 +193,10 @@ for i_episode in range(last_loaded_epoch + 1, n_training_episodes+1):
         
         save_train_results(i_episode, metrics_path, env , exp_path, env_attributes["points"], train_time, episode_rewards, plot_scores_train_extrinsic, episode_actor_loss, episode_critic_1_loss, episode_critic_2_loss, env_type)
            
-        save_test_results(i_episode, metrics_path, env, exp_path, env_attributes["points"], actor, env_type) 
+        save_test_results(i_episode, metrics_path, env, env_attributes["state_mask"], exp_path, env_attributes["points"], actor, env_type) 
         
         if  i_episode % 10 == 0 : #was 5
-               save_models(i_episode, exp_path, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2, agent_memory, env_type)    
+               save_models(i_episode, exp_path, actor,actor_optimizer,critic_1, critic_optimizer_1 , critic_2 , critic_optimizer_2, agent_actual_memory, agent_synthetic_memory, env_type)    
         
 
 

@@ -40,7 +40,7 @@ with open('all_paths.json', 'r') as openfile:           json_data = json.load(op
 
 exp_path = json_data['experiment_path']
 
-def test_agent(env, actor, start_time, episode_length, warmup_period,
+def test_agent(env, state_mask, actor, start_time, episode_length, warmup_period,
                log_dir=os.getcwd(), 
                save_to_file=True, plot=False,  points=['reaTZon_y','reaTSetHea_y','reaTSetCoo_y','oveHeaPumY_u',
                                                       'weaSta_reaWeaTDryBul_y', 'weaSta_reaWeaHDirNor_y'], testcase='bestest_hydronic', i_episode=0, cid = 0,  compress_features = None):
@@ -74,7 +74,7 @@ def test_agent(env, actor, start_time, episode_length, warmup_period,
     print('Test Simulating...')
     while not done:
         
-        _, discrete_action, _ = actor.select_action(state)
+        _, discrete_action, _ = actor.select_action(state[state_mask ])
         
 
         state, reward, truncated, terminated, res = env.step(discrete_action)   

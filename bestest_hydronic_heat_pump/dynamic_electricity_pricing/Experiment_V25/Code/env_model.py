@@ -201,15 +201,15 @@ class Hypernet(nn.Module):
 
 class ReaTZon_Model:
     
-    def __init__(self, env_model_attributes):
+    def __init__(self, env, env_model_attributes):
         
-        self.name = "ReaTZon Model"
+        self.name = "ReaTZon_Model"
         
         t_input_dim =  env_model_attributes["real_zone_input"]
         
         t_hidden_dim = env_model_attributes["hidden_layers"]
         
-        t_output_dim = env_model_attributes["state_model_output"]
+        t_output_dim = env_model_attributes["real_zone_output"]
         
         num_layers = env_model_attributes["num_layers"]
         
@@ -238,45 +238,51 @@ class ReaTZon_Model:
 
         self.hypernet_old = None
         
+        input_states = ['reaTZon_y',"TDryBul_pred_0", 'TDryBul_pred_900', 'TDryBul_pred_1800', 'TDryBul_pred_2700', 'TDryBul_pred_3600', 'TDryBul_pred_4500','TDryBul_pred_5400','TDryBul_pred_6300','TDryBul_pred_7200']
+        
+        self.input_state_index = [ i for i, obs in enumerate( env.observations) if obs in input_states ]
+        
+        self.output_state_index = [ i for i, obs in enumerate( env.observations) if obs in ["reaTZon_y"] ]
+        
+        
         
     def get_dataset(self, env_memory):
         
-        temp = ['reaTZon_y',"TDryBul_pred_0", 'TDryBul_pred_900', 'TDryBul_pred_1800', 'TDryBul_pred_2700', 'TDryBul_pred_3600', 'TDryBul_pred_4500','TDryBul_pred_5400','TDryBul_pred_6300','TDryBul_pred_7200']
+            states = torch.cat( list(env_memory.states), dim =0 )[ list(env_memory.train_index), : ] [:, self.input_state_index  ] 
+            
+            actions = torch.cat( list(env_memory.actions), dim =0 ) [ list(env_memory.train_index), : ]
+            
+            train_X =  torch.cat([ states, actions ] , dim = 1 )
+            
+            train_y = torch.cat( list(env_memory.next_states), dim =0 )[ list(env_memory.train_index), : ] [:, self.output_state_index  ] 
+            
+            
+            states = torch.cat( list(env_memory.states), dim =0 )[ list(env_memory.validation_index), : ] [:, self.input_state_index  ] 
+            
+            actions = torch.cat( list(env_memory.actions), dim =0 ) [ list(env_memory.validation_index), : ]
+            
+            validation_X =  torch.cat([ states, actions ] , dim = 1 )
+            
+            validation_y = torch.cat( list(env_memory.next_states), dim =0 )[ list(env_memory.validation_index), : ] [:, self.output_state_index  ] 
+            
+            
+            return train_X, train_y, validation_X, validation_y
         
-        states = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.train_index][temp].values , dtype=torch.float)
         
-        actions = torch.tensor(  pd.DataFrame(env_memory.actions).iloc[env_memory.train_index].values, dtype=torch.float )
+            
         
-        train_X =  torch.cat([ states, actions ] , dim = 1 )
-        
-        train_y =  torch.tensor( pd.DataFrame(env_memory.next_states).iloc[env_memory.train_index][['reaTZon_y']].values , dtype=torch.float)
-        
-        
-        states = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.validation_index][temp].values , dtype=torch.float)
-        
-        actions = torch.tensor(  pd.DataFrame(env_memory.actions).iloc[env_memory.validation_index][['oveHeaPumY_u']].values, dtype=torch.float )
-        
-        validation_X =  torch.cat([ states, actions ] , dim = 1 )
-        
-        validation_y =  torch.tensor( pd.DataFrame(env_memory.next_states).iloc[env_memory.validation_index][['reaTZon_y']].values, dtype=torch.float )
-         
-        
-        return train_X, train_y, validation_X, validation_y
-        
-
-
 
 class TDryBul_Model:
     
-    def __init__(self, env_model_attributes):
+    def __init__(self, env, env_model_attributes):
         
-        self.name = "TDryBul Model"
+        self.name = "TDryBul_Model"
         
         t_input_dim =  env_model_attributes["dry_bulb_input"]
         
         t_hidden_dim = env_model_attributes["hidden_layers"]
         
-        t_output_dim = env_model_attributes["state_model_output"]
+        t_output_dim = env_model_attributes["dry_bulb_output"]
         
         num_layers = env_model_attributes["num_layers"]
         
@@ -305,30 +311,51 @@ class TDryBul_Model:
 
         self.hypernet_old = None
         
+        input_states =  ["TDryBul_pred_0", 'TDryBul_pred_900', 'TDryBul_pred_1800', 'TDryBul_pred_2700', 'TDryBul_pred_3600', 'TDryBul_pred_4500','TDryBul_pred_5400','TDryBul_pred_6300','TDryBul_pred_7200']
+        
+        self.input_state_index = [ i for i, obs in enumerate( env.observations) if obs in input_states ]
+        
+        self.output_state_index = [ i for i, obs in enumerate( env.observations) if obs in ['TDryBul_pred_7200'] ]
         
     def get_dataset(self, env_memory):
         
-        temp = ["TDryBul_pred_0", 'TDryBul_pred_900', 'TDryBul_pred_1800', 'TDryBul_pred_2700', 'TDryBul_pred_3600', 'TDryBul_pred_4500','TDryBul_pred_5400','TDryBul_pred_6300','TDryBul_pred_7200']
+        #temp = ["TDryBul_pred_0", 'TDryBul_pred_900', 'TDryBul_pred_1800', 'TDryBul_pred_2700', 'TDryBul_pred_3600', 'TDryBul_pred_4500','TDryBul_pred_5400','TDryBul_pred_6300','TDryBul_pred_7200']
         
-        train_X = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.train_index][temp].values , dtype=torch.float)
+        #if env_memory.name == "Train":
+            
+            train_X = torch.cat( list(env_memory.states), dim =0 )[ list(env_memory.train_index), : ] [:, self.input_state_index  ] 
+            
+            train_y = torch.cat( list(env_memory.next_states), dim =0 )[ list(env_memory.train_index), : ] [:, self.output_state_index  ] 
+            
+            
+            #train_X = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.train_index][self.input_columns].values , dtype=torch.float)
+            
+            #train_y =  torch.tensor( pd.DataFrame(env_memory.next_states).iloc[env_memory.train_index][self.output_columns ].values , dtype=torch.float)
+            
+            
+            validation_X = torch.cat( list(env_memory.states), dim =0 )[ list(env_memory.validation_index), : ] [:, self.input_state_index  ] 
+            
+            validation_y = torch.cat( list(env_memory.next_states), dim =0 )[ list(env_memory.validation_index), : ] [:, self.output_state_index  ] 
+            
+            #validation_X = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.validation_index][self.input_columns].values , dtype=torch.float)
+            
+            #validation_y =  torch.tensor( pd.DataFrame(env_memory.next_states).iloc[env_memory.validation_index][self.output_columns].values, dtype=torch.float )
+             
+            
+            return train_X, train_y, validation_X, validation_y
         
-        train_y =  torch.tensor( pd.DataFrame(env_memory.next_states).iloc[env_memory.train_index][['TDryBul_pred_7200']].values , dtype=torch.float)
+        #if env_memory.name == "Test":
+            
+        #    test_X = torch.tensor( env_memory.states [temp].values , dtype=torch.float)
         
-        
-        validation_X = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.validation_index][temp].values , dtype=torch.float)
-        
-        validation_y =  torch.tensor( pd.DataFrame(env_memory.next_states).iloc[env_memory.validation_index][['TDryBul_pred_7200']].values, dtype=torch.float )
-         
-        
-        return train_X, train_y, validation_X, validation_y
-        
-
+        #    return test_X
     
         
+    
 class Reward_Model:
-    def __init__(self, env_model_attributes):
+    def __init__(self, env, env_model_attributes):
         
-        self.name = "Reward Model"
+        self.name = "Reward_Model"
         
         t_input_dim = env_model_attributes["reward_model_input"]
         
@@ -365,7 +392,10 @@ class Reward_Model:
         
         self.min_reward, self.max_reward = None, None
         
-    
+        input_states = ['reaTZon_y','reaTSetCoo_y','reaTSetHea_y']
+        
+        self.input_state_index = [ i for i, obs in enumerate( env.observations) if obs in input_states ]
+        
     def scale(self, y):
         
         y = ( 2 * (y - self.min_reward ) / ( self.max_reward  - self.min_reward) ) - 1
@@ -381,35 +411,61 @@ class Reward_Model:
     
     def get_dataset(self, env_memory):
         
-        states = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.train_index][['reaTZon_y','reaTSetCoo_y','reaTSetHea_y']].values , dtype=torch.float)
+        #temp = ['reaTZon_y','reaTSetCoo_y','reaTSetHea_y']
         
-        actions = torch.tensor(  pd.DataFrame(env_memory.actions).iloc[env_memory.train_index].values, dtype=torch.float )
+        #if env_memory.name == "Train":
+            
+            states = torch.cat( list(env_memory.states), dim =0 )[ list(env_memory.train_index), : ] [:, self.input_state_index  ] 
+            
+            actions = torch.cat( list(env_memory.actions), dim =0 ) [ list(env_memory.train_index), : ]
+            
+            #states = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.train_index][self.input_columns].values , dtype=torch.float)
+            
+            #actions = torch.tensor(  pd.DataFrame(env_memory.actions).iloc[env_memory.train_index].values, dtype=torch.float )
+            
+            train_X =  torch.cat([ states, actions ] , dim = 1 )
+            
+            train_y = torch.cat( list(env_memory.rewards), dim =0 )[ list(env_memory.train_index), : ] 
+            
+            #train_y =  torch.tensor( pd.DataFrame(env_memory.rewards).iloc[env_memory.train_index].values , dtype=torch.float)
+            
+            
+            states = torch.cat( list(env_memory.states), dim =0 )[ list(env_memory.validation_index), : ] [:, self.input_state_index  ] 
+            
+            actions = torch.cat( list(env_memory.actions), dim =0 ) [ list(env_memory.validation_index), : ]
+            
+            #states = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.validation_index][self.input_columns].values , dtype=torch.float)
+            
+            #actions = torch.tensor(  pd.DataFrame(env_memory.actions).iloc[env_memory.validation_index].values, dtype=torch.float )
+            
+            validation_X =  torch.cat([ states, actions ] , dim = 1 )
+            
+            validation_y = torch.cat( list(env_memory.rewards), dim =0 )[ list(env_memory.validation_index), : ] 
+            
+            #validation_y =  torch.tensor( pd.DataFrame(env_memory.rewards).iloc[env_memory.validation_index].values, dtype=torch.float )
+            
+            if self.min_reward is None:
+                self.min_reward = torch.min(train_y)
+            
+            if self.max_reward is None:
+                self.max_reward = torch.max(train_y)
+            
+            train_y = self.scale(train_y)
+            
+            validation_y = self.scale(validation_y)
+            
+            return train_X, train_y, validation_X, validation_y
         
-        train_X =  torch.cat([ states, actions ] , dim = 1 )
         
-        train_y =  torch.tensor( pd.DataFrame(env_memory.rewards).iloc[env_memory.train_index].values , dtype=torch.float)
-        
-        
-        states = torch.tensor( pd.DataFrame(env_memory.states).iloc[env_memory.validation_index][['reaTZon_y','reaTSetCoo_y','reaTSetHea_y']].values , dtype=torch.float)
-        
-        actions = torch.tensor(  pd.DataFrame(env_memory.actions).iloc[env_memory.validation_index].values, dtype=torch.float )
-        
-        validation_X =  torch.cat([ states, actions ] , dim = 1 )
-        
-        validation_y =  torch.tensor( pd.DataFrame(env_memory.rewards).iloc[env_memory.validation_index].values, dtype=torch.float )
-        
-        if self.min_reward is None:
-            self.min_reward = torch.min(train_y)
-        
-        if self.max_reward is None:
-            self.max_reward = torch.max(train_y)
-        
-        train_y = self.scale(train_y)
-        
-        validation_y = self.scale(validation_y)
-        
-        return train_X, train_y, validation_X, validation_y
-        
+        #if env_memory.name == "Test":
+            
+        #    states = torch.tensor(  env_memory.states[temp].values , dtype=torch.float)
+            
+        #    actions = torch.tensor( env_memory.actions.values, dtype=torch.float )
+            
+        #    test_X =  torch.cat([ states, actions ] , dim = 1 )
+            
+        #    return test_X
     
     
 
